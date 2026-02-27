@@ -1,0 +1,202 @@
+---
+import { Image } from "astro:assets";
+const { src, alt, caption, width = 800, height = 400 } = Astro.props;
+---
+
+<figure class="image-popup">
+  <Image
+    src={src}
+    alt={alt || "Image description"}
+    width={width}
+    height={height}
+    loading="lazy"
+  />
+  {caption && <figcaption>Bild: {caption}</figcaption>}
+</figure>
+
+<!-- Modal Overlay -->
+<div id="imageModal" class="image-modal" aria-hidden="true">
+  <div class="image-modal-content">
+    <button id="closeModal" class="close-btn" aria-label="Close image popup"
+      >&times;</button
+    >
+    <img id="modalImage" alt="Full-size image" />
+    <div id="caption" class="caption"></div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const figures = document.querySelectorAll(".image-popup");
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const captionText = document.getElementById("caption");
+    const closeBtn = document.getElementById("closeModal");
+
+    let modalMoved = false;
+
+    if (!figures.length || !modal || !modalImg || !captionText || !closeBtn)
+      return;
+
+    const moveModal = () => {
+      if (modalMoved) {
+        return;
+      }
+
+      modal.parentNode.removeChild(modal);
+      document.body.appendChild(modal);
+      modalMoved = true;
+    };
+
+    const openModal = (imgSrc, caption) => {
+      moveModal();
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden", "false");
+      modalImg.src = imgSrc;
+      captionText.innerHTML = caption || "";
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    figures.forEach((figure) => {
+      figure.addEventListener("click", (e) => {
+        const clickedImg = e.target.closest("img");
+        if (!clickedImg) return;
+        const caption = figure.querySelector("figcaption")?.innerHTML;
+        openModal(clickedImg.src, caption);
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (e) => {
+      const content = document.querySelector(".image-modal-content");
+      if (!content.contains(e.target)) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  });
+</script>
+
+<style>
+  /* ===== Image Preview ===== */
+  .image-popup {
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 0 1em;
+  }
+
+  .image-popup img {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .image-popup:hover img {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ===== Modal Overlay ===== */
+  .image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+  }
+
+  .image-modal.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ===== Modal Content ===== */
+  .image-modal-content {
+    position: relative;
+    background: rgba(20, 20, 20, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+    z-index: 10000;
+    pointer-events: auto;
+  }
+
+  /* ===== Close Button on LEFT ===== */
+  .close-btn {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10001;
+    pointer-events: all;
+  }
+
+  .close-btn:hover {
+    background: #ddd;
+  }
+
+  /* ===== Image ===== */
+  #modalImage {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ===== Caption ===== */
+  .caption {
+    margin-top: 12px;
+    color: #f0f0f0;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  figcaption {
+    font-style: italic;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  @keyframes fadeIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>
