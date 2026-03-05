@@ -63,11 +63,6 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Introduktion',
-					collapsed: true,
-					autogenerate: { directory: 'intro' },
-				},
-				{
 					label: 'Kursmoment',
 					autogenerate: { directory: 'kmom' },
 				},
