@@ -30,27 +30,27 @@ export default defineConfig({
 				'./src/styles/dbwebb.css',
 			],
 			editLink: {
-				baseUrl: 'https://github.com/bth-python/website/tree/main',
+				baseUrl: 'https://github.com/bth-python/bth-python.github.io/tree/main',
 			},
 			social: [
 				{
 					icon: 'github',
           			label: 'GitHub',
-					href: 'https://github.com/bth-python/website'
+					href: 'https://github.com/bth-python/bth-python.github.io'
 				}
 			],
 			head: [
 				{
 					tag: 'script',
 					attrs: {
-						src: '/website/js/OpenDetailsFromHash.js',
+						src: '/js/OpenDetailsFromHash.js',
 						defer: true,
 					},
 				},
 				{
 					tag: 'script',
 					attrs: {
-						src: '/website/js/openIssue.js',
+						src: '/js/openIssue.js',
 						defer: true,
 					},
 				},
