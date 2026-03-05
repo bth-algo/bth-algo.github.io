@@ -84,7 +84,9 @@ export default defineConfig({
 					collapsed: true,
 					autogenerate: { directory: 'ovrigt' },
 				},
+				
 			],
+			pagination: false,
 		}),
 	],
 });
