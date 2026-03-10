@@ -19,13 +19,13 @@ Här publiceras även större meddelanden rörande kursen.
 
 En stor del av kursmaterialet finns tillgängligt via kurssidan på den öppna webbplatsen för kursen.
 
-- [Kursmaterial](https://bth-python.github.io/website/)
+- [Kursmaterial](https://bth-algo.github.io/)
 
 ## Kursrepo GitHub
 
 Kursmaterial och inlämningar sker delvis via Git-repon och GitHub. Kursen har en organisation på GitHub.
 
-- [Kurs organisation på GitHub](https://github.com/bth-python/)
+- [Kurs organisation på GitHub](https://github.com/bth-algo/)
 
 ## Kurschatt via Discord
 
@@ -38,4 +38,4 @@ Du får en invite till Discord via Canvas, eller be din lärare om det. Troligen
 När det sker streamade (eller inspelade) genomgångar och föreläsningar så sker de ofta via Youtube-kanalen för dbwebb.
 
 - [DBwebb kanalen](https://www.youtube.com/c/DbwebbSe)
-- Spellista för [Streams HT25](https://www.youtube.com/playlist?list=PLKtP9l5q3ce_6V-NBdaXB927GdpMQdCMt)
+- Spellista för [Streams VT26](https://studio.youtube.com/playlist/PLKtP9l5q3ce9DKTJEUrMWjpjh-MsC6_7Z)

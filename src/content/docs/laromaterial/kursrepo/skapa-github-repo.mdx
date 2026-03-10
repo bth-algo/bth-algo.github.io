@@ -1,5 +1,5 @@
 ---
-title: "Skapa kursrepo på GitHub" 
+title: "⚠️ Skapa kursrepo på GitHub" 
 description: Skapa en plats för ditt kursrepo på GitHub, en plats dit du kan ladda upp ditt kursrepo.
 author: mos
 revision:
@@ -9,71 +9,65 @@ sidebar:
 ---
 
 import Figure from '@components/CustomFigure.astro';
-import YouTube from '@components/YouTube.astro';
 
-Nu skall vi skapa en plats på GitHub där du kan ladda upp ditt git repo. Vi har ännu inte skapat ditt git repo, det blir nästa steg. Först behöver vi en plats på GitHub dit vi kan koppla ditt git repo.
+Nu skall vi skapa en plats på GitHub där du kan ladda upp ditt lokala Git-repo. Vi har ännu inte skapat ditt lokala Git-repo, det blir nästa steg. Först behöver vi en plats på GitHub dit vi kan koppla ditt Git-repo.
 
 Börja med att öppna din webbläsare och [gå till GitHub för att skapa ett nytt repo](https://github.com/new).
 
 Det kan se ut ungefär så här (användargränssnittet uppdateras ibland så bilden kan skilja mot det du ser).
 
-import ghnew1 from '@assets/kursrepo/ghnew1.png';
+import gh1 from '@assets/kursrepo/gh1.png';
 
 <Figure 
-    src={ghnew1}
+    src={gh1}
     caption="Nu är du redo att skapa en plats för ditt kursrepo på GitHub."
+    class="shadow"
 />
 
 Gör nu följande ändringar för att skapa platsen för ditt repo.
 
 **Owner**
 
-Som owner väljer du kursens organisation `bth-python`. Då hamnar repot inuti organisationen.
+Som owner väljer du kursens organisation `bth-algo`. Då hamnar repot inuti organisationen.
 
 **Repository name**
 
-Som namn på ditt repo väljer du en kombination av kursens smeknamn `python` och din studentakronym, separerat med bindestreck `-`. Om din studentakronym är `abcd25` så namnger du repot som `python-abcd25`.
+Som namn på ditt repo väljer du en kombination av kursens smeknamn `algo` och din studentakronym, separerat med bindestreck `-`. Om din studentakronym är `abcd25` så namnger du repot som `algo-abcd25`.
 
 **Description**
 
 Som beskrivning kan du skriva vad du vill, som en kort introduktion till vad repot handlar om, till exempel kan du lägga till följande text.
 
-> My course repo for the python course.
+> My course repo for the algo course.
 
 **Private repo**
 
-Här behöver du inte ändra något, det är förinställt att repot du skapar är "privat".
+Det är förinställt på "internal" men du ändrar till "privat".
 
-Du kan bara skapa privata repon som student, det innebär att andra studenter inte kan se ditt repo men alla som är lärare i kursen har full tillgång till ditt repo.
+Du ska bara skapa privata repon som student, det innebär att andra studenter inte kan se ditt repo men alla som är lärare i kursen har full tillgång till ditt repo.
 
-**No initialization**
+**Start with a template**
 
-I övrig skall du inte ändra något alls. Vi vill skapa ett tomt repo utan innehåll så inget mer skall fyllas i.
+Välj templaten `bth-algo/algo-abcd25`.
 
-När du är klar kan det se ut så här.
+**Include all branches**
 
-import ghnew2 from '@assets/kursrepo/ghnew2.png';
-
-<Figure 
-    src={ghnew2}
-    caption="Nu har du fyllt i det som behövs för att skapa platsen för repot på GitHub."
-/>
+Låt `Include all branches` vara **off**.
 
 Nu kan du klicka på knappen "Create repository" för att skapa platsen för det tomma repot.
 
 Det kan se ut ungefär så här när du är klar (var uppmärksam på att användargränssnittet uppdateras med jämna mellanrum så det du ser i webbläsaren kan skilja från bilden nedan).
 
-import ghnew3 from '@assets/kursrepo/ghnew3.png';
+import gh2 from '@assets/kursrepo/gh2.png';
 
 <Figure 
-    src={ghnew3}
+    src={gh2}
     caption="Nu har du skapat platsen för repot på GitHub."
 />
 
-Nu har du dessutom en direktlänk till ditt kursrepo på GitHub. I mitt fall blev det `https://github.com/bth-python/python-abcd25`. Den sista delen av länken är namnet på repot, så det beror på vilket namn du gav repot.
+Nu har du dessutom en direktlänk till ditt kursrepo på GitHub. I mitt fall blev det `https://github.com/bth-algo/algo-grmstud`. Den sista delen av länken är namnet på repot, så det beror på vilket namn du gav repot.
 
-Det är bra att du skapar ett bokmärke (eller liknande) så att du har en direktlänk till ditt kursrepo på GitHub.
-
+Det är bra att du skapar ett bokmärke (eller liknande) i din webbläsare så att du har en direktlänk till ditt kursrepo på GitHub.
 
 
 ## Problemlösning - vanliga frågor och svar
@@ -84,5 +78,5 @@ Här finns svar på vanliga frågor om något går fel.
 
 ### Jag gav mitt repo fel namn
 
-Du kan byta namnet på ditt repo "Settings -> General -> Repository name", försäkra dig om att du namnger repot på rätt sätt med kursens smeknamn som inledning `python`, följt av ett bindestreck `-` och därefter din studentakronym, till exempel `abcd25`. Använd bara små bokstäver.
+Du kan byta namnet på ditt repo "Settings -> General -> Repository name", försäkra dig om att du namnger repot på rätt sätt med kursens smeknamn som inledning `algo`, följt av ett bindestreck `-` och därefter din studentakronym, till exempel `abcd25`. Använd bara små bokstäver.
 

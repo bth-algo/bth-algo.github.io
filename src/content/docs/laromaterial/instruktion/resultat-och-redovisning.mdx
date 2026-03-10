@@ -4,45 +4,28 @@ description: No description.
 sidebar:
     order: 001
 ---
-import Figure from '@components/CustomFigure.astro';
-import { YouTube } from 'astro-embed';
 
-Som ett sista steg i varje kursmoment skall du redovisa. Gör så här.
+Som ett sista steg i varje kursmoment ska du redovisa. Gör så här:
 
+- Gör veckans quiz
+- Gör inlämningsuppgiften och pusha till GitHub
 
-<YouTube
-    id="qz82kX5peHs"
-    title="Andreas visar hur du lämnar in ett kursmoment."
-/>
+MER INFO KOMMER!
+
+{/* Ev. video här?
 
 PS! För kmom03, kmom06 och kmom10 skall du även göra en pull request (PR) på GitHub. Läs mer om det längst ner på sidan.
 
+## Kör testerna lokalt
 
-## Kör tester
+Dubbelkolla att din kod passerar testerna och validerar. Ladda ner testerna på nytt, se information i respektive kmom. De kan vara uppdaterade. Om du har några fel, fixa dem innan du fortsätter.
 
-Dubbelkolla att din kod passerar testerna och validerar. Använd `uv run tester` och `uv run ruff check`. Om du har några fel, fixa dem före du fortsätter.
+## Gör veckans quiz
 
+Varje kmom har ett quiz på Canvas som ska göras och klaras av.
+ 
 
-
-## Skriv redovisningstext
-
-Du skriver din redovisningstext i din `README.md` fil i kursrepot.
-
-I din redovisningstext beskriver du dina reflektioner från kursmomentet, vad som gick bra och om något var mer utmanande. Reflektera över svårigheter, problem, lösningar, erfarenheter, lärdomar, resultatet, etc.
-
-Besvara de specifika frågor som finns för varje uppgift och kursmoment.
-
-Skriv ett stycke om totalt 5-8 meningar för varje kursmoment. Försök väva in frågorna i löpande text.
-
-Kan du koppla och jämföra (reflektera) dina lärdomar från nuvarande kursmoment mot andra kursmoment, kurser eller andra lärdomar du har sedan tidigare? Sånt gillar lärare.
-
-{/*
-Läs gärna hur du kan skriva [en bra redovisningstext](kurser/faq/att-skriva-en-bra-redovisningstext).
-*/}
-
-
-
-## Tagga och pusha ditt repo
+## Kör testerna på GitHub
 
 Lägg till en tagg till ditt repo och pusha sedan både taggen och ditt repo.
 
@@ -61,62 +44,24 @@ Du kan använda följande versioner för dina taggar.
 Tagga ditt repo så här.
 
 ```bash title="Lägg till en tagg på ditt repo med versionsnummer."
-git tag -a v1.0.0 -m "Ready with kmom01"
+git tag -a v1.0.0 -m "First draft of kmom01."
+git tag -a v1.0.1 -m "Menu choice 1 in kmom01 ready."
+...
+git tag -a v1.1.0 -m "Ready with kmom01."
 ```
 
 Om du gör ändringar så taggar du din nya inlämning med ett högre versionsnummer, till exempel v1.0.1 eller v1.1.0, du kan själv bestämma vilken version som känns lämplig.
 
 Nu kan du pusha både tagg och repo till GitHub.
 
-```bash title="Pusha repo inklusive taggar."
-git push
+```bash title="Pusha din tagg till GitHub."
 git push --tags
 ```
 
-I framtiden kommer du (troligen) att använda versionsnummer enligt något som heter "[Semantic versioning](https://semver.org/)", kika gärna på hur det fungerar.
+När du taggar så körs testerna du har i ditt repo på respektive kmom på GitHub. Kolla på GitHub att det går grönt under "Actions"!
 
-Som ett sista steg i din inlämning så kan du kontrollera att GitHub verkligen innehåller den allra senaste versionen av din kod och att testerna passerar.
+Som ett sista steg i din inlämning så kan du kontrollera att GitHub verkligen innehåller den allra senaste versionen av din kod.
 
-### Kolla att testerna passerar på GitHub
-
-När du laddade upp din tag till GitHub började den automatiskt köra testerna och validera din kod. Gå till ditt repo i webbläsaren och klicka på `Actions` fliken.
-
-
-import wf1 from '@assets/img/instruktion/click_action.png';
-
-<Figure 
-    src={wf1}
-    caption="Gå till Actions fliken"
-/>
-
-Nu kan du se kommentaren på din senaste commit och tag numret du satte.
-
-Beroende på hur snabb du var på att gå till denna fliken kommer du ha olika symboler före commit meddelande. På bilden nedanför är det en gul prick. Det byter att testerna körs nu och resultatet är inte klart. Om den är grön med en bock betyder det att testerna är klara och allt är korrekt. Om den är röd med ett kryss betyder det att något gick fel.
-
-import wf2 from '@assets/img/instruktion/click_workflow.png';
-
-<Figure 
-    src={wf2}
-    caption="Gå till Actions fliken"
-/>
-
-Oavsett vilken symbol det är kan du klicka på. Då kommer du till följande bild som visa en översikt av vad som har gjorts. Om det ser ut som på bilden nedanför och det är grönt, då är du klar och kan jobba vidare med kursen.
-
-import wf3 from '@assets/img/instruktion/workflow_success.png';
-
-<Figure 
-    src={wf3}
-    caption="Gå till Actions fliken"
-/>
-
-Om det inte är grönt utan rött istället som på bilden nedanför, hoppa vidare till [Actions testerna blir fel](#actions-testerna-blir-fel).
-
-import wf4 from '@assets/img/instruktion/workflow_fail.png';
-
-<Figure 
-    src={wf4}
-    caption="Gå till Actions fliken"
-/>
 
 
 ## Återkoppling och bedömning
@@ -129,7 +74,7 @@ Det sker ingen betygsättning, bedömning eller återkoppling när du är klar o
 
 **När du lämnar in kmom06** kontrolleras att du uppfyller kraven i kmom04, kmom05 och kmom06. Du får betyget G när du är godkänd och du får Ux om det är något som saknas eller behöver uppdateras.
 
-**När du lämnar in kmom10** rättas den och samtidigt kontrolleras att du har godkänt på inlämningen för kmom03 och kmom06. Därefter får du ditt godkända betyg A-E eller Fx för komplettering eller F för underkänt. Betyget på kmom10 blir också ditt slutbetyg på kursen.
+**När du lämnar in kmom10** rättas den och samtidigt kontrolleras att du har godkänt på inlämningen för kmom03 och kmom06. Du får betyget G när du är godkänd och du får Ux om det är något som saknas eller behöver uppdateras. Betyget på kmom10 blir också ditt slutbetyg på kursen.
 
 
 
@@ -137,62 +82,6 @@ Det sker ingen betygsättning, bedömning eller återkoppling när du är klar o
 
 I samband med att du lämnar in kmom03, kmom06 och kmom10 skall du även göra en pull request (PR) på GitHub för att visa att du gör din inlämning.
 
-[Gör en PR (kmom03)](/website/laromaterial/instruktion/gor-en-pr/).
+[Gör en PR](/website/laromaterial/instruktion/gor-en-pr/).
 
-Läraren kommer att titta på din inlämning och betygsätta den.
-
-## Vanliga fel
-
-### Actions testerna blir fel
-
-Din kod klarar inte av testerna eller koden validerar inte. Klicka på steget som är rött, då kommer du vidare till vad som har gått fel.
-
-- Läs igenom loggen.
-- Uppdatera din kod lokalt.
-- Kör `tester` och `ruff` för att kolla att din lösning har funkat.
-- Skapa en ny commit.
-- Skapa en ny tag och ladda upp till GitHub som visas under [Tagga och pusha ditt repo](#tagga-och-pusha-ditt-repo). PS. nu ska du inte använda samma tagnummer som förut. Öka siffran som det beskrivs i texten. T.ex. om du fixar ett fel på din kmom01 inlämning öka till `v1.0.1`. Om du behöver göra en till fix efter detta, öka siffran till `v1.0.2`.
-- Nu kan du följa [Kolla att testerna passerar på GitHub](#kolla-att-testerna-passerar-på-GitHub) igen.
-
-
-{/* 
-Testa din inlämning
----------------------------------------
-
-Du kan själv testköra rättningsprocessen via följande kommando.
-
-```bash
-# Om du står i rooten av ditt kursrepo.
-uv run tester tests/kmom01
-uv run ruff check src/kmom01
-```
-
-Byt ut kmom01 mot det kursmoment du vill inspektera.
-
-Den som rättar och kontrollerar din inlämning utgår från ovan kommando.
-
-Du kan själv provköra och se samma resultat som rättaren ser. Det är en mycket god idé att alltid testköra sin inlämning på samma sätt som rättaren gör. Du sparar tid genom att själv upptäcka eventuella slarvfel. */}
-
-
-
-{/*
-Lämna in på Canvas 
----------------------------------------
-
-Lämna in en länk till din rapport-sida på Canvas. Länken innehåller din studentakronym och på det viset hittar rättaren din inlämning.
-
-Det är bra om du också kopierar in din redovisningstext in i Canvas, det kan vara bra att ha som backup om något händer.
-
-Läraren kommer snabbt kolla igenom din redovisningstext och uppgifterna. Betyg är G (godkänd) eller U/komplettera (komplettera → gör om → gör bättre). Bedömningen baseras på din redovisningstext samt att du har fullgjort kursmomentets uppgifter.
-*/}
-
-
-
-{/*
-Feedback och frågor 
----------------------------------------
-
-[Vilken feedback kan jag förvänta mig](kurser/faq/vilken-feedback-far-man-pa-inlamningarna)?
-
-Ställ dina frågor och funderingar i de kanaler som erbjuds i kursen. Se till att du får dina frågor besvarade. Fråga igen om något är oklart. Se till att din fråga alltid blir besvarad.
-*/}
+Läraren kommer att titta på din inlämning och betygsätta den. */}
