@@ -21,13 +21,9 @@ Följande använder vi som underlag och riktlinje när vi sätter kursens slutbe
 
 ### Bedömning G
 
-Inlämningsuppgifterna fungerar väl med grundläggande funktionalitet implementerad.
+Studenten uppfyller kursens lärandemål.
 
 Kursmomenten är utförda och redovisade enligt instruktionerna.
-
-Studenten har god förmåga att reflektera över innehållet i övningarna och sin egen insats i kursmomentet.
-
-Studenten uppfyller kursens lärandemål.
 
 *Studenten har visat att den behärskar det som krävs enligt lärandemålen.*
 
