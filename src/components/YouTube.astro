@@ -1,0 +1,123 @@
+---
+import { YouTube } from '@astro-community/astro-embed-youtube';
+
+export interface Props {
+  /** YouTube-video-id eller full URL */
+  id: string;
+  /** Valfri rubrik som visas fetstil i figcaption */
+  title?: string;
+  /** En enkel bildtext som visas efter titel (kan ersättas av <slot name="caption">) */
+  caption?: string;
+  /** Egen poster-bild (URL) */
+  poster?: string;
+  /** YouTube player-params, t.ex. "start=10&end=60" */
+  params?: string;
+  /** Tillgänglighetslabel för play-knappen (fallback: title eller "Play") */
+  playlabel?: string;
+
+  /** Bildförhållande för embed: '16:9' | '4:3' | '1:1' | '21:9' */
+  aspect?: '16:9' | '4:3' | '1:1' | '21:9';
+  /** Justering: 'left' | 'center' | 'right' | 'full' */
+  align?: 'left' | 'center' | 'right' | 'full';
+
+  /** Maxbredd för figuren (CSS-värde). Default: "min(100%, 900px)" */
+  maxWidth?: string;
+  /** Valfri explicit bredd (CSS-värde), lämna tom för att använda maxWidth */
+  width?: string;
+
+  /** Extra CSS-klasser på <figure> */
+  class?: string;
+}
+
+const {
+  id,
+  title,
+  caption,
+  poster,
+  params,
+  playlabel,
+  aspect = '16:9',
+  align = 'center',
+  maxWidth = 'min(100%, 900px)',
+  width,
+  class: className,
+} = Astro.props;
+
+const ratioMap = {
+  '16:9': 9 / 16,
+  '4:3': 3 / 4,
+  '1:1': 1,
+  '21:9': 9 / 21,
+} as const;
+
+const paddingTop = `${(ratioMap[aspect] ?? 9 / 16) * 100}%`;
+const figureClass = ['not-content', 'video-figure', `align-${align}`, className]
+  .filter(Boolean)
+  .join(' ');
+
+/** Använd titel som default playlabel om inget angivits */
+const resolvedPlayLabel = playlabel ?? title ?? 'Play';
+---
+
+<style>
+  .video-figure {
+    margin: 1rem 0;
+  }
+  .video-outer {
+    position: relative;
+    width: 100%;
+  }
+  .ratio {
+    /* Skapar responsiv höjd utifrån padding-top-tricket */
+    width: 100%;
+    pointer-events: none;
+  }
+  .video-content {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Justeringar */
+  .align-center { margin-inline: auto; }
+  .align-left { margin-inline-end: auto; }
+  .align-right { margin-inline-start: auto; }
+  .align-full { width: 100%; max-width: none; }
+
+  /* Bildtext */
+  figcaption {
+    caption-side: bottom;
+    font-style: italic;
+    text-align: left;
+  }
+  figcaption strong {
+    color: inherit;
+  }
+</style>
+
+<figure
+  class={figureClass}
+  style={`max-width:${maxWidth};${width ? `width:${width};` : ''}`}
+>
+  <div class="video-outer">
+    <div class="ratio" style={`padding-top:${paddingTop}`}></div>
+    <div class="video-content">
+      <YouTube
+        id={id}
+        poster={poster}
+        params={params}
+        playlabel={resolvedPlayLabel}
+      />
+    </div>
+  </div>
+
+  {
+    /* figcaption-prioritet: slot > (title + caption) > caption */
+  }
+  <figcaption>
+    <slot name="caption">
+      {title ? <strong>{title}</strong> : null}
+      {title && caption ? ' — ' : null}
+      {(!title && caption) ? caption : (title && !caption) ? null : null}
+    </slot>
+  </figcaption>
+</figure>
