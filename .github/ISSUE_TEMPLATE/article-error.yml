@@ -12,8 +12,8 @@ body:
     attributes:
       label: Link to the error
       description: You should not need to edit this if you used the report button.
-      placeholder: https://bth-python.github.io/
-      value: "https://bth-python.github.io/"
+      placeholder: https://bth-algo.github.io/
+      value: "https://bth-algo.github.io/"
     validations:
       required: true
   - type: textarea
@@ -51,7 +51,7 @@ body:
       description: |
         Where was the code/instruction executed?
          - OS: [e.g. iOS]
-         - Language [e.g. Bash command, Python, JS, C#]
+         - Language [e.g. Bash command, algo, JS, C#]
          - Program [e.g. terminal, browser, Thonny]
     validations:
       required: false
