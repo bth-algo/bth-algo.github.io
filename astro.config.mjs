@@ -1,11 +1,25 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
 import starlight from '@astrojs/starlight';
+import starlightImageZoom from 'starlight-image-zoom'
+import embeds from 'astro-embed/integration';
+import starlightAutoSidebar from 'starlight-auto-sidebar'
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://bth-algo.github.io/',
+	base: '/',
+	markdown: {
+		remarkPlugins: [remarkReadingTime],
+	},
 	integrations: [
+		embeds(),
 		starlight({
+			plugins: [
+				starlightImageZoom(),
+				starlightAutoSidebar(), // https://starlight-auto-sidebar.netlify.app/metadata/#label
+			],
 			title: 'Kursen Algo',
 			favicon: 'favicon.png',
 			logo: {
@@ -14,7 +28,32 @@ export default defineConfig({
 			customCss: [
 				'./src/styles/dbwebb.css',
 			],
+			editLink: {
+				baseUrl: 'https://github.com/bth-algo/bth-algo.github.io/tree/main',
+			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			head: [
+				{
+					tag: 'script',
+					attrs: {
+						src: '/js/OpenDetailsFromHash.js',
+						defer: true,
+					},
+				},
+				{
+					tag: 'script',
+					attrs: {
+						src: '/js/openIssue.js',
+						defer: true,
+					},
+				},
+				{
+					tag: 'base',
+					attrs: {
+						href: ''
+					}
+				}
+			],
 			sidebar: [
 				{
 					label: 'Introduktion',
