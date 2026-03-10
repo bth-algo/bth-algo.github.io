@@ -48,6 +48,13 @@ export default defineConfig({
 					},
 				},
 				{
+					tag: 'script',
+					attrs: {
+						src: '/js/functions.js',
+						defer: true,
+					},
+				},
+				{
 					tag: 'base',
 					attrs: {
 						href: ''
