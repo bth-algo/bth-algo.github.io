@@ -326,18 +326,17 @@ Som medlemsvariabel behövs endast en referens-variabel som motsvarar den pekare
 ```csharp
 public class Stack<T>: IStack<T>
 {
-    private class Node<E>
+        private class Node
     {
-        public E Data;
-        public Node<E>? Next;
-        public Node(E data, Node<E>? next = null)
+        public T Data;
+        public Node? Next;
+        public Node(T data, Node? next = null)
         {
             this.Data = data;
             this.Next = next;
         }
     }
-
-    private Node<T>? _top; // för att peka på top-noden
+    private Node? _top; // för att peka på top-noden
 
     // ....
 }
@@ -350,9 +349,9 @@ Vi börjar med konstruktorn som ska implementeras så att objektet som skapas mo
 ```csharp
 public class Stack<T>: IStack<T>
 {
-    private class Node<E> {...}
+    private class Node {...}
 
-    private Node<T>? _top; 
+    private Node? _top; 
 
     public Stack()
     {
@@ -368,15 +367,15 @@ Vi fortsätter med `Push`-metoden som ska hantera att det nya noden placeras på
 ```csharp
 public class Stack<T>: IStack<T>
 {
-    private class Node<E> {...}
+    private class Node {...}
 
-    private Node<T>? _top; 
+    private Node? _top; 
 
     public Stack() {...}
 
     public void Push(T data)
     {
-        this._top = new Node<T>(data, this._top);
+        this._top = new Node(data, this._top);
     }
 
     // ....
