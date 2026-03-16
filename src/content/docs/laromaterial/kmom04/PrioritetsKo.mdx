@@ -301,14 +301,14 @@ I detta fall väljer vi att låta en enkellänkad listan vara sorterad baserat p
     width="700px"
 />
 
-På samma sätt som för stack och kö använder vi en inre privat klass för att representerar noder, men denna gång behöver vi även se till att den generiska datatypen (här benämnd `E`) är jämförbar eftersom vi behöver orda noderna baserat på det som lagras i dem (som är `Data` av typen `E`). Vi använder därför `IComparable` även här. 
+På samma sätt som för stack och kö använder vi en inre privat klass för att representerar noder
 
 ```csharp
-private class Node<E> where E: IComparable<E>
+private class Node
 {
-    public E Data;
-    public Node<E>? Next;
-    public Node(E data, Node<E>? next = null)
+    public T Data;
+    public Node? Next;
+    public Node(T data, Node? next = null)
     {
         this.Data = data;
         this.Next = next;
@@ -321,10 +321,10 @@ private class Node<E> where E: IComparable<E>
 1. Anta att vi har deklarerat två variabler enligt 
 
     ```csharp
-    Node<string> first;
-    Node<string> second;
+    Node first;
+    Node second;
     ```
-    och att vi för var och en av dessa variabler har skapat ett Node-objekt. Skriv kod som presenterar den sträng av de båda som finns i noderna och som är minst (kommer först i alfabetisk ordning). Om de har samma innehåll presenters istället "Lika". 
+    där den generiska datatypen T är "ersatt" med `string` och att vi för var och en av dessa variabler har skapat ett Node-objekt. Skriv kod som presenterar den sträng av de båda som finns i noderna och som är minst (kommer först i alfabetisk ordning). Om de har samma innehåll presenters istället "Lika". 
 
     <details>
     <summary>Klicka här för att visa svaret</summary>  
@@ -359,7 +359,7 @@ Medlemsvariabler i klassen `PriorityQueue` blir
 
     ```csharp
     // medlemsvariabler
-    private Node<T>? _first;
+    private Node? _first;
     private int _size;
 
     // konstuktor
@@ -410,7 +410,7 @@ Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga 
     ```csharp
 
      if (elem.CompareTo(this._first.Data) >= 0)
-            this._first = new Node<T>(elem, this._first);
+            this._first = new Node(elem, this._first);
     ```
     </details>
 
@@ -422,7 +422,7 @@ Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga 
 
     ```csharp
     if (this._first == null || elem.CompareTo(this._first.Data) >= 0)
-        this._first = new Node<T>(elem, this._first);
+        this._first = new Node(elem, this._first);
     ```
     </details>
 
@@ -449,7 +449,7 @@ Vi behöver utföra följande steg:
     <summary>Klicka här för att visa svaret</summary>  
 
     ```csharp
-    Node<T> walker = this._first;
+    Node walker = this._first;
     // 2) ...
     // 3) ...
     this._size += 1;
@@ -462,7 +462,7 @@ Vi behöver utföra följande steg:
     <summary>Klicka här för att se svaret</summary>  
 
     ```csharp
-    Node<T> walker = this._first;
+    Node walker = this._first;
     while (walker.Next != null && elem.CompareTo(walker.Next.Data) < 0)
     {
         walker = walker.Next;
@@ -478,12 +478,12 @@ Vi behöver utföra följande steg:
     <summary>Klicka här för att se svaret</summary>  
 
     ```csharp
-    Node<T> walker = this._first;
+    Node walker = this._first;
     while (walker.Next != null && elem.CompareTo(walker.Next.Data) < 0)
     {
         walker = walker.Next;
     }
-    walker.Next = new Node<T>(elem, walker.Next);
+    walker.Next = new Node(elem, walker.Next);
     this._size += 1;
     ```
     </details>
