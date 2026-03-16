@@ -329,10 +329,10 @@ Precis som när vi definierade klassen Stack, döljer vi klassen Node inom klass
 ```csharp
 public class Queue<T>: IQueue<T>
 {
-    private class Node<E> {...}
+    private class Node {...}
 
-    private Node<T>? _first; // för att peka på första noden
-    private Node<T>? _last; // för att peka på sista noden
+    private Node? _first; // för att peka på första noden
+    private Node? _last; // för att peka på sista noden
     // ....
 }
 ```
@@ -391,12 +391,12 @@ Om kön innehåller minst ett element ska ett nytt `Node`-objekt skapas för ele
     {
         if (this._last == null)
         {
-            this._last = new Node<T>(elem);
+            this._last = new Node(elem);
             this._first = this._last;
         }
         else
         {
-            this._last.Next = new Node<T>(elem);
+            this._last.Next = new Node(elem);
             this._last = this._last.Next;
         }
     }
