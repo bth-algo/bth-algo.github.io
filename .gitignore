@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # Other
 work/
+
+**/.vscode/
+
+# Specific files
+.vscode/settings.json
+package-lock.json
+package.json
