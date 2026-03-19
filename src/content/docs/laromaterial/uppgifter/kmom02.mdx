@@ -254,6 +254,38 @@ void Shuffle<T>(T[] arr, int n) where T: IComparable<T>
 ```
 </details>
 
+<details>
+<summary>Ett förslag på hur du kan använda en och samma metod för att testa de olika sorteringsalgoritmerna hittar du här</summary>  
+
+Parametern `Action<BusStop[], int, int> SortMethod` motsvarar en metod som har parameterlistan `BusStop[], int, int`.  
+Övriga parametrar 
+- `BusStop[] busStops` - den array med BusSTop-objekt som ska sorteras
+- `int n`- antalet element i arrayen som ska sorteras
+- `int nrOfTimes` - antalet gånger sorteringen ska utföras
+
+
+
+```csharp
+int AverageComparisons(Action<BusStop[], int, int> SortMethod, BusStop[] busStops, int n, int nrOfTimes)
+{
+    int totalComparisons = 0;
+    for (int i = 0; i < nrOfTimes; i++)
+    {
+        if (nrOfTimes != 1)
+            Shuffle(busStops, n);
+        BusStop.ResetNrOfComparisons();
+        SortMethod(busStops, 0, n - 1);
+        totalComparisons += BusStop.GetNrOfComparisons();
+    }
+    return totalComparisons / nrOfTimes;
+}
+
+
+// Anrop med tex Insertionsort med 5 körningar
+AverageComparisons(SortingAlgorithms.Insertionsort, busStops, nrOfElements, nrOfTimes);
+```
+</details>
+
 ## Resultat
 
 Notera resultateten (t.ex i tabeller) för varje underlag (slumpade, sorterade resp omvänt sorterade) där det för varje sorteringsalgoritm framgår hur många jämförelser som genomförts.
