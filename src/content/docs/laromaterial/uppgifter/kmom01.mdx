@@ -79,11 +79,11 @@ Det finns för båda sökalgoritmerna en *extra parameter* som är en lista (dat
 Parameterlistan ska vara anpassad efter följande anrop:
 ```
 // Sökning av targetInt i arrayen nrs med 10 heltal 
-int index = SearchAlgorithms.LinearSearch(nrs, 10, target, indexes);
+int index = SearchAlgorithms.LinearSearch(nrs, 10, targetInt, indexes);
 ```
 ```
 // Sökning av targetStr i arrayen words med 100 strängar
-int index = SearchAlgorithms.BinarySearch(words, 100, target, indexes);
+int index = SearchAlgorithms.BinarySearch(words, 100, targetStr, indexes);
 ``` 
 ```
 // Sökning av targetBusStop i arrayen busStops med 1000 BusStop-objekt
@@ -130,3 +130,11 @@ Några tips på vägen:
 I filerna `words999.txt`, `words1200.txt`, `orderedWords999.txt` och `orderedWords1200.txt` finns ord som du kan använda för att testa dina sökalgoritmer på lite större mängder med strängar. De två första filerna innehåller 999 respektive 1200 ord i slumpmässig ordning, medan de två sista filerna innehåller samma ord i sorterad ordning.
 
 För att testa med större mängder heltal kan du dels generera slumpmässiga heltal genom att använda `Random`-klassen och dels sortera dem med hjälp av `Array.Sort`-metoden. 
+
+## Detta förväntas du kunna efter att du genomfört uppgiften
+
+- definiera generiska klasser som är jämförbara med CompareTo-metoden
+- implementera och/eller skriva pseudokod för linjär- och binärsökning
+- förstå hur många jämförelser linjär- och binärsökning utför i relation till antalet element
+- förstå och kunna implementera tester som säkerställer att linjär- och binärsökning är korrekta
+
