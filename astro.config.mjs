@@ -65,6 +65,11 @@ export default defineConfig({
 					collapsed: true,
 					autogenerate: { directory: 'kmom' },
 				},
+				{
+					label: 'Studieguide',
+					collapsed: true,
+					autogenerate: { directory: 'studieguide' },
+				},
 			],
 		}),
 	],

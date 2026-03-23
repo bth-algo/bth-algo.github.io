@@ -7,22 +7,28 @@ sidebar:
 
 Som ett sista steg i varje kursmoment ska du redovisa. Gör så här:
 
-- Gör inlämningsuppgiften och pusha till GitHub
+- Gör uppgiften och pusha till GitHub
+- Vissa kmom har andra uppgifter som tilll exempele Quiz på Canvas och Kunskapsintervjuer.
 
 PS! För kmom03, kmom06 och kmom10 skall du även göra en pull request (PR) på GitHub. Läs mer om det längst ner på sidan.
 
 ## Kör testerna lokalt
 
-Dubbelkolla att din kod passerar testerna och validerar. Ladda ner testerna på nytt, se information i respektive kmom. De kan vara uppdaterade. Om du har några fel, fixa dem innan du fortsätter.
+Dubbelkolla att din kod passerar testerna och validerar. Ladda ner testerna på nytt, se information i respektive kmom. De kan vara uppdaterade. Om du har några fel, fixa dem innan du fortsätter. Du kan köra testerna från kursrepots rot eller genom att gå ner i testkatalogen.
 
-## Gör veckans quiz
+```bash title="Kör testerna från kursrepots rot."
+dotnet test tests/kmom01/Searching.Tests/Searching.Tests.csproj
+```
 
-Varje kmom har ett quiz på Canvas som ska göras och klaras av.
- 
+```bash title="Kör testerna i kmom:ets katalog."
+cd tests/kmom01/Searching.Tests
+dotnet test
+```
+
 
 ## Kör testerna på GitHub
 
-Lägg till en tagg till ditt repo och pusha sedan både taggen och ditt repo.
+Lägg till en tagg till ditt repo och pusha sedan både taggen och ditt repo. Taggen ska ha formatet vXX.Y där v står för version, XX står för kursmomentets nummer och Y är versionen mellan 0-9.
 
 Du kan använda följande versioner för dina taggar.
 
@@ -45,7 +51,7 @@ git tag -a v01.1 -m "Menu choice 1 in kmom01 ready."
 git tag -a v01.4 -m "Ready with kmom01."
 ```
 
-Om du gör ändringar så taggar du din nya inlämning med ett högre versionsnummer, till exempel v01.0.1 eller v01.1.0, du kan själv bestämma vilken version som känns lämplig.
+Om du gör ändringar så taggar du din nya inlämning med ett högre versionsnummer på följande sätt: v01.0 eller v01.1.
 
 Nu kan du pusha både tagg och repo till GitHub.
 
@@ -79,4 +85,4 @@ I samband med att du lämnar in kmom03, kmom06 och kmom10 skall du även göra e
 
 [Gör en PR](../../laromaterial/instruktion/gor-en-pr/).
 
-Läraren kommer att titta på din inlämning och betygsätta den. */}
+Läraren kommer att titta på din inlämning och betygsätta den.
