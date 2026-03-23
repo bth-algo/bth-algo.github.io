@@ -1,0 +1,237 @@
+---
+title: "Gör en PR (kmom03, kmom06 och kmom10)" 
+description: Instruktion om hur du gör en pull request (PR) för att lämna in kmom03.
+sidebar:
+    order: 035
+---
+
+import Figure from '@components/CustomFigure.astro';
+import YouTube from '@components/YouTube.astro';
+
+
+Följ denna instruktionen för att göra en pull request (PR) för att lämna in uppgiften i kmom03 och kmom06.
+
+:::note
+Bilderna visar inlämning för kmom03. Flödet är likadant för kmom06. I instruktionerna när det står `<X>`, ersätt det med `3` om du lämnar in kmom03 och `6` om du lämnar in kmom06.
+:::
+
+## Förutsättning
+
+Du har uppfyllt kraven i uppgiften kmom03/kmom06 och har gjort en vanlig inlämning enligt [Resultat och redovisning](/website/laromaterial/instruktion/resultat-och-redovisning).
+
+
+## Ordlista
+
+- `PR`: Pull request
+- `Submitted`: Får din PR när de automatiska testerna gått igenom. Nu ska du bara vänta på att en lärare kollar på din inlämning.
+- `Test-passed`: Får din PR när de automatiska testerna gått igenom.
+- `Test-failed`: Får din PR när något gått fel i de automatiska testerna. Ladda ner testerna igen, fixa felet lokalt och pusha till GitHub. Kör igång de automatiska testerna igen under "Actions" och markera din sista commit. Välj "Re-run all jobs" och sen "Re-run jobs".
+- `Approved`/`G`/`1`: Helt klar med en uppgift.
+- `Needs improvement`/`Ux`/`0.49`: En lärare har bedömt din inlämning men tycker att något behöver förbättras i din inlämning. Använd dig av label `Re-submitted` när du har gjort din uppdatering.
+- `Re-submitted`: Du sätter den som label på din PR efter att du har fixat den komplettering en lärare gav på din inlämning.
+- `Submission not approved`/`U`/`0`: En lärare har bedömt din `Re-submitted` men tycker inte att det är tillräckligt bra. Du behöver göra en ny inlämning till nästa rättningstillfälle.
+
+
+## Mitt eget arbete
+
+Det du lämnar in är ditt eget arbete. Om du har tagit hjälp av extern kod, eller om du har kopierat någon mindre del av koden, så är det tydligt angivet i kommentarerna i koden eller i din redovisningstext.
+
+I samband med att du gör din PR så intygar du att arbetet är ditt eget och uppfyller de regler som finns för "[Fusk och medveten vilseledning](/website/studieguide/fusk/)".
+
+
+
+## Pull request (PR)
+
+Du skall nu göra din inlämning som en PR mot följande branch.
+
+* `bth/submit/kmom03`
+
+Följ stegen nedan för att skapa en PR.
+
+
+
+### Gå till din kod på GitHub
+
+Du gör detta med hjälp av GitHub. Se till att du har pushat din aktuella kodbas till GitHub och öppna webbläsaren mot din kod på GitHub.
+
+import pr1 from '@assets/pr/pr1.png';
+
+<Figure 
+    src={pr1}
+    caption="Kodbas på GitHub."
+/>
+
+
+
+### Gå till Pull requests
+
+Klicka på (1) "Pull requests" i navbaren för din kodbas och därefter (2) den gröna knappen till höger "New pull request".
+
+import pr2 from '@assets/pr/pr2.png';
+
+<Figure 
+    src={pr2}
+    caption="New pull requests."
+/>
+
+
+
+### Förbered att skapa en ny PR
+
+Så här ser det ut när du klickat på "New Pull Request" (se föregående bild). Börja med (1) att välja "base" för din PR, där (2) väljer du `bth/submit/kmom0<X>` och vi låter "compare" vara `main`. Nu dyker det upp filer att jämföra och då (3) klickar du på den gröna knappen "Create pull request".
+
+import pr3 from '@assets/pr/pr3.png';
+
+<Figure 
+    src={pr3}
+    caption="Create pull requests."
+/>
+
+Det här betyder att du vill merga `main` till `bth/submit/kmom0<X>`.
+
+
+### Öppna en PR mot en branch
+
+Nu är du snart redo att skapa en PR. Börja (1) med att fylla i en titel på din PR, till exempel "Inlämning av kmom03" och lägg in dig själv som "Assignees". Nu är det dags, öppna till din PR genom att klicka på (2) den gröna knappen "Create pull request".
+
+import pr5 from '@assets/pr/pr5.png';
+
+<Figure 
+    src={pr5}
+    caption="Gör en PR för att merga main in till bth/submit/kmom03."
+/>
+
+Nu är din PR öppnad.
+
+
+
+### En ny PR är öppnad
+
+När det är klart kan det se ut så här.
+
+import pr6 from '@assets/pr/pr6.png';
+
+<Figure 
+    src={pr6}
+    caption="Gör en PR för att merga main in till bth/submit/kmom03."
+/>
+
+Vänta ett par minuter, skrolla sen ner för att se att testerna har godkänts.
+
+
+### Testerna gick fel
+
+Om något gick fel med testerna ser det ut så här i din PR. Du får en kommentar om vad som gick fel samt din PR får labeln `tests-failed`. I denna bilden har testerna för kmom01 och kmom02 gått bra men däremot har testerna för kmom03 gått fel.
+
+import prError from '@assets/pr/prError.png';
+
+<Figure 
+    src={prError}
+    caption="Något gick fel i testerna."
+/>
+
+Vanliga fel:
+
+- du har inte de nyaste testerna
+- du har inte den nyaste workflow filen
+
+Nu behöver du kolla vad som gick fel, fixa felet och ladda upp koden igen. Enklast gör du det genom att:  
+
+1. Ladda ner testerna för det eller de kmom som gick fel och kör dem lokalt
+1. Rätta felet och testkör lokalt.
+1. Pusha din rättning till GitHub och testerna ska starta automatiskt.
+
+Om testerna inte skulle starta automatiskt så går i under "Actions", klicka på din senaste "action" och klicka på knappen "Re-run all jobs". Därefter får du klicka på den gröna knappen "Re-run jobs" och så kör testerna igång igen ett en liten stund. Men detta ska inte behövas!
+
+:::tip
+Vi rättar inte inlämningar (PRs) med labeln `tests-failed`.
+:::
+
+
+### Testerna gick bra
+
+Vänta ett par minuter för att se att testerna har godkänts. Då har din PR fått lablarna `submitted` och `tests-passed`.
+
+import prOk1 from '@assets/pr/prOk1.png';
+
+<Figure 
+    src={prOk1}
+    caption="Lyckat resultat från testerna ger lablarna `submitted` och `tests-passed`."
+/>
+
+Skrolla längre ner och du ska ha fått en kommentar om att testerna gick bra samt meddelandet "All checks have passed".
+
+import prOk2 from '@assets/pr/prOk2.png';
+
+<Figure 
+    src={prOk2}
+    caption="Lyckat resultat från testerna."
+/>
+
+:::note
+NU är din PR klar och väntar på rättning! Alla labels sätts automatiskt!
+:::
+
+## PR kmom06
+
+I inlämningen för kmom06 är det lite speciellt eftersom det är tester som ni gjort själva som ska köras. Dessutom körs ett antal tester för att kontrollera att inlämningen följer kraven.
+
+Återkoppling på testerna får ni längst ner i PR för kmom06. Det kan se ut så här:
+
+import prKmom06Ok from '@assets/pr/prKmom06Ok.png';
+
+<Figure 
+    src={prKmom06Ok}
+    caption="Lyckat resultat från testerna i inlämningen för kmom06."
+/>
+
+**Student test result**  
+Först körs era egna tester och resultatet blir antingen "student tests kmom05 ok" eller "FAIL:kmom05 student tests".
+
+**Test result**  
+Därefter körs testerna för att kolla om kraven följs. Eftersom testerna är hemliga så får ni en tabell med alla testfall, en tabell för kmom05 och en tabell för kmom06. Antingen står det en ✅ och då har testet gått igenom, eller så står det ett felmeddelande från testet.
+
+**Test results kmom05**  
+Tabell med alla testfall för kmom05 med resultat.
+
+**Test results kmom06**  
+Tabell med alla testfall för kmom06 med resultat.
+
+## PR kmom07/10
+
+Du gör PR för projektet på samma sätt som för kmom03 och kmom06. Här finns inga tester utan du förväntas att själv se till att du följer kraven.
+
+## Feedback och bedömning
+
+När läraren rättar din PR så får du återkoppling i kommentarer till din PR.
+
+### Approved / G
+
+Om läraren tycker att allt ser bra ut får du en kommentar, label `Approved` och G i Canvas. Läraren mergar din PR och stänger den när den är godkänd. Du kommer också se vilken lärare som har varit "reviewer". Du kan jobba vidare med nästa kmom.
+
+
+### Needs improvement / Ux
+
+Om läraren tycker att något är fel som du behöver fixa får du label `Needs improvement` och `Ux` på Canvas. Det kommer finnas kommentarer på specifika rader. Om kommentaren innehåller en `Warning` som på bilden nedanför, då måste du åtgärda det i din kod. Om kommentaren inte innehåller `Warning` behöver du inte åtgärda det som står där.
+
+import pr_warning from '@assets/pr/pr_comment_warning.png';
+
+<Figure 
+    src={pr_warning}
+    caption="Kommentar som ska åtgärdas."
+/>
+
+När du har åtgärdat felen gör följande:
+
+- I din PR sätt label `Re-submitted`. 
+- Pusha din kod til GitHub. Då körs testerna igen.
+- Om din fix funkade ska du nu få lablarna `submitted` och `tests-passed`.
+
+### Submission not approved / U
+
+Om åtgärderna du gjorde i `Re-submitted` bedöms att inte vara tillräckliga får du label `Submission not approved` och `U` i Canvas. Det kommer finnas kommentarer som förklara felet och läraren kommer stänga din PR.
+
+I kmom10, vid större fel, ges inte komplettering. Då kan du få U direkt.
+
+Din inlämning kommer inte rättas mer. Din PR stängs. Du behöver göra en ny PR till nästa rättningstillfälle. I [studieplanen](/website/intro/studieplan/) hittar du när nästa rättningstillfälle är.
+
