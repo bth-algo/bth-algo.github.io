@@ -19,8 +19,8 @@ I denna kursen använder du versionshanteringssystemet Git och webbplatsen GitHu
 
 I denna guiden får du hjälp med:
 
-1. [Få tillgång till organisationen på GitHub](../laromaterial/kursrepo/organisation).
+1. [Få tillgång till organisationen på GitHub](./kursrepo/organisation).
 
-2. [Klona kursens repo lokalt](../laromaterial/kursrepo/skapa-git-repo).
+2. [Klona kursens repo lokalt](./kursrepo/skapa-git-repo).
 
 I kursen kommer vi att referera till ditt Git-repo som ditt "kursrepo".
