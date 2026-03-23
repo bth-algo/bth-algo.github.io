@@ -18,7 +18,7 @@ I `kmom01` skapar du ett dotnet console-projekt namngivet `Searching`.
 <details>
 <summary>Kort repetition/sammanställning</summary>  
 
-```
+```bash title="Kör följande kommandon i terminalen"
 // skapa dotnet console projekt
 dotnet new console -n Searching
 
@@ -113,15 +113,21 @@ public class SearchAlgorithms
 ```
 #### Exempel på anrop och förväntat resultat
 
+##### Linjärsökning
+
 Anta att `nrs` är en heltalsarray med innehållet 20, 40, 30, 70, 60, 50 och att indexes är en tom lista (`List<int> indexes = new List<int>()`).  
 
 Efter anropet `int index = SearchAlgorithms.LinearSearch(nrs, 6, 30, indexes)` ska `index` innehålla 2 och listan `indexes` innehålla 0, 1, 2.
 
 Efter anropet `int index = SearchAlgorithms.LinearSearch(nrs, 6, 90, indexes)` ska `index` innehålla -1 och listan `indexes` innehålla 0, 1, 2, 3, 4, 5.
 
+##### Binärsökning
+
 Anta att `orderedNrs` är en heltalsarray med innehållet 22, 33, 44, 55, 66, 77, 88 och indexes är en tom lista.
 
 Efter anropet `int index = SearchAlgorithms.BinarySearch(orderedNrs, 7, 55, indexes)` ska `index` innehålla 3 och listan `indexes` innehålla 3.
+
+Efter anropet `int index = SearchAlgorithms.BinarySearch(orderedNrs, 7, 33, indexes)` ska `index` innehålla 1 och listan `indexes` innehålla 3, 1.
 
 
 ### Säkerställ att algoritmerna fungerar
@@ -202,6 +208,7 @@ I ditt dotnet-projekt ska följande filer ingå
 - `BusStop.cs` med klassen BusStop definierad enligt klassdiagrammet
 - `SearchingAlgorithms.cs` med klassen SearchingAlgorithms med de generiska klassmetoderna för linjärsökning och binärsökning
 - `Program.cs` med några lämpliga tester
+- `orderedWords1200.txt`
 
 
 ### Detta förväntas du kunna efter att du genomfört uppgiften
