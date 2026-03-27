@@ -275,6 +275,8 @@ public class Die: IComparable<Die>
 }
 ```
 
+Anm: Här kan man även använda CompareTo för _value
+
 **Testa dig själv**
 
 1. Anta att man vill tillföra möjligheten att jämföra objekt av klasstypen `Car` nedan genom att implementera interfacet `IComparable` och att det ska vara årsmodellen som jämförelsen baseras på. Hur blir implementationen i metoden `CompareTo`?
@@ -315,8 +317,17 @@ public class Die: IComparable<Die>
         return -1;
     return 0;
     ```
+
+    eller
+
+    ```csharp
+    if (other == null)
+       return 1;
+    return this._modelYear.CompareTo(other._modelYear);
+    ```
     
     </details>
+    
 
 2. Om det istället ska vara bilmärket som jämförelsen baseras på. Hur blir implementationen i metoden `CompareTo`?
 
@@ -326,11 +337,7 @@ public class Die: IComparable<Die>
     ```csharp
     if (other == null)
         return 1;
-    if (this._make > other._make)
-        return 1;
-    if (this._make < other._make)
-        return -1;
-    return 0;
+    return this._make.CompareTo(other._make);
     ```
     </details>
 
