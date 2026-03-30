@@ -117,14 +117,13 @@ Pair<List<int>> listPair = new Pair<List<int>>(l1, l2);
 I C# finns det flera interface, bland annat ett interface som används när man vill kräva att objekt av en klass ska vara jämförbara. Interfacet är generiskt och ser ut så här:
 
 ```csharp
-public interface IComparable<in T>
+public interface IComparable<T>
 {
     int CompareTo(T? other);
 }
 ```
 Vad kan vi utläsa av interfacet?
 
-- `<in T>` betyder att typ-parametern T endast kan användas som inparameter (det går inte att returnera datatypen T från metoder som ingår).
 - alla klasser som implementerar interfacet måste definiera metoden `int CompareTo(T? other)`
 - attributet `int CompareTo(T? other)` motsvarar det objekt som anropande objekt ska jämföras med
 
