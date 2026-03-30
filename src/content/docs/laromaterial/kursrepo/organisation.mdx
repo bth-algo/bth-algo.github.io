@@ -21,7 +21,7 @@ På kursens [Canvas](https://canvas.bth.se) sida finns en uppgift som heter **Gi
 
 När uppgiften rättats och får du en inbjudan till organisationen. Du kommer att få en notis i Canvas och ett mejl till din GitHub användare (den du angav i uppgiften).
 
-När du har fått inbjudan kan du acceptera den genom att klicka på länken i mejlet eller i Canvas.
+När du har fått inbjudan kan du acceptera den genom att klicka på länken i mejlet eller i Canvas. Vi rekommenderar att du använder kommentaren i Canvas. Där hittar du länk till både inbjudan och ditt repo.
 
 import organisation3 from '@assets/kursrepo/organisation3.png';
 
@@ -45,4 +45,19 @@ import organisation4 from '@assets/kursrepo/organisation4.png';
     caption="Acceptera inbjudan till organisationen på GitHub."
 />
 
-När du har aktiverat SSO är du redo att arbeta vidare.
+## Aktivera SSH för organisationen
+
+För att kunna arbeta med kursens kod och uppgifter på GitHub behöver du aktivera SSH för organisationen.
+
+1. Uppe i högra hörnet på vilken sida som helst på GitHub, klicka på din profilbild och välj `Settings`.
+2. I menyn till vänster, klicka på `SSH and GPG keys`.
+3. För din SSH nyckel, klicka på "Configure SSO" och välj `bth-algo` i listan över organisationer.
+
+import authenticateSsh from '@assets/kursrepo/authenticate-ssh.png';
+
+<Figure 
+    src={authenticateSsh}
+    caption="Aktivera SSH för organisationen på GitHub."
+/>
+
+Nu är du redo att arbeta vidare.
