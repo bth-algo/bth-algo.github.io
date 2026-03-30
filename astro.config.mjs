@@ -31,7 +31,7 @@ export default defineConfig({
 			editLink: {
 				baseUrl: 'https://github.com/bth-algo/bth-algo.github.io/tree/main',
 			},
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/bth-algo/bth-algo.github.io' }],
 			head: [
 				{
 					tag: 'script',
