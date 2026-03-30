@@ -46,8 +46,8 @@ Sätt default-argument för note till "-".
 När BusStop-objekt jämförs ska det vara `_name` som jämförelsen baseras på. Anta exempelvis att följande objekt skapas:
 
 ```
-BusStop busStopA = new BusStop("Traryd", 134, "Hög kant");
-BusStop busStopB = new BusStop("Ljungby", 122, "Ingen busskur för närvarande");
+BusStop busStopA = new BusStop(134, "Traryd",  "Hög kant");
+BusStop busStopB = new BusStop(122, "Ljungby", "Ingen busskur för närvarande");
 ```
 då resulterar 
 - `busStopA.CompareTo(busStopB)` i 1
