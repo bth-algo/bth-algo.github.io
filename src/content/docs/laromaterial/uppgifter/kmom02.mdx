@@ -50,7 +50,7 @@ dotnet test
 
 Kopiera den generiska klassen `BusStop` som du har i `kmom01` till katalogen `Sorting` och ändra dessutom namespace till `Sorting`. 
 
-Uppdatera dessutom `BusStop` enligt klassdiagrammet  
+Uppdatera `BusStop` enligt klassdiagrammet  
 
 <Figure
     src={klassdiagram}
@@ -73,8 +73,8 @@ Kontrollera att du får rätt resultat.
 <summary>Ett förslag hittar du här</summary>
 
 ```csharp
-BusStop busStopA = new BusStop("Traryd", 134, "Hög kant");
-BusStop busStopB = new BusStop("Ljungby", 122, "Ingen busskur för närvarande");
+BusStop busStopA = new BusStop(134, "Traryd", "Hög kant");
+BusStop busStopB = new BusStop(122, "Ljungby", "Ingen busskur för närvarande");
 
 Console.WriteLine($"Antalet jämförelser vid start {BusStop.GetNrOfComparisons()}");
 if (busStopA.CompareTo(busStopB) > 0)
@@ -175,7 +175,7 @@ private static int Partition<T>(T[] A, int start, int end) where T : IComparable
 
 Nu ska du undersöka hur effektiva algoritmerna är genom att undersöka antalet jämförelser. Du ska göra detta genom att sortera BusStop-objekt.
 
-Filen `stops.txt` innehåller hållplatser för Blekingetrafiken. Innehållet på filen är
+Filen `stops.txt` (som du hittar i katalogen `example`) innehåller hållplatser för Blekingetrafiken. Innehållet på filen är
 ```text
 stop_id,stop_name,stop_lat,stop_lon,location_type,parent_station,platform_code
 9021010001001000,Kungsplan,56.165202,15.586844,1,,
