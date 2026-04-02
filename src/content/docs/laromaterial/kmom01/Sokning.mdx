@@ -217,7 +217,7 @@ Sökning görs på 25. Vilka element kommer 25 att jämföras med i arrayen? Vil
 
 Vi formulerar sökningen som en algoritm i pseudokod.
 
-**Idé**: Vi behöver hålla reda på *startindex*, *slutindex* och *mittindex* i arrayen. Beräkning av mittindex görs genom (startindex + mittindex)/2. Använd en boolesk variabel *found* som sätts till false. 
+**Idé**: Vi behöver hålla reda på *startindex*, *slutindex* och *mittindex* i arrayen. Beräkning av mittindex görs genom (startindex + slutindex)/2. Använd en boolesk variabel *found* som sätts till false. 
 Upprepa att undersöka om det som söks finns i arrayen på plats mittindex. Om så är fallet sätt found till true, men om det inte är så uppdatera startindex eller slutindex baserat på om det som söks är mindre än det som finns på mittindex eller ej. Upprepningen ska endast fortgå om det finns element kvar i arrayen (dvs startindex < endindex) och found fortfarande är falsk. När upprepningen är klar kontrolleras om found fortfarande är false. Om så är fallet sätts index till -1. Avslutningsvis returneras index.
 
 Indata: en array *A*, antalet element som finns i arrayen *n* och det element som söks *toFind*
