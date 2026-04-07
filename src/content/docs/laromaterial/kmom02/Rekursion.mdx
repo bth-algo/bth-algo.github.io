@@ -9,7 +9,7 @@ Vissa algoritmer är sk. rekursiva. Detta innebär att de anropar sig själva.
 
 En algoritmen har till uppgift att lösa ett problem (en uppgift) och om detta utförs rekursivt innebär det att problemet vid varje nytt anrop minskar och att det finns ett direkt resultat när problemet är tillräckligt litet. 
 
-Om vi tänker oss det enkla exemplet att summera alla heltal från 1 till ett visst värde representerat av n. Då hade vi med största säkerhet tänkt oss en iteration från 1 till n i vilken summan ökas med nästa tal. Vi kan nu formulera algoritmen, som vi namnger *iterative_sum* enligt
+Om vi tänker oss det enkla exemplet att summera alla heltal från 1 till ett visst värde representerat av n. Då hade vi med största säkerhet tänkt oss en iteration från 1 till n i vilken summan ökas med nästa tal. Vi kan nu formulera en algoritm, som vi namnger *iterative_sum* enligt
 
 ```
 iterative_sum(n)
@@ -29,7 +29,7 @@ Om vi vill göra en rekursiv algoritm `recursive_sum(n)` för att lösa samma pr
  1. Minsta summan som kan beräknas är summan från 1 till 1, dvs sum(1). Denna ska resultera i 1, dvs *sum(1) = 1*.
  2. Vi ser att t.ex att om vi redan har beräknat summan från 1 till 6 så behöver vi bara addera 7 till denna för att få fram summan från 1 till 7. Generaliserar vi kan vi säga att om vi har summan från 1 till n-1 så kan vi, genom att addera n, till denna få summan 1 till n. Vi kan uttrycka detta genom **sum(n) = sum(n-1) + n** och tillsammans med att vi vet och har definierat att **sum(1) = 1** har vi en rekursiv lösning.
 
- Nu använder vi detta för att formulera algoritmen, som vi namnger `recursive_sum` enligt
+ Nu använder vi detta för att formulera en algoritm, som vi namnger `recursive_sum` enligt
 
     ```csharp
     static int recursive_sum(int n)
