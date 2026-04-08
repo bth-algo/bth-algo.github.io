@@ -162,44 +162,37 @@ Vi ska undersöka alternativen **array** och **länkning**. Array är en datastr
 Stacken placerar elementen (som är av datatypen T) i en array. Botten på stacken motsvaras av index 0 i arrayen och toppen växter mot högre index.   
 Vi vet att en array är begränsad i storlek och vi behöver hitta en lösning eftersom stacken inte begränsas men det fixar vi senare.   
 Vi deklarerar, förutom en medlemsvariabel för arrayen, en heltalsvariabel som håller var toppen är i arrayen.   
-I detta fall deklarerar även en medlemsvariabel som håller kapaciteten på arrayen för att tydliggöra hur det kan behöva hanteras i vissa programmeringsspråk. Detta bör dock undvikas i programmeringsspråk där arrayen vet sin kapacitet, vilket är fallet i C#. Du kan helt enkelt bortse från denna medlemsvariabel i C# och ersätta den med `Length` för arrayen.
 
-```csharp 
 <br></br>
 <Figure
     src={stackMedArray}
     caption="Stack som representeras med en array"
-    width="500px"
+    width="600px"
 />
 
 ```csharp
 public class Stack<T>: IStack<T>
 {
-    private T[] _elements; 
-    private int _capacity; 
+    private T[] _elements;
     private int _top;
 
     //...
 }
 ```
 
-Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom stack. Kapaciteten behöver ges ett startvärde (i detta fall 10), arrayen allokeras med denna kapacitet och top-variabeln ges värdet 0.  
-*Anm: Det är möjligt att hantera storleken på kön utan att använda en medlemsvariabel för kapaciteten i C#.*
-
+Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom stack. Arrayen behöver ges en initial kapacitet, i detta fall 10. Dessutom sätts `top`-variabeln till 0.  
 
 
 ```csharp
 public class Stack<T>: IStack<T>
 {
     private T[] _elements;
-    private int _capacity;
     private int _top;
 
     public Stack()
     {
         this._top = 0;
-        this._capacity = 10;
-        this._elements = new T[this._capacity];
+        this._elements = new T[10];
     }
     //...
 }
@@ -211,7 +204,6 @@ Nästa steg blir att implementera `Push`-metoden. Elementet som *pushas* ska ham
 public class Stack<T>: IStack<T>
 {
     private T[] _elements;
-    private int _capacity;
     private int _top;
 
     public Stack() {...} 
@@ -267,12 +259,11 @@ Vid anrop av Empty ska resultatet blir sant eller falskt vilket avgörs av inneh
     </details>
 
 
-Då var vi klara med implementationen av ADT:n Stack där vi använt en array som intern datastruktur förutom att stacken är begränsad i storlek. Vi löser detta genom att vid anrop av push() kontrollera om arrayen är fylld och i så fall fixa en större array (på samma sätt som i artikeln om ADT).
+Då var vi klara med implementationen av ADT:n Stack där vi använt en array som intern datastruktur förutom att stacken är begränsad i storlek. Vi löser detta genom att vid anrop av `Push()` kontrollera om arrayen är fylld och i så fall fixa en större array (på samma sätt som i artikeln om ADT).
 
-- öka innehållet i `_capacity`
-- allokera en ny större array baserat på den nya kapaciteten
+- allokera en ny större array 
 - kopiera över innehållet från arrayen som `_elements` refererar till
-- ändra elements så att den refererar till den nya större arrayen
+- ändra `_elements` så att den refererar till den nya större arrayen
 
 Detta hanteras lämpligen i en privat hjälpmetod:
 
@@ -280,15 +271,13 @@ Detta hanteras lämpligen i en privat hjälpmetod:
 public class Stack<T>: IStack<T>
 {
     private T[] _elements;
-    private int _capacity;
     private int _top;
 
     public Stack() {...} 
 
     private void expand()
     {
-        this._capacity += 10;
-        T[] temp = new T[this._capacity];
+        T[] temp = new T[this._elements.Length + 10];
         for (int i=0; i < this._top; i++)
         {
             temp[i] = this._elements[i];
