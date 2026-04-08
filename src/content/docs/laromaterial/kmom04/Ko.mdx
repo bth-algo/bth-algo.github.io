@@ -135,7 +135,7 @@ Vi ska använda alternativen **array** respektive **länkning**.
 
 #### Array 
 
-Kön placerar elementen (som är av datatypen T) i en array. Eftersom principen First-In-First-Out ska uppfyllas behöver vi sätta in element från en "ände" och plocka bort element från den andra "änden". För arrayen och möjligheten att expandera denna, deklarerar vi en array-variabel och en medlemsvariabel för kapaciteten på arrayen samt en heltalsvariabel för antalet element som finns i kön. Därutöver behöver vi heltalsvariabler för att hålla index för var kön börjar respektive var kön slutar. Att
+Kön placerar elementen (som är av datatypen T) i en array. Eftersom principen First-In-First-Out ska uppfyllas behöver vi sätta in element i en "ände" och plocka bort element från den andra "änden". Vi deklarerar en array-variabel och en heltalsvariabel för antalet element som finns i kön. Därutöver behöver vi heltalsvariabler för att hålla index för var kön börjar respektive var kön slutar. *Anm: Det går att utesluta variabeln för storlek men vi väljer att använda den här*
 
 <Figure
     src={koMedArray}
@@ -155,7 +155,7 @@ Kön kommer att *slingra sig* mot höger efter hand som element tas bort och sä
 
 **Testa dig själv**
  
-1. I en kö används en array cirkulärt. Kapaciteten är 5 och följande operationer utförs (i den ordning de är angivna) på kön. På vilka index finns de element som ingår i kön när alla operationer är utförda?
+1. I en kö används en array cirkulärt. Kapaciteten på arrayen är 5 och följande operationer utförs (i den ordning de är angivna) på kön. På vilka index finns de element som ingår i kön när alla operationer är utförda?
     
     Enqueue(A), Enqueue(G), Enqueue(T), Dequeue(), Enqueue(W), Dequeue(), Enqueue(S), Dequeue(), enqueue(Y)
 
@@ -173,7 +173,6 @@ Nu börjar vi med implementationen av klassen `Queue` vilken ska implementera in
 public class Queue<T>: IQueue<T>
 {
     private T[] _elements; 
-    private int _capacity;
     private int _size;
     private int _last; 
     private int _first;
@@ -183,22 +182,20 @@ public class Queue<T>: IQueue<T>
 }
 ```
 
-Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom kö. Kapaciteten ges ett startvärde som i detta fall är 10, arrayen allokeras med denna kapacitet, storleken sätts till 0 och variablerna för index motsvarande sist och först i kön sätts till 0.
+Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom kö. Arrayen ges en kapaciteten ges en startkapacitet som i detta fall är 10, storleken sätts till 0 och variablerna för index motsvarande sist och först i kön sätts till 0.
 
 
 ```csharp
 public class Queue<T>: IQueue<T>
 {
     private T[] _elements; 
-    private int _capacity;
     private int _size;
     private int _last; 
     private int _first;
 
     public Queue()
     {
-        this._capacity = 10;
-        this._elements = new T[this._capacity];
+        this._elements = new T[10];
         this._size = 0;
         this._last = 0;
         this._first = 0;
@@ -206,7 +203,7 @@ public class Queue<T>: IQueue<T>
 
 ```
 
-Nästa steg blir att implementera `Enqueue`-metoden. Elementet som sätts in ska hamna sist i kön vilket motsvaras av den index-position som `_last` innehåller. Om arrayen är fylld behöver den först utökas. Detta hanterar vi med en privat hjälp-metod `expand()`. När elementet placerats i arrayen ska `_last` räknas upp. Vi behöver hantera cirkulariteten för `_last` vilket lämpligen görs med modulus-beräkning. Storleken på kön har efter insättningen ökat och vi uppdaterar även `_size`. *Anm: det är möjligt att hantera storleken på kön utan att använda en medlemsvariabel för*
+Nästa steg blir att implementera `Enqueue`-metoden. Elementet som sätts in ska hamna sist i kön vilket motsvaras av den index-position som `_last` innehåller. Om arrayen är fylld behöver den först utökas. Detta hanterar vi med en privat hjälp-metod `expand()`. När elementet placerats i arrayen ska `_last` räknas upp. Vi behöver hantera cirkulariteten för `_last` vilket lämpligen görs med modulus-beräkning. Storleken på kön har efter insättningen ökat och vi uppdaterar även `_size`.
 
 **Testa dig själv**
  
@@ -214,7 +211,7 @@ Nästa steg blir att implementera `Enqueue`-metoden. Elementet som sätts in ska
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Genom att undersöka om antalet element, dvs storleken (_size) är samma som kapaciteten på arrayen (_capacity)
+    Genom att undersöka om antalet element, dvs storleken (_size) är samma som arrayens kapacitet.
     </details>
 
 1. Vad vet vi om index för första elementet (`_first`) och index för sista elementet i kön (`_last`) när arrayen är fylld?
@@ -230,7 +227,7 @@ Nästa steg blir att implementera `Enqueue`-metoden. Elementet som sätts in ska
     <summary>Klicka här för att visa svaret</summary>  
 
     Överför först elementen från och med index givet av `first` till index givet av `_size` i den gamla arrayen (använd for-loop) så att dessa placeras från och med index 0 i den nya.  
-    Överför därefter elementen från och med index 0 till index givet av `_last` i den gamla arrayen (använd for-loop) så att dessa placeras efter de som redan först över i den nya arrayen.  
+    Överför därefter elementen från och med index 0 till index givet av `_last` i den gamla arrayen (använd for-loop) så att dessa placeras efter de som redan förts över i den nya arrayen.  
     </details>
 
 
@@ -238,7 +235,6 @@ Nästa steg blir att implementera `Enqueue`-metoden. Elementet som sätts in ska
 public class Queue<T>: IQueue<T>
 {
     private T[] _elements; 
-    private int _capacity;
     private int _size;
     private int _last; 
     private int _first;
@@ -249,18 +245,18 @@ public class Queue<T>: IQueue<T>
 
     public void Enqueue(T elem)
     {
-        if (this._size == this._capacity)
+        if (this._size == this._elements.Length)
         {
             expand(); // antar att denna är implementerad
         }
         this._elements[this._last] = elem;
-        this._last = (this._last + 1) % this._capacity;
+        this._last = (this._last + 1) % this._elements.Length;
         this._size++;
     }
     //...
 }
 ```
-Vi fortsätter med `Dequeue`-metoden. Elementet som är först i kön ska "tas bort" (inte ingå i kön). Denna nod finns på index `_first`. Vi använder en variabel för att hålla elementet på detta index och flyttar fram `_first` genom att öka denna med 1. Återigen behöver vi hantera cirkulariteten. Vi behöver dessutom minska `_size`. Vi reflekterar över att det bör kastas ett undantag om kön är tom.
+Vi fortsätter med `Dequeue`-metoden. Elementet som är först i kön ska "tas bort" (inte ingå i kön). Detta element finns på index `_first`. Vi använder en variabel för att hålla elementet på detta index och flyttar fram `_first` genom att öka denna med 1. Återigen behöver vi hantera cirkulariteten. Vi behöver dessutom minska `_size`. Vi reflekterar över att det bör kastas ett undantag om kön är tom.
 
 **Testa dig själv**
 
@@ -275,7 +271,7 @@ Vi fortsätter med `Dequeue`-metoden. Elementet som är först i kön ska "tas b
         if (this._size == 0)
             throw new Exception();
         T toDequeue = this._elements[this._first];
-        this._first = (this._first + 1) % this._capacity;
+        this._first = (this._first + 1) % this._elements.Length;
         this._size--;
         return toDequeue;
     }
@@ -285,7 +281,7 @@ Vi fortsätter med `Dequeue`-metoden. Elementet som är först i kön ska "tas b
 
 
 Slutligen har vi `Peek`-metoden och `Empty`-metoden. Vid anrop av Peek ska det element som är på först i kön returneras, men inte tas bort (fortfarande ingå i kön). Elementet hittas på index `_first`. Ett undantag bör kastas om stacken är tom.
-Vid anrop av Empty ska resultatet blir sant eller falskt vilket avgörs av innehållet i `_size` mot innehållet `_capacity`.
+Vid anrop av Empty ska resultatet blir sant eller falskt vilket avgörs av innehållet i `_size`.
 
 **Testa dig själv**
 
