@@ -11,9 +11,9 @@ import stack from '@assets/img/kmom04/stack.png';
 import stackMedArray from '@assets/img/kmom04/stackMedArray.png';
 import stackMedLankning from '@assets/img/kmom04/stackMedLankning.png';
 
-En stack följer principen **Last-In-First-Out** även förkortat **LIFO**. Ett exempel från vardagen är en trave tallrikar eller ett rör med tennisbollar. Man placerar en ny tallrik respektive en ny tennisboll ovanpå de befintliga. När man tar en tallrik tar en den översta. På samma sätt får man den översta när man tar en tennisboll från röret. När man illustrera en stack gör man ofta det som en stapel där man refererar till toppen av stacken. 
+En stack följer principen **Last-In-First-Out** även förkortat **LIFO**. Exempel från vardagen är en trave tallrikar eller ett rör med tennisbollar. Man placerar en ny tallrik respektive en ny tennisboll ovanpå de befintliga. När man tar en tennisboll eller en tallrik tar man den översta. När man illustrera en stack gör man ofta det som en stapel där man refererar till toppen av stacken. 
 
-I bilden visas en stack där F är det element som placerats på stacken sist (och därmed är överst). Om ett element ska tas bort från stacken så blir det F.
+I bilden visas en stack där E är det element som placerats på stacken sist (och därmed är överst). Om ett element tas bort från stacken så är det F. 
 
 
 <Figure
@@ -26,14 +26,9 @@ I bilden visas en stack där F är det element som placerats på stacken sist (o
 Stackens beteende, dvs uppsättning operationer, motsvaras av
 
 - push - sätt in ett element överst
-- pop - ta bort det översta noden
-- peek - "kika" på det översta utan att ta bort det
+- pop - ta bort det översta elementet
+- peek - "kika" på det översta elementet utan att ta bort det
 - empty - avgör om stacken är tom eller ej
-
-ADT:n Heap har operationerna 
-- sätta in ett element
-- ta bort elementet med högst värde/prioritet
-- "kika" på elementet med högst värde/prioritet
 
 **Testa dig själv**  
 
@@ -66,7 +61,7 @@ ADT:n Heap har operationerna
 För att göra det möjligt att välja vilken datatyp en Stack ska hantera kan man som bekant skapa så kallade generiska interface och generiska klasser. Vi gör ett interface för stacken med metoder som motsvarar stackens beteende
 
 ```csharp
-interface IStack<T>
+public interface IStack<T>
 {
     void Push(T elem);
     T Pop();
@@ -90,9 +85,9 @@ Vad förväntar vi oss av klassen Stack?
 - Att vi kan placera element (i vårt fall strängar) på toppen av stacken.
     ```csharp
     // ...
-    strStack.Push("one"); // "one" är noden på toppen
-    strStack.Push("two"); // "two" är noden på toppen, placerat ovanför "one"
-    strStack.Push("three"); // "three" är noden på toppen, placerat ovanför "two"
+    strStack.Push("one"); // "one" är elementet på toppen
+    strStack.Push("two"); // "two" är elementet på toppen, placerat ovanför "one"
+    strStack.Push("three"); // "three" är elementet på toppen, placerat ovanför "two"
     ```
 
 - Att vi kan ta bort element (i vårt fall strängar) från toppen av stacken.
@@ -152,7 +147,7 @@ Om vi tänker oss att vi ska implementera en egen ADT Stack där det, förutom t
 
 - skapa en tom stack
 
-ska vi skapa en klass namngiven `Stack` och i denna klass bestämma vilka medlemsvariabler vi behöver för att 
+behöver vi skapa en klass, lämpligen namngiven `Stack`, och i denna klass bestämma vilka medlemsvariabler vi behöver för att 
 
 - hantera vilken datatyp som helst
 - kunna representera den sekvens av element som finns i stacken som möjliggör att uppfylla principen Last-In-First-Out.
@@ -160,7 +155,7 @@ ska vi skapa en klass namngiven `Stack` och i denna klass bestämma vilka medlem
 
 ### Representera stack
 
-Vi ska undersöka alternativen **array** och **länkning**. Array är en datastruktur där vi har indexering från 0 och uppåt där sista index är 1 mindre är arrayens kapacitet. Länkning innebär att objekt kan "peka ut" andra objekt och på så sätt skapa en kedja av objekt där vi bara behöver veta var kedjan börjar, dvs vilket element som är först.
+Vi ska undersöka alternativen **array** och **länkning**. Array är en datastruktur där vi har indexering från 0 och uppåt där sista index är 1 mindre är arrayens kapacitet. Länkning innebär att objekt kan "peka ut" andra objekt och på så sätt skapa en kedja av objekt där vi bara behöver veta var kedjan börjar, dvs vilket element som är först (eller för en stack snarare överst).
 
 #### Array 
 
@@ -185,7 +180,7 @@ public class Stack<T>: IStack<T>
 }
 ```
 
-Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom stack. Kapaciteten behöver ges ett startvärde - i detta fall 10, arrayen allokeras med denna kapacitet och top-variabeln ges värdet 0.
+Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom stack. Kapaciteten behöver ges ett startvärde (i detta fall 10), arrayen allokeras med denna kapacitet och top-variabeln ges värdet 0.
 
 
 
@@ -206,7 +201,7 @@ public class Stack<T>: IStack<T>
 }
 ```
 
-Nästa steg blir att implementera `Push`-metoden. Elementet som *pushas* ska hamna på toppen vilket motsvaras av den index-position som top innehåller. Därefter behöver top räknas upp. Ännu så länge antar vi att det finns plats i arrayen.
+Nästa steg blir att implementera `Push`-metoden. Elementet som *pushas* ska hamna på toppen vilket motsvaras av den index-position som `_top` innehåller. Därefter behöver `_top` räknas upp. Ännu så länge antar vi att det finns plats i arrayen.
 
 ```csharp
 public class Stack<T>: IStack<T>
@@ -224,7 +219,7 @@ public class Stack<T>: IStack<T>
     //...
 }
 ```
-Vi fortsätter med `Pop`-metoden. Vid anrop av Pop ska det element som är på toppen av stacken "tas bort" (dvs inte ingå i stacken längre) och returneras. Elementet på toppen hittas på index `_top - 1`. Vi behöver alltså först minsta på värdet i `_top` och därefter returnera det som finns på `_top` i arrayen. Vi reflekterar över att det bör kastas ett undantag om stacken är tom.
+Vi fortsätter med `Pop`-metoden. Vid anrop av Pop ska det element som är på toppen av stacken "tas bort" (dvs inte ingå i stacken längre) och returneras. Elementet på toppen hittas på index `_top - 1`. Vi behöver alltså först minska på värdet i `_top` och därefter returnera det som finns på `_top` i arrayen. Vi reflekterar över att det bör kastas ett undantag om stacken är tom.
 
 **Testa dig själv**
 
@@ -270,9 +265,9 @@ Vid anrop av Empty ska resultatet blir sant eller falskt vilket avgörs av inneh
 
 Då var vi klara med implementationen av ADT:n Stack där vi använt en array som intern datastruktur förutom att stacken är begränsad i storlek. Vi löser detta genom att vid anrop av push() kontrollera om arrayen är fylld och i så fall fixa en större array (på samma sätt som i artikeln om ADT).
 
-- öka innehållet i _capacity
+- öka innehållet i `_capacity`
 - allokera en ny större array baserat på den nya kapaciteten
-- kopiera över innehållet från arrayen som _elements refererar till
+- kopiera över innehållet från arrayen som `_elements` refererar till
 - ändra elements så att den refererar till den nya större arrayen
 
 Detta hanteras lämpligen i en privat hjälpmetod:
@@ -310,7 +305,7 @@ public class Stack<T>: IStack<T>
 
 ### Länkning
 
-För att representera en Stack genom läkning används en enkellänkad lista. Det är endast toppen på stacken som är relevant för de operationer (metoder) som man ska kunna utföra på stacken. Man sätter in nya element på toppen (Push), tar bort element från toppen (Pop) och levererar noden toppen utan att ta bort det (Peek).
+För att representera en Stack genom läkning används en enkellänkad lista. Det är endast toppen på stacken som är relevant för de operationer (metoder) som man ska kunna utföra på stacken. Man sätter in nytt element på toppen (Push), tar bort element från toppen (Pop) och levererar element på toppen utan att ta bort det (Peek).
 
 <br></br>
 <Figure
@@ -320,13 +315,13 @@ För att representera en Stack genom läkning används en enkellänkad lista. De
 />
 
 
-Vi definierar klassen Stack och döljer klassen Node för "omvärlden". Det gör vi genom att definiera Node-klassen som privat inom Stack-klassen. Då är det endast inom klassen Stack som Node är tillgänglig.  
+Vi definierar klassen `Stack` och döljer klassen `Node` för "omvärlden". Det gör vi genom att definiera `Node`-klassen som privat inom `Stack`-klassen. Då är det endast inom klassen `Stack` som `Node` är tillgänglig (inkapsling och informationsdöljning (*encapsulation* och *information hiding*)).  
 Som medlemsvariabel behövs endast en referens-variabel som motsvarar den pekare som *pekar på* top-noden.
 
 ```csharp
 public class Stack<T>: IStack<T>
 {
-        private class Node
+    private class Node
     {
         public T Data;
         public Node? Next;
@@ -344,7 +339,7 @@ public class Stack<T>: IStack<T>
 
 Implementationen i de metoder som ingår i stacken måste anpassas så att de motsvarar stackens beteende, nu genom att använda enkellänkning.
 
-Vi börjar med konstruktorn som ska implementeras så att objektet som skapas motsvarar en tom stack. Det innebär att top-pekaren ges värdet null.
+Vi börjar med konstruktorn som ska implementeras så att objektet som skapas motsvarar en tom stack. Det innebär att `top`-pekaren ges värdet `null`.
 
 ```csharp
 public class Stack<T>: IStack<T>
@@ -361,7 +356,7 @@ public class Stack<T>: IStack<T>
 }
 ```
 
-Vi fortsätter med `Push`-metoden som ska hantera att det nya noden placeras på toppen. Vi behöver skapa ett `Node`-objekt som innehåller det nya elementet. Vidare ska detta `Node`-objekt infogas vid top-pekaren. 
+Vi fortsätter med `Push`-metoden som ska hantera att det nya elementet placeras på toppen. Vi behöver skapa ett `Node`-objekt som innehåller det nya elementet. Vidare ska detta `Node`-objekt infogas vid `top`-pekaren. 
 
 
 ```csharp
@@ -382,7 +377,7 @@ public class Stack<T>: IStack<T>
 }
 ```
 
-Metoden `Pop` ska ta bort och returnera det element som är överst på stacken. Vi "plockar ut" elementet som är lagrat i top-noden och ändrar top-pekaren så att den pekar på det `Node`-objekt som är top-nodens efterföljare. Vi kastar dessutom ett undantag om stacken är tom.
+Metoden `Pop` ska ta bort och returnera det element som är överst på stacken. Vi "plockar ut" elementet som är lagrat i top-noden och ändrar `top`-pekaren så att den pekar på det `Node`-objekt som är top-nodens efterföljare. Vi kastar dessutom ett undantag om stacken är tom.
 
 **Testa dig själv**
  
@@ -395,7 +390,7 @@ Metoden `Pop` ska ta bort och returnera det element som är överst på stacken.
     public T Pop()
     {
         if (this._top == null)
-            throw new Exception();
+            throw new Exception(); // gärna ett mer specifikt undantag
         T popElement = this._top.Data;
         this._top = this._top.Next;
         return popElement;
@@ -404,7 +399,7 @@ Metoden `Pop` ska ta bort och returnera det element som är överst på stacken.
     </details>
 
 
-Återstår `Peek`-metoden som ska leverera noden på toppen utan att ta bort det och `Empty`-metoden som ska avgöra om stacken är tom eller ej. 
+Återstår `Peek`-metoden som ska leverera elementet på toppen utan att ta bort det och `Empty`-metoden som ska avgöra om stacken är tom eller ej. 
 
 **Testa dig själv**
  
