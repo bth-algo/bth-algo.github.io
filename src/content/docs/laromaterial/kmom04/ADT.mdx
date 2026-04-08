@@ -30,7 +30,7 @@ intList.RemoveAt(2); // listan innehåller // 33, 99, 77
 intList.RemoveAt(intList.Count - 1); // listan innehåller // 33, 99
 
 ```
-Vi vet hur listan "fungerar" (det är en sekvens av element från index 0 och framåt) och att det finns metoder som kan anropas för att arbeta med listan. Däremot behöver vi inte veta hur listan hanterar elementen (vilka medlemsvariabler den använder) och inte hur metoderna är implementerade (hur listan läser uppgiften för metoden). 
+Vi vet hur listan "fungerar" (det är en sekvens av element från index 0 och framåt) och att det finns metoder som kan anropas för att arbeta med listan. Däremot behöver vi inte veta hur listan hanterar elementen (vilka medlemsvariabler den använder) och inte hur metoderna är implementerade (hur listan löser uppgiften för metoden). 
 
 Listan är en ADT! Den är implementerad som en klass, den kapslar in data och beteendet och den döljer implementation! Det användaren behöver se är gränssnittet vilket motsvaras av uppsättningen metoder.
 
@@ -52,7 +52,7 @@ Eftersom många ADT:er har ett väldefinierat gränssnitt men kan implementeras 
 kan vi skapa ett interface i C#
 
 ```csharp
-interface ISimpleList<T>
+public interface ISimpleList<T>
 {
     void AddLast(T elem);
     void AddFirst(T elem);
@@ -101,7 +101,8 @@ ISimpleList<int> lyckyNrList;
 ISimpleList<string> nameList;
 ISimpleList<Car> carList;
 
-// objekt av en konkret klasstyp måste skapas för dessa variabler, men all övrig implementation kan skrivas baserat på de metoder som finns i interfacet
+// objekt av en konkret klasstyp måste skapas för dessa variabler, 
+// men all övrig implementation kan skrivas baserat på de metoder som finns i interfacet
 lyckyNrList.AddFirst(55);
 int value = lyckyNrList.GetAt(0);
 
@@ -130,10 +131,10 @@ int nrOfCars = carList.Size();
      En datatyp som definieras av sitt beteende ur en användares synvinkel vilket gäller möjliga värden, möjliga operationer på data av denna typ och vad man kan förvänta sig av beteendet hos dessa operationer utan att behöva känna till implementation.
     </details>
 
-1. Implementera en ADT SpecialList givet genom interfacet 
+1. Implementera en ADT SpecialList baserat på interfacet 
 
     ```csharp
-    interface ISpecialList<T>
+    public interface ISpecialList<T>
     {
         void AddFirst(T elem);
         void RemoveLast();
