@@ -148,7 +148,7 @@ Kön kommer att *slingra sig* mot höger efter hand som element tas bort och sä
 
 <Figure
     src={koMedArrayCirkular}
-    caption="Kö som representeras med en array"
+    caption="Kö som representeras med en cirkulär array"
     width="600px"
 />
 
@@ -167,7 +167,7 @@ Kön kommer att *slingra sig* mot höger efter hand som element tas bort och sä
     På index 4 finns S  
     </details>
 
-Nu börjar vi med implementationen av klassen `Queue` vilken ska implementera interfacet `IQueue`. Medlemsvariablerna blir (observera att det går att klara sig utan att hålla kapaciteten på kön (se artikeln om Stack).
+Nu börjar vi med implementationen av klassen `Queue` vilken ska implementera interfacet `IQueue`. 
 
 ```csharp
 public class Queue<T>: IQueue<T>
@@ -182,7 +182,7 @@ public class Queue<T>: IQueue<T>
 }
 ```
 
-Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom kö. Arrayen ges en kapaciteten ges en startkapacitet som i detta fall är 10, storleken sätts till 0 och variablerna för index motsvarande sist och först i kön sätts till 0.
+Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom kö. Arrayen ges en startkapacitet som i detta fall är 10, storleken sätts till 0 och variablerna för index motsvarande sist och först i kön sätts till 0.
 
 
 ```csharp
@@ -280,8 +280,8 @@ Vi fortsätter med `Dequeue`-metoden. Elementet som är först i kön ska "tas b
     </details>
 
 
-Slutligen har vi `Peek`-metoden och `Empty`-metoden. Vid anrop av Peek ska det element som är på först i kön returneras, men inte tas bort (fortfarande ingå i kön). Elementet hittas på index `_first`. Ett undantag bör kastas om stacken är tom.
-Vid anrop av Empty ska resultatet blir sant eller falskt vilket avgörs av innehållet i `_size`.
+Slutligen har vi `Peek`-metoden och `Empty`-metoden. Vid anrop av Peek ska det element som är först i kön returneras, men inte tas bort (fortfarande ingå i kön). Elementet hittas på index `_first`. Ett undantag bör kastas om stacken är tom.
+Vid anrop av `Empty` ska resultatet blir sant eller falskt vilket avgörs av innehållet i `_size`.
 
 **Testa dig själv**
 
@@ -311,7 +311,7 @@ Då var vi klara med implementationen av ADT:n Kö där vi använt en array som 
 
 ### Länkning
 
-För att representera en Kö genom läkning används en enkellänkad lista men med två pekare "in i" listan. En pekare *pekar på* det element som är först i kön och en annan pekare *pekar på* det element som är sist i kön. Då blir det snabbt att sätta in element i den ena änden av listan och att ta bort element i den andra änden av listan. 
+För att representera en Kö genom läkning används en enkellänkad lista. I detta fall används två pekare "in i" listan. En pekare *pekar på* det element som är först i kön och en annan pekare *pekar på* det element som är sist i kön. Då blir det snabbt att sätta in element i den ena änden av listan och att ta bort element i den andra änden av listan. 
 <br></br>
 <Figure
     src={koMedLankning}
@@ -333,7 +333,7 @@ public class Queue<T>: IQueue<T>
 }
 ```
 
-Implementationen i de metoder som ingår i kön måste anpassas så att de motsvarar köns beteende, nu genom att använda enkellänkning med pekare på första och pekare på sista noden.
+Implementationen i de metoder som ingår i kön måste anpassas så att de motsvarar köns beteende, dvs anpassas för användning av enkellänkning med pekare på första och pekare på sista noden.
 
 Vi börjar med konstruktorn som ska implementeras så att objektet som skapas motsvarar en tom kö. Det innebär att båda pekarna ges värdet null.
 
@@ -355,7 +355,7 @@ Vi börjar med konstruktorn som ska implementeras så att objektet som skapas mo
     ```
     </details>
 
-Vi fortsätter med `Enqueue`-metoden som ska hantera att det nya elementet placeras sist i kön. Vi behöver skapa ett `Node`-objekt som innehåller elementet. Vidare ska detta `Node`-objekt så att det hamnar efter det `Node`-objekt som last-pekaren *pekar på*. 
+Vi fortsätter med `Enqueue`-metoden som ska hantera att det nya elementet placeras sist i kön. Vi behöver skapa ett `Node`-objekt som innehåller elementet. Vidare ska detta `Node`-objekt hamna efter det `Node`-objekt som last-pekaren *pekar på*. 
 
 Det finns två fall att ta hänsyn till:
 - kön är tom
@@ -372,8 +372,8 @@ Det finns två fall att ta hänsyn till:
     </details>
 
 
-Om kön är tom ska ett nytt `Node`-objekt skapas för elementet som placers i kön, vilket kommer vara både det första och det sista `Node`-objektet i kön.  
-Om kön innehåller minst ett element ska ett nytt `Node`-objekt skapas för elementet, vilket placeras efter det som för närvarande är sist. Därefter ska detta nya `Node`-objekt pekas ut som sista.
+Om kön är tom ska ett `Node`-objekt för elementet placers i kön så att det kommer vara både det första och det sista.  
+Om kön innehåller minst ett element ska ett `Node`-objekt för elementet placeras efter det som för närvarande är sist. Därefter ska detta nya `Node`-objekt *pekas ut* som sista.
 
 **Testa dig själv**
  
@@ -400,7 +400,7 @@ Om kön innehåller minst ett element ska ett nytt `Node`-objekt skapas för ele
     
     </details>
 
-Metoden `Dequeue` ska ta bort och returnera det element som är först i kön. Vi behöver först kontrollera om detta är möjligt - finns inga element i kön kastar vi ett undantag. Om det finns minst ett `Node`-objekt i kön, hämtar vi det element som är placerat i det första `Node`-objektet och håller det med en lokal variabel. Vi ändrar därefter pekaren till första så att det pekar på dessa efterföljare (som kan vara null). Avslutningsvis returnerar vi elementet som vi håller i den lokala variabeln.
+Metoden `Dequeue` ska ta bort och returnera det element som är först i kön. Vi behöver först kontrollera om detta är möjligt. Finns inga element i kön kastar vi ett undantag. Om det finns minst ett `Node`-objekt i kön, hämtar vi det element som är placerat i det första `Node`-objektet och håller det med en lokal variabel. Vi ändrar därefter pekaren till första så att det pekar på efterföljaren (som kan vara null). Avslutningsvis returnerar vi elementet som vi håller i den lokala variabeln.
 
 **Testa dig själv**
  
@@ -458,7 +458,7 @@ Vi analyserar operationerna **Enqueue**. **Dequeue**, **Peek** och **Empty** fö
 
 Analysen omfattar inte expandering av arrayen.  
 
-- **Enqueue**: Arbetet innebär att placera ett element på ett känt/givet index (behöver inte leta upp detta utan variabeln top har detta index) och att räkna upp index (öka innehållet i variabeln för sista index med 1 modulus kapaciteten). Samma arbete utförs oavsett antalet element i arrayen, vilket ger **O(1)**.
+- **Enqueue**: Arbetet innebär att placera ett element på ett känt/givet index (behöver inte leta upp detta utan variabeln `last` har detta index) och att öka värdet med 1 (inkluderat moduls beräkningen mot arrayen kapacitet). Samma arbete utförs oavsett antalet element i arrayen är 1 eller flera, vilket ger **O(1)**. 
 - **Dequeue**: Arbetet innebär returnera ett element på ett känt/givet index och räkna upp index (även här med modulus). Samma arbete utförs oavsett antalet element i arrayen, vilket ger **O(1)**.
 
 **Testa dig själv**
@@ -467,20 +467,20 @@ Analysen omfattar inte expandering av arrayen.
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Arbetet innebär att returnera ett element från ett känt/givet index där index beräknas genom att utföra en minskning med 1. Samma arbete utförs oavsett antalet element i arrayen, vilket ger O(1).
+    Arbetet innebär att returnera ett element från ett känt/givet index där index beräknas genom att utföra en minskning med 1. Samma arbete utförs oavsett antalet element i arrayen, vilket ger **O(1)**.
     </details>
 
 1. Hur blir analysen av **Empty**?
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Resultatet ges av en jämförelse (size == 0). Samma arbete utförs oavsett antalet element i arrayen, vilket ger O(1). 
+    Resultatet ges av en jämförelse (size == 0). Samma arbete utförs oavsett antalet element i arrayen, vilket ger **O(1)**. 
     </details>
 
 ### Länkning
 
-- **Enqueue**: O(1) Arbetet innebär att skapa ett Node-objekt, och infoga det vid last-pekaren och därefter "uppdatera" last-pekare till detta nya Node-objekt. Samma arbete utförs oavsett antalet element i den länkade listan, vilket ger O(1).
-- **Dequeue**: O(1) Arbetet innebär att "hämta" elementet från det Node-objekt som är först i listan, flytta forts-pekaren till nästa Node-objekt och slutligen returnera det "hämtade" elementet. Samma arbete utförs oavsett antalet element i den länkade listan, vilket ger O(1).
+- **Enqueue**: Arbetet innebär att skapa ett Node-objekt, och infoga det vid last-pekaren och därefter "uppdatera" last-pekare till detta nya Node-objekt. Samma arbete utförs oavsett antalet element i den länkade listan, vilket ger **O(1)**.
+- **Dequeue**: Arbetet innebär att "hämta" elementet från det Node-objekt som är först i listan, flytta first-pekaren till nästa Node-objekt och slutligen returnera det "hämtade" elementet. Samma arbete utförs oavsett antalet element i den länkade listan, vilket ger **O(1)**.
 
 **Testa dig själv**
  
@@ -488,17 +488,17 @@ Analysen omfattar inte expandering av arrayen.
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Arbetet innebär att returnera ett element som finns i det Node-objekt som first pekar på. Samma arbete utförs oavsett antalet element i listan, vilket ger O(1).
+    Arbetet innebär att returnera ett element som finns i det Node-objekt som first pekar på. Samma arbete utförs oavsett antalet element i listan, vilket ger **O(1)**.
     </details>
 
 1. Hur blir analysen av **Empty**?
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Resultatet ges av en jämförelse (first == null). Samma arbete utförs oavsett antalet element i listan, vilket ger O(1). 
+    Resultatet ges av en jämförelse (first == null). Samma arbete utförs oavsett antalet element i listan, vilket ger **O(1)**. 
     </details>
 
-## Sammanfattning
+## Sammanfattningsvis
 
 - ADT Kö följer principen First-In-First-Out
 - Beteendet, dvs de operationer som ADT:n Kö har är
@@ -508,5 +508,5 @@ Analysen omfattar inte expandering av arrayen.
     - empty - avgör om kön är tom eller ej
 - För att implementera en kö kan man använda
     - array - där denna används cirkulär, index för första och sista index behövs
-    - enkellänkning - noder paketerar elementen och en pekare *pekar på* den första noden och en pekare *pekar på* sista noden. All insättning sker vid den pekare som *pekar på* sista noden och borttagning görs vid den pekare som *pekar på* första noden.
+    - enkellänkning - noder paketerar elementen och en pekare *pekar på* den första noden och en pekare *pekar på* sista noden. 
 - Alla operationer på ADT:n Kö, oavsett om kön använder en array eller en enkellänkad lista med en pekare till början av kön och en pekare till slutet av kön som intern datastruktur, är O(1), dvs konstant tidskomplexitet.
