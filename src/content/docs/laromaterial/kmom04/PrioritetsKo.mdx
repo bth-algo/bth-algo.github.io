@@ -16,7 +16,7 @@ import prioLankningInsattning from '@assets/img/kmom04/prioLankningInsattning.pn
 import prioLankningInsattningMellan from '@assets/img/kmom04/prioLankningInsattningMellan.png';
 
 
-I en prioritetskö (priority queue) spelar insättningsordningen ingen roll, men det som är garanterat är att det objekt osm har högst prioritet av de som finns i kön är det element som kommer att lämna kön vid nästa borttagning. En liknelse från verkligheten som ligger närmast är en sk VIP-kö. Den som är *viktigast*/*har högst status* är den som lämnar kön först oavsett när personen i fråga kom till kön.
+I en prioritetskö (priority queue) spelar insättningsordningen ingen roll, men det som är garanterat är att det objekt som har högst prioritet av de som finns i kön är det element som kommer att lämna kön vid nästa borttagning. En liknelse från verkligheten är en sk VIP-kö. Den som är *viktigast*/*har högst status* är den som lämnar kön först oavsett när personen i fråga kom till kön.
 
 Prioritetsköns beteende, dvs uppsättning operationer, motsvaras av
 
@@ -25,26 +25,26 @@ Prioritetsköns beteende, dvs uppsättning operationer, motsvaras av
 - peek - "kika" på det noden som har högst prioritet utan att ta bort det
 - size - avgör storleken, dvs antalet element, i kön
 
-Det finns dessutom ett krav på elementen som ska placeras i prioritetskön och det är att det ska vara möjligt att jämföra elementen. För att uppnå kravet på elementen använder vi det generiska interfacet (som vi har tittat på tidigare)
+Det finns dessutom ett krav på elementen som ska placeras i prioritetskö och det är att det ska vara möjligt att jämföra elementen. För att uppnå kravet på elementen använder vi det generiska interfacet (som vi har tittat på tidigare)
 
 ```csharp
-public interface IComparable<in T>
+public interface IComparable<T>
 {
     int CompareTo(T? other);
 }
 ```
 
-Metoden `int CompareTo(T? other)` returnera
-- *< 0* om anropande objekt (this) är *mindre än* other
-- *0* om anropande objekt (this) är *lika med/ekvivalent* other
-- *> 0* om anropande objekt (this) är *större än* other
+Vi repeterar att metoden `int CompareTo(T? other)` returnera
+- *< 0* om anropande objekt är *mindre än* other
+- *0* om anropande objekt är *lika/ekvivalent med* other
+- *> 0* om anropande objekt är *större än* other
 
 ## Interface för Prioritetskö
 
-Vi skapar ett generiskt interface med krav på att den generiska datatypen ska vara jämförbar.
+Vi skapar ett generiskt interface. Här kan vi välja att antingen uttrycka krav på att den generiska datatypen ska vara jämförbar eller inte alls ta med detta. Oavsett så är det en fördel att uttrycka kravet på att den generiska datatypen ska vara jämförbar, eftersom det annars inte finns någon garanti för att det går att jämföra element i prioritetskön.
 
 ```csharp
-interface IPriorityQueue<T> where T : IComparable<T>
+public interface IPriorityQueue<T> where T : IComparable<T>
 {
     void Enqueue(T elem);
     T Dequeue();
@@ -60,12 +60,13 @@ Anta att interfacet `IPriorityQueue` har implementerats av den generiska klassen
 
 Vad förväntar vi oss av klassen PriorityQueue? 
 
-- Att vi kan skapa en tom prioritetskö
-- Att vi kan placera element i prioritetskön.
-- Att vi kan ta bort element noden som har högst prioritet.
-- Att vi kan kika på det element som har högst prioritet utan att ta bort det    
+Att vi kan 
+- skapa en tom prioritetskö
+- placera element i prioritetskön.
+- ta bort element som har högst prioritet.
+- "kika på" det element som har högst prioritet utan att ta bort det    
 
-Vi exemplifiera med int som vi vet uppfyller kravet på den generiska datatypen, nämligen att `CompareTo` finns.
+Vi exemplifiera med `int` som vi vet uppfyller kravet på den generiska datatypen, dvs att `CompareTo` finns.
     
 ```csharp
 IPriorityQueue<int> pq = new PriorityQueue<int>();
@@ -133,7 +134,7 @@ Nu har vi förhoppningsvis förståelse för vad vi kan förvänta oss av ADT:n 
 
 ### Överkurs: Representera prioritetskö
 
-Nu är det dags att implementera ADT:n Prioritetskö. Vi behöver göra lite mer än när vi implementerade Stack coh Kö eftersom vi behöver kräva att elementen som placeras i prioritetskön är jämförbara.
+Nu är det dags att implementera ADT:n Prioritetskö. Vi behöver uttrycka att det krävs att elementen som placeras i prioritetskön är jämförbara.
 
 ```csharp
 public class PriorityQueue<T>: IPriorityQueue<T> where T: IComparable<T>
@@ -151,7 +152,7 @@ Vi ska återigen använda alternativen **array** respektive **länkning** men vi
 
 #### Array 
 
-Här är det lämpligt att bara lägga in ett nytt element efter de redan befintliga. Det ger bra effektivitet om vi samtidigt håller reda på detta index. Vi kan inte få samma effektivitet när vi ska ta bort det element som har högst prioritet eftersom vi inte vet var det finns. Alla element måste kontrolleras för att kunna avgöra vilket som har högst prioritet/värde.
+Här är det lämpligt att bara lägga in ett nytt element efter de som redan finns i kön. Det ger bra effektivitet om vi samtidigt håller reda på det index som är sist. Vi kan inte få samma effektivitet när vi ska ta bort det element som har högst prioritet eftersom vi inte vet var det finns. Alla element måste kontrolleras för att kunna avgöra vilket som har högst prioritet/värde.
 
 <br></br>
 <Figure
@@ -166,7 +167,6 @@ Då är det dags för implementationen av klassen `PriorityQueue`. Medlemsvariab
 public class PriorityQueue<T>: IPriorityQueue<T> where T: IComparable<T>
 {
     private T[] _elements; 
-    private int _capacity;
     private int _size;
 
     //...
@@ -174,7 +174,7 @@ public class PriorityQueue<T>: IPriorityQueue<T> where T: IComparable<T>
 }
 ```
 
-Konstruktorn ska skapa en tom prioritetskö vilket innebär att sätta kapaciteten, allokera en array och sätta storleken till 0. 
+Konstruktorn ska skapa en tom prioritetskö vilket innebär att allokera en array med initial kapacitet och sätta storleken till 0. 
 
 **Testa dig själv**
 
@@ -187,8 +187,7 @@ Konstruktorn ska skapa en tom prioritetskö vilket innebär att sätta kapacitet
 
     public PriorityQueue()
     {
-        this._capacity = 3;
-        this._elements = new T[this._capacity];
+        this._elements = new T[10];
         this._size = 0;
     }
 
@@ -208,10 +207,8 @@ Metoden `Enqueue` ska placera noden på nästa lediga plats. Observera att expan
 
     public void Enqueue(T elem)
     {
-        if (this._size == this._capacity)
-        {
-            expand();
-        }
+        if (this._size == this._elements.Length)
+             Expand();
         this._elements[this._size++] = elem;
     }
 
@@ -219,7 +216,7 @@ Metoden `Enqueue` ska placera noden på nästa lediga plats. Observera att expan
     </details>
 
 
-Metoden `Dequeue` ska returnera det element som har högst prioritet/värde. Eftersom elementen i arrayen är oordnade behöver vi leta upp det som har högst prioritet/värde, spara undan detta och ersätta noden som ska ts bort med de som är sist i arrayen. 
+Metoden `Dequeue` ska returnera det element som har högst prioritet/värde. Eftersom elementen i arrayen är oordnade behöver vi leta upp det som har högst prioritet/värde, spara undan detta och ersätta noden som ska tas bort med det som är sist i arrayen. 
 
 **Testa dig själv**
 
@@ -324,17 +321,17 @@ private class Node
     Node first;
     Node second;
     ```
-    där den generiska datatypen T är "ersatt" med `string` och att vi för var och en av dessa variabler har skapat ett Node-objekt. Skriv kod som presenterar den sträng av de båda som finns i noderna och som är minst (kommer först i alfabetisk ordning). Om de har samma innehåll presenters istället "Lika". 
+    där den generiska typen motsvarar `string` och att vi för var och en av dessa variabler har skapat ett `Node`-objekt. Skriv kod som presenterar den sträng av de båda som finns i noderna och som är störst (kommer sist i alfabetisk ordning). Om de har samma innehåll presenters istället "Lika". 
 
     <details>
     <summary>Klicka här för att visa svaret</summary>  
 
     ```csharp
-    if (first.Data.compareTo(second.Data) < 0)
+    if (first.Data.compareTo(second.Data) > 0)
     {
         Console.WriteLine(first.Data);
     }
-    else if (first.Data.compareTo(second.Data) > 0)
+    else if (first.Data.compareTo(second.Data) < 0)
     {
         Console.WriteLine(second.Data);
     }
@@ -372,10 +369,10 @@ Medlemsvariabler i klassen `PriorityQueue` blir
     ```
     </details>
 
-Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga en nod på rätt plats bland redan ordande noder. Den nod som innehåller noden med högst prioritet/värde ska vara först och därefter ska nodernas element vara placerade i avtagande ordning. Vi inser att det blir ett par specialfall
+Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga en nod på rätt plats bland redan ordnade noder. Den nod som innehåller noden med högst prioritet/värde ska vara först och därefter ska nodernas element vara placerade i avtagande ordning. Vi inser att det blir ett par specialfall
 
-- den nya noden är den enda (dvs listan är tom) eftersom medlemsvariabeln som ska *pekar på* det första behöver sättas att peka på en ny nod. 
-- den nya noden är större än eller lika med de som finns i listan eftersom medlemsvariabeln som ska *pekar på* det första behöver sättas att peka på en ny nod som i sin tur ska peka på den nuvarande första. 
+- den nya noden är den enda (dvs listan är tom) eftersom medlemsvariabeln som ska *pekar på* det första i så fall behöver ändras för att peka på en ny nod. 
+- den nya noden är större än eller lika med de som finns i listan eftersom medlemsvariabeln som ska *pekar på* det första behöver ändras för att peka på en ny nod (som i sin tur ska peka på den nuvarande första). 
 
 <br></br>
 <Figure
@@ -386,7 +383,7 @@ Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga 
 
 **Testa dig själv**
  
-1. Skriv kod för att hantera att kontrollera att listan är tom och i så fall placera en ny nod innehållande elem som första (och enda) nod i den länkade listan.
+1. Skriv kod för att hantera att kontrollera att listan är tom och i så fall placera en ny nod innehållande `elem` som första (och enda) nod i den länkade listan.
 
 
     <details>
@@ -426,11 +423,11 @@ Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga 
     ```
     </details>
 
-Nu återstår det generella fallet där vi behöver hitta platsen för det nya noden enligt den sorterade ordningen. Vi behöver en lokal variabel som motsvarar en *pekare* som kan användas för att gå från nod till nod. Denna pekare behöver stanna på noden som ska vara framför den nya för att vi ska kunna infoga en ny Nod därefter.
+Nu återstår det generella fallet där vi behöver hitta platsen för det nya noden enligt den sorterade ordningen. Vi behöver en lokal variabel som motsvarar en *pekare* som kan användas för att gå från nod till nod. Denna pekare behöver stanna på noden som ska vara framför den nya för att vi ska kunna infoga en ny nod därefter.
 
 Vi behöver utföra följande steg:  
 1) skapa och sätta pekaren som ska vandra så att den *pekar på* den första node. 
-2) låta denna pekare *vandra* tills den hittar rätt plats 
+2) låta denna pekare *vandra* tills den hittar rätt plats (dvs "framför" den nod som har lägre prioritet/värde än det nya noden) eller tills den når slutet av listan
 3) infoga den nya noden *efter* den nod som pekaren *vandrat till*
 4) uppdatera antalet med 1
 
@@ -452,7 +449,7 @@ Vi behöver utföra följande steg:
     Node walker = this._first;
     // 2) ...
     // 3) ...
-    this._size += 1;
+    this._size++;
     ```
     </details>
 
@@ -468,7 +465,7 @@ Vi behöver utföra följande steg:
         walker = walker.Next;
     }
     // 3) ...
-    this._size += 1;
+    this._size++;
     ```
     </details>
 
@@ -484,7 +481,7 @@ Vi behöver utföra följande steg:
         walker = walker.Next;
     }
     walker.Next = new Node(elem, walker.Next);
-    this._size += 1;
+    this._size++;
     ```
     </details>
 
@@ -498,7 +495,7 @@ Vi behöver utföra följande steg:
 
 **Testa dig själv**  
  
-Skriv koden för `Dequeueu`  
+Skriv koden för `Dequeue`  
 
 <details>
 <summary>Klicka här för att visa svaret</summary>  
@@ -506,7 +503,7 @@ Skriv koden för `Dequeueu`
 ```csharp
 if (this._first == null)
         throw new Exception();
-T? toDeliver = this._first.Data;
+T toDeliver = this._first.Data;
 this._first = this._first.Next;
 this._size--;
 return toDeliver;
