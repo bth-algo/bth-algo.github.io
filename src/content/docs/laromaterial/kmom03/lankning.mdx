@@ -8,8 +8,8 @@ hidden: true
 import Figure from '@components/CustomFigure.astro';
 
 import enkelLankning from '@assets/img/kmom03/Enkellankning.png';
-import elementForeKedjning from '@assets/img/kmom03/elementForeKedjning.png';
-import elementenKedjade from '@assets/img/kmom03/elementenKedjade.png';
+import elementForeKedjning from '@assets/img/kmom03/Element_for_kedjning.png';
+import elementenKedjade from '@assets/img/kmom03/Elementen_kedjade.png';
 import dubbelLankning from '@assets/img/kmom03/dubbelLankning.png';
 import insattningDubbelLankadLista from '@assets/img/kmom03/insattningDubbelLankadLista.png';
 import cirkularEnkelLankning from '@assets/img/kmom03/cirkularEnkelLankning.png';
@@ -63,7 +63,7 @@ Node third = new Node(30);
     width="500px"
 />
 
-Nu kan vi fixa så att det blir en kedja med dessa noder enligt bilden, dvs en enkellänkad lista:  
+Vi kan fortsätta med att fixa så att det blir en kedja med dessa noder enligt bilden, dvs en enkellänkad lista:  
 
 
 <br></br>
@@ -73,8 +73,8 @@ Nu kan vi fixa så att det blir en kedja med dessa noder enligt bilden, dvs en e
 />
 
 
-Ändra `Next` i det objekt `first` pekar på till referensen som objektet med värdet 20 pekar på. Denna referens finns i variabeln `second`.
-Ändra `Next` i det objekt `second` pekar på till referensen som objektet med värdet 30 pekar på. Denna referens finns i variabeln `third`.
+Ändra `Next` i det objekt `first` pekar på (har referensen till) så att det pekar på (får referensen till) objektet med värdet 20. Denna referens finns i variabeln `second`.
+Ändra `Next` i det objekt `second` pekar på (har referensen till) så att det pekar på (får referensen till) objektet med värdet 30. Denna referens finns i variabeln `third`.
 
 I C# blir detta:
 
@@ -87,7 +87,7 @@ third = null;
 
 Vi observerar återigen att kedjan löper på ett håll. Det går till exempel att komma från noden med värdet 10 till noden med värdet 20 men inte tvärtom.
 
-För att skriva ut värdet som finns i Data i det andra noden behöver vi börja i `first`, använda punkt-notation för att accessa `Next` i objektet som `first` pekar på, dvs  `first.Next`. Här finns referensen till nästa objekt så vi använder återigen punkt-notation, för att accessa Data, dvs `first.Next.Data`. Det blir alltså
+För att skriva ut värdet som finns i `Data` i den andra noden behöver vi börja i `first`, använda punkt-notation för att accessa `Next` i objektet som `first` pekar på, dvs  `first.Next`. Här finns referensen till nästa objekt så vi använder återigen punkt-notation, för att accessa `Data`, dvs `first.Next.Data`. Det blir alltså
 
 ```csharp
     Console.Write(first.Next.Data);
