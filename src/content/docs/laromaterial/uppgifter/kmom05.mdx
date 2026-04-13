@@ -62,11 +62,11 @@ Sorteringsordningen ska vara från lägst till högst.
 I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att din sortering fungerar korrekt.
 
 - Prova att sortera med de olika datatyperna `int`, `string` och `BusStop`.  
-- Överst i `Program.cs`skriver du en kommentar där du resonerar om tidskomplexiteten i ordo-nontaion för din sortering.
+- Överst i `Program.cs`skriver du en kommentar där du resonerar om tidskomplexiteten i ordo-notation för din sortering.
 - Kontrollera att arrayen verkligen är sorterad när algoritmen är klar. Du kan använda samma kod som användes i kmom02.
 
     <details>
-    <summary>Det hittar du här</summary>
+    <summary>Den hittar du här</summary>
 
     ```csharp
     bool CheckSorted<T>(T[] arr, int n) where T: IComparable<T>
@@ -88,4 +88,4 @@ I ditt dotnet-projekt ska följande filer ingå
 - `IHeap.cs` - som innehåller interfacet IHeap
 - `Heap.cs` - som innehåller klassen Heap som implementerar IHeap
 - `UsingHeap.cs` - som innehåller klassen UsingHeap med metoden `SortUsingAHeap`
-- `Program.cs`- där du har kod som kontrollerar att sorteringen fungerar korrekt.
+- `Program.cs`- där du har kod som kontrollerar att sorteringen fungerar korrekt och en kommentar med ditt resonemang över tidskomplexiteten för din implementation sorteringsalgoritmen.
