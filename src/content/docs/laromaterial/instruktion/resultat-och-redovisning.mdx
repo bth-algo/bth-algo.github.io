@@ -14,7 +14,35 @@ PS! För kmom03, kmom06 och kmom10 skall du även göra en pull request (PR) på
 
 ## Kör testerna lokalt
 
-Dubbelkolla att din kod passerar testerna och validerar. Ladda ner testerna på nytt, se information i respektive kmom. De kan vara uppdaterade. Om du har några fel, fixa dem innan du fortsätter. Du kan köra testerna från kursrepots rot eller genom att gå ner i testkatalogen.
+Dubbelkolla att din kod passerar testerna och validerar antingen med `task check-ready` eller `dotnet test`.
+
+### Ladda ner testerna lokalt
+
+Ladda ner testerna på nytt, se information i respektive kmom. De kan vara uppdaterade. Om du har några fel, fixa dem innan du fortsätter. 
+
+```bash title="Ladda ner testerna"
+task download-tests
+```
+
+### Kör testerna lokalt med task
+
+Du kan köra testerna lokalt för att kolla om ditt kmom är klart. Om `task check-ready` inte funkar, börja med att ladda ner en ny task-fil och lägg till den med add, commit och push.
+
+```bash title="Ladda ner ny task-fil (behövs om task check-ready inte funkar)"
+task download-taskfile
+```
+
+Kolla ditt kmom och kör testerna lokalt med följande task-kommmando.
+
+```bash title="Kolla ditt kmom och kör testerna lokalt med task-kommandot"
+task check-ready -- kmom01
+```
+
+Byt sen ut "kmom01" mot "kmom02" etc.
+
+### Kör testerna lokalt med `dotnet test`
+
+Du kan köra testerna från kursrepots rot eller genom att gå ner i testkatalogen.
 
 Här ser du ett exempel på hur du kan köra testerna i kmom01.
 
@@ -34,15 +62,15 @@ Lägg till en tagg till ditt repo och pusha sedan både taggen och ditt repo. Ta
 
 Du kan använda följande versioner för dina taggar.
 
-| Version | Kmom   |
-|---------|--------|
-| v01.0   | kmom01 |
-| v02.0   | kmom02 |
-| v03.0   | kmom03 |
-| v04.0   | kmom04 |
-| v05.0   | kmom05 |
-| v06.0   | kmom06 |
-| v10.0   | kmom10 |
+| Version | Kmom   | Kommentar |
+|---------|--------|-----------|
+| v01.0   | kmom01 | |
+| v02.0   | kmom02 | |
+| v03.0   | kmom03 | Tester saknas! Tagga inte kmom03! |
+| v04.0   | kmom04 | |
+| v05.0   | kmom05 | |
+| v06.0   | kmom06 | |
+| v10.0   | kmom10 | |
 
 Tagga ditt repo så här.
 
