@@ -9,7 +9,7 @@ import Figure from '@components/CustomFigure.astro';
 
 import klassdiagram from '@assets/img/kmom02/KlassdiagramKmom02Uppgift.png';
 
-I denna uppgift ska du implementera en min-Heap. 
+I denna uppgift ska du implementera en min-Heap. Denna kommer att användas i det avslutande projektet i kursen men du kommer i denna uppgift dessutom använda din  min-Heap för att utföra sortering.
 
 
 ### Förberedelser
@@ -26,7 +26,8 @@ Kopiera den generiska klassen `BusStop` som du har i `kmom02` till katalogen `He
 
 ### min-Heap
 
-Du ska i denna uppgift implementera en min-Heap i klassen `Heap`. Klassen `Heap` ska implementeras baserat på det generiska interfacet `IHeap`
+Du ska i denna uppgift implementera en min-Heap i klassen `Heap`. Klassen `Heap` ska implementeras baserat på det generiska interfacet `IHeap`.  
+Både klassen `Heap` och interfacet `IHeap` ska finnas i namespace `Heap` och de ska vara generiska och de ska ha en typparameter T som har en begränsning så att den måste implementera interfacet `IComparable<T>`. Interfacet `IHeap` hittar du nedan.
 
 ```csharp
 public interface IHeap<T> where T:IComparable<T>
@@ -39,7 +40,7 @@ public interface IHeap<T> where T:IComparable<T>
 }
 ```
 
-Metoden `GetAllElements` är egentligen inte en metod som ska ingå i en Heap men denna behövs för att vi ska göra vissa kontroller när vi rättar din lösning.
+Metoden `GetAllElements` är egentligen inte en metod som ska ingå i en Heap men denna behövs för att vi ska kunna göra vissa kontroller när vi rättar din lösning.
 Det är tillåtet och dessutom lämpligt att tillföra hjälpmetoder för att lösa vissa delproblem.
 
 #### Sortera genom att använda en heap
@@ -52,14 +53,16 @@ Stommen till metoden är
 public static void SortUsingAHeap<T>(T[] A, int n) where T : IComparable<T> {/*ska implementeras*/}
 ```
 
-och denna ska placeras i en klass namngiven UsingHeap.
+och denna ska placeras i en klass namngiven `UsingHeap` och även denna klass ska finnas i namespace `Heap`.
 
 Sorteringsordningen ska vara från lägst till högst.
 
 #### Kontrollera att din algoritm är korrekt
 
-- Prova att sortera med olika datatyper (t.ex int och string).  
+I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att din sortering fungerar korrekt.
 
+- Prova att sortera med de olika datatyperna `int`, `string` och `BusStop`.  
+- Överst i `Program.cs`skriver du en kommentar där du resonerar om tidskomplexiteten i ordo-nontaion för din sortering.
 - Kontrollera att arrayen verkligen är sorterad när algoritmen är klar. Du kan använda samma kod som användes i kmom02.
 
     <details>
@@ -79,79 +82,10 @@ Sorteringsordningen ska vara från lägst till högst.
     ```
     </details>
 
-## SKA NOG INTE VARA MED ##
-### Hur effektiv är algoritmen
+#### Filer som ingår i inlämningen
 
-Nu ska du undersöka hur effektiva algoritmerna är genom att undersöka antalet jämförelser. Du ska göra detta genom att sortera BusStop-objekt.
-
-Filen `stops.txt` innehåller hållplatser för Blekingetrafiken. Innehållet på filen är
-```text
-stop_id,stop_name,stop_lat,stop_lon,location_type,parent_station,platform_code
-9021010001001000,Kungsplan,56.165202,15.586844,1,,
-9021010001013000,Landsvägsgatan,56.172004,15.588238,1,,
-9021010001014000,Tullskolan,56.174439,15.58903,1,,
-9021010001015000,Polhemsgatan,56.176723,15.590546,1,,
-...
-```
-
-Du kan använda följande kod för att läsa från fil och skapa en array med osorterade BusStop-objekt, där de 8 sista siffrorna i stop_id blir nummer (`_nr`) och stop_name blir namnet (`_name`).
-
-Parametern `nrOf` motsvarar det antal som ska läsas från filen men om dess värde är -1 läses hela filen.
-
-```csharp
-BusStop[] ReadFromFile(string filename, int nrOf = -1)
-{
-    try 
-    {
-        string[] stops = File.ReadAllLines(filename);
-            if (nrOf == -1 || nrOf > stops.Length)
-        nrOf = stops.Length - 1;
-        BusStop[] busStops = new BusStop[nrOf];
-        for (int i=0; i<nrOf; i++)
-        {
-            string[] parts = stops[i+1].Split(",");
-            busStops[i] = new BusStop(parts[1], int.Parse(parts[0].Substring(8)));
-        }
-        return busStops;
-    }
-    catch(Exception e)
-    {
-        return null;
-    }
-}
-
-```
-
-#### Undersök algoritmernas effektivitet
-
-Exekvera din implementation med 
-
-1. 10, 100 resp 1000 osorterade BusStop-objekt
-1. 10, 100 resp 1000 omvänt sorterade BusStop-objekt
-1. 10, 100 resp 1000 sorterade BusStop-objekt
-
-och notera resultaten (antalet jämförelser). Är resultaten rimliga/korrekta? Vilken ordo-notation har algoritmen? 
-
-Obs: För att resultatet av sortering av de osorterade BusStop-objekten ska blir relevant behöver du göra minst 5 olika exekveringar med olika ordning i arrayerna. Ett tips är att blanda objekten inför varje ny sortering. När dessa körningar genomförts bestämmer du medelvärdet av antalet jämförelser.
-
-<details>
-<summary>Ett förslag på hur du kan blanda hittar du här</summary>
-
-```csharp
-void Shuffle<T>(T[] arr, int n) where T: IComparable<T>
-{
-    for (int times=1; times<n; times++)
-    {
-        int i = random.Next(0, n);
-        int j = random.Next(0, n);
-        (arr[i], arr[j]) = (arr[j], arr[i]);
-    }
-}
-
-```
-</details>
-
-## Resultat
-
-Notera resultateten så att det tydligt framgår hur många jämförelser som genomförts och redogör för dina slutsatser.
-
+I ditt dotnet-projekt ska följande filer ingå
+- `IHeap.cs` - som innehåller interfacet IHeap
+- `Heap.cs` - som innehåller klassen Heap som implementerar IHeap
+- `UsingHeap.cs` - som innehåller klassen UsingHeap med metoden `SortUsingAHeap`
+- `Program.cs`- där du har kod som kontrollerar att sorteringen fungerar korrekt.
