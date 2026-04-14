@@ -16,16 +16,16 @@ import prioLankningInsattning from '@assets/img/kmom04/prioLankningInsattning.pn
 import prioLankningInsattningMellan from '@assets/img/kmom04/prioLankningInsattningMellan.png';
 
 
-I en prioritetskö (priority queue) spelar insättningsordningen ingen roll, men det som är garanterat är att det objekt som har högst prioritet av de som finns i kön är det element som kommer att lämna kön vid nästa borttagning. En liknelse från verkligheten är en sk VIP-kö. Den som är *viktigast*/*har högst status* är den som lämnar kön först oavsett när personen i fråga kom till kön.
+I en prioritetskö (priority queue) spelar insättningsordningen ingen roll men det som är garanterat är att det objekt som har högst prioritet av de som finns i kön är det element som kommer att lämna kön vid nästa borttagning. En liknelse från verkligheten är en sk VIP-kö. Den som är *viktigast*/*har högst status* är den som lämnar kön först oavsett när personen i fråga kom till kön.
 
-Prioritetsköns beteende, dvs uppsättning operationer, motsvaras av
+Prioritetsköns beteende, dvs uppsättning operationer, motsvaras av:
 
 - enqueue - sätt in ett element i kön
 - dequeue - ta bort det element som har högst prioritet
 - peek - "kika" på det noden som har högst prioritet utan att ta bort det
 - size - avgör storleken, dvs antalet element, i kön
 
-Det finns dessutom ett krav på elementen som ska placeras i prioritetskö och det är att det ska vara möjligt att jämföra elementen. För att uppnå kravet på elementen använder vi det generiska interfacet (som vi har tittat på tidigare)
+Det finns dessutom ett krav på elementen som ska placeras i prioritetskö och det är att det ska vara möjligt att jämföra elementen. För att uppnå kravet på elementen använder vi det generiska interfacet (som vi har tittat på tidigare).
 
 ```csharp
 public interface IComparable<T>
@@ -34,7 +34,8 @@ public interface IComparable<T>
 }
 ```
 
-Vi repeterar att metoden `int CompareTo(T? other)` returnera
+Vi repeterar att metoden `int CompareTo(T? other)` returnerar:
+
 - *< 0* om anropande objekt är *mindre än* other
 - *0* om anropande objekt är *lika/ekvivalent med* other
 - *> 0* om anropande objekt är *större än* other
@@ -56,17 +57,18 @@ Nu har vi sett till att det finns krav på metoden `CompareTo` för den generisk
 
 ### Använda ADT Prioritetskö
 
-Anta att interfacet `IPriorityQueue` har implementerats av den generiska klassen `PriorityQueue`. 
+Anta att interfacet `IPriorityQueue` har implementerats av den generiska klassen `PriorityQueue`.
 
-Vad förväntar vi oss av klassen PriorityQueue? 
+Vad förväntar vi oss av klassen PriorityQueue?
 
-Att vi kan 
-- skapa en tom prioritetskö
+Att vi kan:  
+
+- skapa en tom prioritetskö.
 - placera element i prioritetskön.
 - ta bort element som har högst prioritet.
-- "kika på" det element som har högst prioritet utan att ta bort det    
+- "kika på" det element som har högst prioritet utan att ta bort det.
 
-Vi exemplifiera med `int` som vi vet uppfyller kravet på den generiska datatypen, dvs att `CompareTo` finns.
+Vi exemplifierar med `int` som vi vet uppfyller kravet på den generiska datatypen, dvs att `CompareTo` finns.
     
 ```csharp
 IPriorityQueue<int> pq = new PriorityQueue<int>();
@@ -84,7 +86,7 @@ res = pq.Dequeue(); // 222  har högst prioritet och tas bort från prioritetsk�
 
 ```
 
-Vi exemplifiera även med Car (enligt ovan) som också uppfyller kravet på `CompareTo` 
+Vi exemplifierar även med Car (enligt ovan) som också uppfyller kravet på `CompareTo`.
     
 ```csharp
 IPriorityQueue<Car> pqCars = new PriorityQueue<Car>();
@@ -102,7 +104,7 @@ res = pqCars.Dequeue(); // bilobjektet motsvarande BMW av årsmodell 2015 tas bo
 
 ```
 
-Nu har vi förhoppningsvis förståelse för vad vi kan förvänta oss av ADT:n Prioritetskö. 
+Nu har vi förhoppningsvis förståelse för vad vi kan förvänta oss av ADT:n Prioritetskö.
 
 **Testa dig själv**
  
@@ -144,13 +146,13 @@ public class PriorityQueue<T>: IPriorityQueue<T> where T: IComparable<T>
 
 ```
 
-Precis som för ADT:erna Stack och Kö behövs det konstruktor och definition av metoderna som ingår i interfacet. Dessutom behöver vi hitta något sätt för en prioritetskö att hantera de element som placeras i den. 
+Precis som för ADT:erna Stack och Kö behövs det konstruktor och definition av metoderna som ingår i interfacet. Dessutom behöver vi hitta något sätt för en prioritetskö att hantera de element som placeras i den.
 
 ### Intern datastruktur
 
 Vi ska återigen använda alternativen **array** respektive **länkning** men vi behöver tänka till så att vi använder dessa på ett effektivt sätt.
 
-#### Array 
+#### Array
 
 Här är det lämpligt att bara lägga in ett nytt element efter de som redan finns i kön. Det ger bra effektivitet om vi samtidigt håller reda på det index som är sist. Vi kan inte få samma effektivitet när vi ska ta bort det element som har högst prioritet eftersom vi inte vet var det finns. Alla element måste kontrolleras för att kunna avgöra vilket som har högst prioritet/värde.
 
@@ -161,7 +163,7 @@ Här är det lämpligt att bara lägga in ett nytt element efter de som redan fi
     width="500px"
 />
 
-Då är det dags för implementationen av klassen `PriorityQueue`. Medlemsvariablerna blir 
+Då är det dags för implementationen av klassen `PriorityQueue`. Medlemsvariablerna blir:  
 
 ```csharp
 public class PriorityQueue<T>: IPriorityQueue<T> where T: IComparable<T>
@@ -174,7 +176,7 @@ public class PriorityQueue<T>: IPriorityQueue<T> where T: IComparable<T>
 }
 ```
 
-Konstruktorn ska skapa en tom prioritetskö vilket innebär att allokera en array med initial kapacitet och sätta storleken till 0. 
+Konstruktorn ska skapa en tom prioritetskö vilket innebär att den ska allokera en array med initial kapacitet och sätta storleken till 0.
 
 **Testa dig själv**
 
@@ -194,7 +196,7 @@ Konstruktorn ska skapa en tom prioritetskö vilket innebär att allokera en arra
     ```
     </details>
 
-Metoden `Enqueue` ska placera noden på nästa lediga plats. Observera att expandering behövs om arrayen är fylld. 
+Metoden `Enqueue` ska placera noden på nästa lediga plats. Observera att expandering behövs om arrayen är fylld.
 
 **Testa dig själv**
 
@@ -208,7 +210,7 @@ Metoden `Enqueue` ska placera noden på nästa lediga plats. Observera att expan
     public void Enqueue(T elem)
     {
         if (this._size == this._elements.Length)
-             Expand();
+            Expand();
         this._elements[this._size++] = elem;
     }
 
@@ -216,11 +218,11 @@ Metoden `Enqueue` ska placera noden på nästa lediga plats. Observera att expan
     </details>
 
 
-Metoden `Dequeue` ska returnera det element som har högst prioritet/värde. Eftersom elementen i arrayen är oordnade behöver vi leta upp det som har högst prioritet/värde, spara undan detta och ersätta noden som ska tas bort med det som är sist i arrayen. 
+Metoden `Dequeue` ska returnera det element som har högst prioritet/värde. Eftersom elementen i arrayen är oordnade behöver vi leta upp det som har högst prioritet/värde, spara undan detta och ersätta noden som ska tas bort med det som är sist i arrayen.
 
 **Testa dig själv**
 
-1. Vi väljer att göra en privat hjälp-metod `int IndexOfHighestPrio()` för att söka upp och returnera index för var noden med högst prioritet/värde finns. Hur implementeras den?
+1. Vi väljer att göra en privat hjälpmetod `int IndexOfHighestPrio()` för att söka upp och returnera index för var noden med högst prioritet/värde finns. Hur implementeras den?
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
@@ -288,9 +290,10 @@ Slutligen är det dags för metoderna `Peek` som returnerar noden med högst pri
     ```
     </details>
 
-#### Länkning 
+#### Länkning
 
 I detta fall väljer vi att låta en enkellänkad listan vara sorterad baserat på elementens prioritet. Det innebär att vi vid varje insättning placerar in det nya noden på rätt plats enligt sorteringsordningen.
+
 <br></br>
 <Figure
     src={priokoLankning}
@@ -298,7 +301,7 @@ I detta fall väljer vi att låta en enkellänkad listan vara sorterad baserat p
     width="700px"
 />
 
-På samma sätt som för stack och kö använder vi en inre privat klass för att representerar noder
+På samma sätt som för stack och kö använder vi en inre privat klass för att representera noder.
 
 ```csharp
 private class Node
@@ -315,7 +318,7 @@ private class Node
 
 **Testa dig själv**
  
-1. Anta att vi har deklarerat två variabler enligt 
+1. Anta att vi har deklarerat två variabler enligt:
 
     ```csharp
     Node first;
@@ -343,7 +346,8 @@ private class Node
     </details>
 
 
-Medlemsvariabler i klassen `PriorityQueue` blir 
+Medlemsvariabler i klassen `PriorityQueue` blir:
+
 - en pekare för att peka på den första noden i den länkade listan
 - en heltalsvariabel för att hålla antalet element i listan
 
@@ -369,10 +373,10 @@ Medlemsvariabler i klassen `PriorityQueue` blir
     ```
     </details>
 
-Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga en nod på rätt plats bland redan ordnade noder. Den nod som innehåller noden med högst prioritet/värde ska vara först och därefter ska nodernas element vara placerade i avtagande ordning. Vi inser att det blir ett par specialfall
+Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga en nod på rätt plats bland redan ordnade noder. Den nod som innehåller noden med högst prioritet/värde ska vara först och därefter ska nodernas element vara placerade i avtagande ordning. Vi inser att det blir ett par specialfall:
 
-- den nya noden är den enda (dvs listan är tom) eftersom medlemsvariabeln som ska *pekar på* det första i så fall behöver ändras för att peka på en ny nod. 
-- den nya noden är större än eller lika med de som finns i listan eftersom medlemsvariabeln som ska *pekar på* det första behöver ändras för att peka på en ny nod (som i sin tur ska peka på den nuvarande första). 
+- den nya noden är den enda (dvs listan är tom) eftersom medlemsvariabeln som ska *pekar på* det första i så fall behöver ändras för att peka på en ny nod.
+- den nya noden är större än eller lika med de som finns i listan eftersom medlemsvariabeln som ska *pekar på* det första behöver ändras för att peka på en ny nod (som i sin tur ska peka på den nuvarande första).
 
 <br></br>
 <Figure
@@ -383,7 +387,7 @@ Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga 
 
 **Testa dig själv**
  
-1. Skriv kod för att hantera att kontrollera att listan är tom och i så fall placera en ny nod innehållande `elem` som första (och enda) nod i den länkade listan.
+1. Skriv kod för att kontrollera att listan är tom och i så fall placera en ny nod innehållande `elem` som första (och enda) nod i den länkade listan.
 
 
     <details>
@@ -398,7 +402,7 @@ Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga 
     </details>
 
 
-1. Skriv kod för att hantera att kontrollera att det nya noden `elem` är större än det största och i så fall placera en ny nod innehållande elem som första nod i den länkade listan.
+1. Skriv kod för att kontrollera att den nya noden `elem` är större än det största och i så fall placera en ny nod innehållande `elem` som första nod i den länkade listan.
 
 
     <details>
@@ -423,14 +427,14 @@ Då tar vi oss an `Enqueue`. Här behöver vi hitta en algoritm för att infoga 
     ```
     </details>
 
-Nu återstår det generella fallet där vi behöver hitta platsen för det nya noden enligt den sorterade ordningen. Vi behöver en lokal variabel som motsvarar en *pekare* som kan användas för att gå från nod till nod. Denna pekare behöver stanna på noden som ska vara framför den nya för att vi ska kunna infoga en ny nod därefter.
+Nu återstår det generella fallet där vi behöver hitta platsen för den nya noden enligt den sorterade ordningen. Vi behöver en lokal variabel som motsvarar en *pekare* som kan användas för att gå från nod till nod. Denna pekare behöver stanna på noden som ska vara framför den nya för att vi ska kunna infoga en ny nod därefter.
 
 Vi behöver utföra följande steg:  
-1) skapa och sätta pekaren som ska vandra så att den *pekar på* den första node. 
+
+1) skapa och sätta pekaren som ska vandra så att den *pekar på* den första noden.
 2) låta denna pekare *vandra* tills den hittar rätt plats (dvs "framför" den nod som har lägre prioritet/värde än det nya noden) eller tills den når slutet av listan
 3) infoga den nya noden *efter* den nod som pekaren *vandrat till*
 4) uppdatera antalet med 1
-
 
 <Figure
     src={prioLankningInsattningMellan}
@@ -488,40 +492,42 @@ Vi behöver utföra följande steg:
 Dags för `Dequeue` som blir enkel eftersom det element som ska tas bort finns i den första noden.  
 
 Vi behöver utföra följande steg:  
-1) lagra elementet som finns i första noden i en variabel 
-2) låt *pekaren* till första noden *peka på* noden därefter 
+
+1) lagra elementet som finns i första noden i en variabel
+2) låt *pekaren* till första noden *peka på* noden därefter
 3) minska antalet med 1
 4) returnera elementet
 
 **Testa dig själv**  
- 
-Skriv koden för `Dequeue`  
+
+Skriv koden för `Dequeue`.  
 
 <details>
 <summary>Klicka här för att visa svaret</summary>  
 
 ```csharp
 if (this._first == null)
-        throw new Exception();
+    throw new Exception();
 T toDeliver = this._first.Data;
 this._first = this._first.Next;
 this._size--;
 return toDeliver;
 ```
+
 </details>
 
 Slutligen är det `Peek` och `Size` som ska implementeras, där `Peek`  returnerar elementet i första noden och `Size` returnerar elementet i prioritetsköns räknare (`size`).
 
 #### Heap
 
-Det finns en trädstruktur som kallas Heap som vi kommer att stöta på senare. Heap lämpar sig väl för att implementera en prioritetskö. Det är dock inte lika enkelt att implementera som de två alternativen vi har gått igenom, varför vi inte kommer att gå in på detta i detalj här.
+Det finns en trädstruktur som kallas *Heap* som vi kommer att stöta på senare. Heap lämpar sig väl för att implementera en prioritetskö. Det är dock inte lika enkelt att implementera som de två alternativen vi har gått igenom här och därför kommer vi inte att gå in på Heap i detalj här.
 
 
 #### Analys av tidskomplexiteten
 
 Vi analyserar operationerna **Enqueue**. **Dequeue**, **Peek** och **Size** för de båda alternativ av intern datastruktur som vi gått igenom (array och länkning).
 
-##### Array 
+##### Array
 
 Analysen omfattar inte expandering av arrayen.  
 
@@ -541,7 +547,7 @@ Analysen omfattar inte expandering av arrayen.
     Vi vet att det är den dominerande termen som avgör, varför vi får **O(n)**.
 
     **Testa dig själv**
- 
+
     Vilken tidskomplexitet i Ordo-notation blir det för `Peek` och för `Size`?
 
     <details>
@@ -554,7 +560,7 @@ Analysen omfattar inte expandering av arrayen.
 
 ##### Länkning
 
-- **Enqueue**: Arbetet innebär att 
+- **Enqueue**: Arbetet innebär att:
     1. hitta rätt plats bland de redan sorterade genom att börja från början av listan och *vandra* framåt med en pekare
     2. infoga ett nytt element vid den pekare som *vandrat*
     3. öka antalet med 1
@@ -573,7 +579,6 @@ Analysen omfattar inte expandering av arrayen.
     Vi vet att det är den dominerande termen som avgör, varför vi får **O(n)** i både värsta fall och i medelfallet.
     </details>
 
-
 - **Dequeue**: Arbetet innebär att hämta elementet i första noden, plocka bort noden, räkna ner antalet samt returnera elementet. Det blir alltså **O(1)**
 
 - **Peek**: Arbetet innebär att returnera elementet i första noden, vilket ger **O(1)**.  
@@ -583,12 +588,12 @@ Analysen omfattar inte expandering av arrayen.
 ## Sammanfattningsvis
 
 - ADT Prioritetskö garanterar att det element som har högst prioritet kommer att vara det element som lämnar kön.
-- Beteendet, dvs de operationer som ADT:n Prioritetskö har är
+- Beteendet, dvs de operationer som ADT:n Prioritetskö har är:
     - enqueue - sätt in ett element i kön
     - dequeue - ta bort det element i kön som har högst prioritet
     - peek - "kika" på det element i kön som har högst prioritet utan att ta bort det
     - size - leverera hur många element prioritetskön innehåller
-- För att implementera en prioritetskö kan man använda
+- För att implementera en prioritetskö kan man använda:
     - array - där elementet inte ordnas utan arrayen är oordnad/osorterad
     - enkellänkning - där elementen i listan är ordande efter prioritet.
 - Vid användande av array blir kostnaden linjär **O(n)** vid borttagning (och peek) och i övrigt konstant.
