@@ -20,16 +20,17 @@ Bilderna visar inlämning för kmom03 och bth-csharp (tänk bth-algo istället).
 Du har uppfyllt kraven i uppgiften och har gjort en vanlig inlämning enligt [Resultat och redovisning](./resultat-och-redovisning).
 
 
-## Ordlista 
+## Ordlista
 
 - `PR`: Pull request
 - `Submitted`: Får din PR när de automatiska testerna gått igenom. Nu ska du bara vänta på att en lärare kollar på din inlämning.
-- `Test-passed`: Får din PR när de automatiska testerna gått igenom.
-- `Test-failed`: Får din PR när något gått fel i de automatiska testerna. Ladda ner testerna igen, fixa felet lokalt och pusha till GitHub. Kör igång de automatiska testerna igen under "Actions" och markera din sista commit. Välj "Re-run all jobs" och sen "Re-run jobs".
+- `Tests passed(TP)`: Får din PR när de automatiska testerna gått igenom.
+- `Tests failed`: Får din PR när något gått fel i de automatiska testerna. Ladda ner testerna igen, fixa felet lokalt och pusha till GitHub.
 - `Approved`/`G`/`1`: Helt klar med en uppgift.
 - `Needs improvement`/`Ux`/`0.49`: En lärare har bedömt din inlämning men tycker att något behöver förbättras i din inlämning. Använd dig av label `Re-submitted` när du har gjort din uppdatering.
 - `Re-submitted`: Du sätter den som label på din PR efter att du har fixat den komplettering en lärare gav på din inlämning.
 - `Submission not approved`/`U`/`0`: En lärare har bedömt din `Re-submitted` men tycker inte att det är tillräckligt bra. Du behöver göra en ny inlämning till nästa rättningstillfälle.
+- `Integration failed`: Något i koden som kör de automatiserade testerna gick fel. Kontakta en lärare.
 
 
 ## Mitt eget arbete
@@ -46,15 +47,15 @@ Du skall nu göra din inlämning som en PR mot följande branch.
 
 ### kmom03
 
-* mot `bth/submit/kmom03`
+- mot `bth/submit/kmom03`
 
 ### kmom06
 
-* mot `bth/submit/kmom06`
+- mot `bth/submit/kmom06`
 
 ### kmom10 (Projektet)
 
-* mot `bth/submit/kmom10`
+- mot `bth/submit/kmom10`
 
 Följ stegen nedan för att skapa en PR.
 
@@ -156,7 +157,7 @@ NU är din PR klar och väntar på rättning! Alla labels sätts automatiskt!
 
 ### Testerna gick fel
 
-Om något gick fel med testerna ser det ut så här i din PR. Du får en kommentar om vad som gick fel samt din PR får labeln `Tests failed`. Eftersom du kör testerna när du taggar så bör detta inte inträffa.
+Om något gick fel med testerna får du en kommentar om vad som gick fel samt din PR får labeln `Tests failed`. Eftersom du kör testerna när du taggar så bör detta inte inträffa.
 
 Vanliga fel:
 
@@ -164,9 +165,9 @@ Vanliga fel:
 
 Nu behöver du kolla vad som gick fel, fixa felet och ladda upp koden igen. Enklast gör du det genom att:  
 
-1. Ladda ner testerna för det eller de kmom som gick fel och kör dem lokalt
+1. Ladda ner testerna på nytt och kör dem lokalt
 1. Rätta felet och testkör lokalt.
-1. Pusha din rättning till GitHub och testerna ska starta automatiskt.
+1. Pusha din rättning till GitHub och gör en ny PR.
 
 
 :::tip

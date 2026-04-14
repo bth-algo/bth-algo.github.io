@@ -11,10 +11,9 @@ import stack from '@assets/img/kmom04/stack.png';
 import stackMedArray from '@assets/img/kmom04/stackMedArrayNy.png';
 import stackMedLankning from '@assets/img/kmom04/stackMedLankning.png';
 
-En stack följer principen **Last-In-First-Out** även förkortat **LIFO**. Exempel från vardagen är en trave tallrikar eller ett rör med tennisbollar. Man placerar en ny tallrik respektive en ny tennisboll ovanpå de befintliga. När man tar en tennisboll eller en tallrik tar man den översta. När man illustrera en stack gör man ofta det som en stapel där man refererar till toppen av stacken. 
+En stack följer principen **Last-In-First-Out** även förkortat **LIFO**. Exempel från vardagen är en trave tallrikar eller ett rör med tennisbollar. Vi placerar en ny tallrik respektive en ny tennisboll ovanpå de befintliga. När vi tar en tennisboll eller en tallrik tar vi den översta. När vi illustrerar en stack gör vi ofta det som en stapel där vi refererar till toppen av stacken.
 
-I bilden visas en stack där E är det element som placerats på stacken sist (och därmed är överst). Om ett element tas bort från stacken så är det F. 
-
+I bilden visas en stack där E är det element som placerats på stacken sist (och därmed är överst). Om ett element tas bort från stacken så är det E.
 
 <Figure
     src={stack}
@@ -22,8 +21,7 @@ I bilden visas en stack där E är det element som placerats på stacken sist (o
     width="250px"
 />
 
-
-Stackens beteende, dvs uppsättning operationer, motsvaras av
+Stackens beteende, dvs uppsättning operationer, motsvaras av:
 
 - push - sätt in ett element överst
 - pop - ta bort det översta elementet
@@ -36,7 +34,7 @@ Stackens beteende, dvs uppsättning operationer, motsvaras av
 
     <details>
     <summary>Klicka här för att få tips</summary>  
-    Anta att arrayen innehåller 66, 33, 99, 11  
+    Anta att arrayen innehåller 66, 33, 99, 11.  
 
     Om alla element i arrayen läggs in i en stack, vilket element får du då om du anropar Pop() för stacken? Vilket element får du nästa gång Pop() anropas?
 
@@ -58,7 +56,7 @@ Stackens beteende, dvs uppsättning operationer, motsvaras av
 
 ## Interface för Stack
 
-För att göra det möjligt att välja vilken datatyp en Stack ska hantera kan man som bekant skapa så kallade generiska interface och generiska klasser. Vi gör ett interface för stacken med metoder som motsvarar stackens beteende
+För att göra det möjligt att välja vilken datatyp en Stack ska hantera kan vi som bekant skapa så kallade generiska interface och generiska klasser. Vi gör ett interface för stacken med metoder som motsvarar stackens beteende.
 
 ```csharp
 public interface IStack<T>
@@ -69,14 +67,15 @@ public interface IStack<T>
     bool Empty();
 }
 ```
+
 Alla klasser som implementerar detta interface måste definiera de metoder som ingår i interfacet.
 
 ### Använda ADT Stack
 
-Anta att interfacet `IStack` har implementerats av den generiska klassen `Stack`. 
-Vad förväntar vi oss av klassen Stack? 
+Anta att interfacet `IStack` har implementerats av den generiska klassen `Stack`.  
+Vad förväntar vi oss av klassen Stack?  
 
-- Att vi kan skapa en tom stack genom att använda en konstruktor.  Vi ska t.ex kunna skapa en stack som hanterar strängar.   
+- Att vi kan skapa en tom stack genom att använda en konstruktor.  Vi ska t.ex kunna skapa en stack som hanterar strängar.  
 
     ```csharp
     IStack<string> strStack = new Stack<string>(); 
@@ -103,7 +102,8 @@ Vad förväntar vi oss av klassen Stack?
     // ...
     string res = strStack.Peek(); // "two" returneras till res men tas inte bort
     ```
-Detta är vad vi som användare förväntar oss av ADT:n Stack och vi bekymrar oss inte om hur stacken är implementerad. 
+
+Detta är vad vi som användare förväntar oss av ADT:n Stack och vi bekymrar oss inte om hur stacken är implementerad.  
 
 **Testa dig själv**
 
@@ -111,7 +111,7 @@ Detta är vad vi som användare förväntar oss av ADT:n Stack och vi bekymrar o
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Last-In-First-Out, dvs det element som kommit senast till stacken är det som lämnar stacken först
+    Last-In-First-Out, dvs det element som kommit senast till stacken är det som lämnar stacken först.
     </details>
 
 **Testa dig själv**
@@ -143,13 +143,13 @@ Detta är vad vi som användare förväntar oss av ADT:n Stack och vi bekymrar o
 
 ## Val av implementation
 
-Om vi tänker oss att vi ska implementera en egen ADT Stack där det, förutom tidigare nämnda metoder, ska vara möjligt att 
+Om vi tänker oss att vi ska implementera en egen ADT Stack där det, förutom tidigare nämnda metoder, ska vara möjligt att  
 
-- skapa en tom stack
+- skapa en tom stack.
 
-behöver vi skapa en klass, lämpligen namngiven `Stack`, och i denna klass bestämma vilka medlemsvariabler vi behöver för att 
+Behöver vi skapa en klass, lämpligen namngiven `Stack`, och i denna klass bestämma vilka medlemsvariabler vi behöver för att:
 
-- hantera vilken datatyp som helst
+- hantera vilken datatyp som helst.
 - kunna representera den sekvens av element som finns i stacken som möjliggör att uppfylla principen Last-In-First-Out.
 - hantera att det inte finns någon begränsning avseende hur många element som kan placeras i stacken.
 
@@ -157,11 +157,11 @@ behöver vi skapa en klass, lämpligen namngiven `Stack`, och i denna klass best
 
 Vi ska undersöka alternativen **array** och **länkning**. Array är en datastruktur där vi har indexering från 0 och uppåt där sista index är 1 mindre är arrayens kapacitet. Länkning innebär att objekt kan "peka ut" andra objekt och på så sätt skapa en kedja av objekt där vi bara behöver veta var kedjan börjar, dvs vilket element som är först (eller för en stack snarare överst).
 
-#### Array 
+#### Array
 
-Stacken placerar elementen (som är av datatypen T) i en array. Botten på stacken motsvaras av index 0 i arrayen och toppen växter mot högre index.   
-Vi vet att en array är begränsad i storlek och vi behöver hitta en lösning eftersom stacken inte begränsas men det fixar vi senare.   
-Vi deklarerar, förutom en medlemsvariabel för arrayen, en heltalsvariabel som håller var toppen är i arrayen.   
+Stacken placerar elementen (som är av datatypen T) i en array. Botten på stacken motsvaras av index 0 i arrayen och toppen växter mot högre index.  
+Vi vet att en array är begränsad i storlek och vi behöver hitta en lösning eftersom stacken inte begränsas men det fixar vi senare.  
+Vi deklarerar, förutom en medlemsvariabel för arrayen, en heltalsvariabel som håller var toppen är i arrayen.  
 
 <br></br>
 <Figure
@@ -180,7 +180,7 @@ public class Stack<T>: IStack<T>
 }
 ```
 
-Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom stack. Arrayen behöver ges en initial kapacitet, i detta fall 10. Dessutom sätts `top`-variabeln till 0.  
+Nu är det dags att fundera över konstruktor och medlemsmetoder. Vi börjar med konstruktor. Vi behöver definierar denna så att tillståndet (värdena på alla medlemsvariabler) för objektet representerar en tom stack. Arrayen behöver ges en initial kapacitet, i detta fall 10. Dessutom sätts `_top`-variabeln till 0.  
 
 
 ```csharp
@@ -215,6 +215,7 @@ public class Stack<T>: IStack<T>
     //...
 }
 ```
+
 Vi fortsätter med `Pop`-metoden. Vid anrop av Pop ska det element som är på toppen av stacken "tas bort" (dvs inte ingå i stacken längre) och returneras. Elementet på toppen hittas på index `_top - 1`. Vi behöver alltså först minska på värdet i `_top` och därefter returnera det som finns på `_top` i arrayen. Vi reflekterar över att det bör kastas ett undantag om stacken är tom.
 
 **Testa dig själv**
@@ -275,7 +276,7 @@ public class Stack<T>: IStack<T>
 
     public Stack() {...} 
 
-    private void expand()
+    private void Expand()
     {
         T[] temp = new T[this._elements.Length + 10];
         for (int i=0; i < this._top; i++)
@@ -284,11 +285,12 @@ public class Stack<T>: IStack<T>
         }
         this._elements = temp;
     }
+
     public void Push(T element)
     {
-        if (this._top == this._capacity)
+        if (this._top == this._elements.Length)
         {
-           expand();
+           Expand();
         }
         this._elements[this._top++] = element;
     }
@@ -298,7 +300,7 @@ public class Stack<T>: IStack<T>
 
 ### Länkning
 
-För att representera en Stack genom läkning används en enkellänkad lista. Det är endast toppen på stacken som är relevant för de operationer (metoder) som man ska kunna utföra på stacken. Man sätter in nytt element på toppen (Push), tar bort element från toppen (Pop) och levererar element på toppen utan att ta bort det (Peek).
+För att representera en Stack genom läkning används en enkellänkad lista. Det är endast toppen på stacken som är relevant för de operationer (metoder) som vi ska kunna utföra på stacken. Vi sätter in nytt element på toppen (Push), tar bort element från toppen (Pop) och levererar element på toppen utan att ta bort det (Peek).
 
 <br></br>
 <Figure
@@ -349,7 +351,7 @@ public class Stack<T>: IStack<T>
 }
 ```
 
-Vi fortsätter med `Push`-metoden som ska hantera att det nya elementet placeras på toppen. Vi behöver skapa ett `Node`-objekt som innehåller det nya elementet. Vidare ska detta `Node`-objekt infogas vid `top`-pekaren. 
+Vi fortsätter med `Push`-metoden som ska hantera att det nya elementet placeras på toppen. Vi behöver skapa ett `Node`-objekt som innehåller det nya elementet. Vidare ska detta `Node`-objekt infogas vid `top`-pekaren.
 
 
 ```csharp
@@ -392,7 +394,7 @@ Metoden `Pop` ska ta bort och returnera det element som är överst på stacken.
     </details>
 
 
-Återstår `Peek`-metoden som ska leverera elementet på toppen utan att ta bort det och `Empty`-metoden som ska avgöra om stacken är tom eller ej. 
+Återstår `Peek`-metoden som ska leverera elementet på toppen utan att ta bort det och `Empty`-metoden som ska avgöra om stacken är tom eller ej.
 
 **Testa dig själv**
  
@@ -418,7 +420,7 @@ Metoden `Pop` ska ta bort och returnera det element som är överst på stacken.
 
 ## Analys av tidskomplexiteten
 
-Vi analyserar operationerna **Push**, **Pop**, **Peek** och **Empty** för de båda alternativ av intern datastruktur som vi gått igenom (array och länkning) -
+Vi analyserar operationerna **Push**, **Pop**, **Peek** och **Empty** för de båda alternativ av intern datastruktur som vi gått igenom (array och länkning).
 
 ### Array 
 
@@ -440,7 +442,7 @@ Analysen omfattar inte expandering av arrayen.
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Resultatet ges av en jämförelse (top == 0). Samma arbete utförs oavsett antalet element i arrayen, vilket ger O(1). 
+    Resultatet ges av en jämförelse (top == 0). Samma arbete utförs oavsett antalet element i arrayen, vilket ger O(1).
     </details>
 
 ### Länkning
@@ -461,18 +463,18 @@ Analysen omfattar inte expandering av arrayen.
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
-    Resultatet ges av en jämförelse (top == null). Samma arbete utförs oavsett antalet element i listan, vilket ger O(1). 
+    Resultatet ges av en jämförelse (top == null). Samma arbete utförs oavsett antalet element i listan, vilket ger O(1).
     </details>
 
 ## Sammanfattningsvis
 
-- ADT Stack följer principen Last-In-First-Out
-- Beteendet, dvs de operationer som ADT:n Stack har är
+- ADT Stack följer principen Last-In-First-Out.
+- Beteendet, dvs de operationer som ADT:n Stack har är:
     - push - sätt in ett element överst på stacken
     - pop - ta bort det översta elementet från stacken
     - peek - "kika" på det översta elementet på stacken utan att ta bort det
     - empty - avgör om stacken är tom eller ej
-- För att implementera en stack kan man använda
+- För att implementera en stack kan vi använda:
     - array -  elementen placeras från 0 och framåt
     - enkellänkning - noder paketerar elementen och en pekare *pekar på* den första (betraktat som översta) noden. All insättning och borttagning utförs vid denna pekare som motsvarar toppen.
 - Alla operationer på stacken, oavsett om stacken använder en array eller en enkellänkad lista som intern datastruktur, är O(1), dvs konstant tidskomplexitet.
