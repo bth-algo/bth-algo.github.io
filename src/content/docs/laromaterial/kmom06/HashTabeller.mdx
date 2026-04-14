@@ -41,7 +41,7 @@ Det är viktigt att hash-funktionen (som i C# implementeras som en metod) gör e
 <br></br>
 <Figure
     src={hashtabell01}
-    caption=""
+    width="650px"
 />
 
 
@@ -51,7 +51,7 @@ Vi tänker oss till exempel en liten förening med medlemmar där varje medlem h
 <br></br>
 <Figure
     src={hashtabell02}
-    caption=""
+    width="650px"
 />
 
 Vi inser att det när det gäller hash-funktionen så är det viktigt att denna är definierad så att det index som funktionen beräknar hamnar inom arrayens index-gränser. I exemplet med medlemmarna kommer detta att uppfyllas eftersom kapaciteten är 10 och modulus 10 ger heltal inom [0..9]. Men vad händer om det finns en medlem med medlemsnummer 1027? Då ger hash-funktionen värdet 7 vilket innebär att medlemmen ska placeras på index 7 men där är upptaget. Det som inträffat är en **kollision**, vilket vi ska gå in på hur vi kan hantera lite senare. 
@@ -85,7 +85,7 @@ Vi fortsätter på medlemsregistret. Medlemmen *Leif Ohlin* med medlemsnummer *1
 <br></br>
 <Figure
     src={hashtabell03}
-    caption=""
+    width="650px"
 />
 
 
@@ -95,7 +95,7 @@ Hash-funktionen ger 5, men denna plats är upptagen. Vi har alltså råkat ut f�
 <br></br>
 <Figure
     src={hashtabell04}
-    caption=""
+    width="650px"
 />
 
 
@@ -120,7 +120,7 @@ Om vi ska ta bort medlemmen med medlemsnummer *1015* (*Per Svahn*) använder vi 
 <br></br>
 <Figure
     src={hashtabell05}
-    caption=""
+    width="650px"
 />
 
 
@@ -129,7 +129,7 @@ Eftersom linjär sondering används vet vi att medlemmen kan ha placerats på n�
 <br></br>
 <Figure
     src={hashtabell07}
-    caption=""
+    width="650px"
 />
 
 
@@ -137,7 +137,7 @@ Förhoppningsvis inses att det finns en del problem som måste hanteras. Vad hä
 <br></br>
 <Figure
     src={hashtabell08}
-    caption=""
+    width="650px"
 />
 
 Vi kan konstatera att en ledig plats i arrayen kan vara ledig pga att
@@ -164,7 +164,7 @@ Ett tips är att använda en egendefinierad enum för dessa tre möjliga fall.
     <br></br>
     <Figure
         src={hashtabelluppgift}
-        caption=""
+        width="300px"
     />
 
     Utför följande i ordning (A, B, C och D).  
@@ -185,7 +185,7 @@ Ett tips är att använda en egendefinierad enum för dessa tre möjliga fall.
     <br></br>
     <Figure
         src={hashtabelluppgiftsvar}
-        caption=""
+        width="300px"
     />
 
     </details>
@@ -209,14 +209,14 @@ Anta hash-tabellen med medlemmar enligt bilden nedan och att vi har samma hash-f
 <br></br>
 <Figure
     src={hashtabellkedjning}
-    caption=""
+    width="300px"
 />
 
 Vi ska sätta in medlemmen *Per Svahn* med medlemsnummer *1015*. Hash-funktionen ger resultatet 5. Där finns redan en medlem men vi lägger även till den nya medlemmen på samma index. 
 <br></br>
 <Figure
     src={hashtabellkedjning01}
-    caption=""
+    width="650px"
 />
 
 *Notera: I bilden har elementen länkats men det är även möjligt att använda andra alternativ (i C# kan t.ex ett List-objekt skapas för varje index i vilket elementen placeras).*
@@ -235,7 +235,7 @@ Sökning utförs på motsvarande sätt som borttagning, dvs efter det att hash-f
     <br></br>
     <Figure
         src={hashtabellkedjning}
-        caption=""
+        width="300px"
     />
 
     Utför operationer enligt  
