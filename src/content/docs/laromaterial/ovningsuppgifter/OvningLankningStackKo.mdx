@@ -54,6 +54,10 @@ listan. Vidare är är listan sorterad från minsta till största element.
 
 Skriv pseudokod för att sätt in ett element på rätt plats enligt sorteringen. Den nya elementet finns i noden (node-objektet) som pekaren `toInsert` pekar på. Denna nods båda pekare är satta till none.
 
+1. Om man vet att en Stack ska användas och man har två alternativa implementeringar att välja mellan, en där Stacken är implementerad med en array och en där Stacken är implementerad med en länkad lista, vilken av dessa implementeringar är lämpligast om antalet element som kommer att finnas på stacken kommer att variera mycket? Motivera.
+
+1. Om man vet att en Kö ska användas och man har två olika alternativ implementeringar att välja mellan, en där Kön är implementerad med en array och en där Kön är implementerad med en länkad lista, vilken av dessa implementeringar är lämpligast om antalet element som kommer att finnas på kön inte kommer att variera speciellt mycket? Motivera.
+
 ## Lösningsförslag
 
 1. 
@@ -152,4 +156,18 @@ Skriv pseudokod för att sätt in ett element på rätt plats enligt sorteringen
         walker.next.prev = toInsert
         walker.next = toInsert
     ```
+    </details>
+
+
+1. 
+    <details>
+    <summary>Klicka här för att visa svaret</summary>
+    En Stack som är implementerad med en länkad lista är lämpligare eftersom den inte har en fast kapacitet utan den kan växa dynamiskt i takt med att element läggs till. En Stack som är implementerad med en array har en fast kapacitet och när denna kapacitet överskrids måste en ny större array skapas och innehållet kopieras över, på samma sätt om det är få element i arrayen i förhållande till kapaciteten så kan en mindre array skapas och innehållet kopieras över, vilket kan vara ineffektivt.
+    </details>
+
+1. 
+
+    <details>
+    <summary>Klicka här för att visa svaret</summary>
+    En Kö som är implementerad med en array är lämpligare eftersom den har en fast kapacitet och när denna kapacitet inte överskrids så är det mer minnes- och tidsmässigt effektivt än att använda en länkad lista där varje element kräver extra minne för att lagra pekare. 
     </details>
