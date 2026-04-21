@@ -1,8 +1,8 @@
 ---
 title: Binära sökträd, BST
-description:  Introduktion och definition av BST
-order: 0020
-hidden: true
+sidebar:
+    order: 0020
+    hidden: true
 ---
 
 import Figure from '@components/CustomFigure.astro';
@@ -45,9 +45,9 @@ ADT:n BST har operationerna (det kan finnas fler men vi nöjer oss med dessa)
 
 ## Insättning  
 
-Vi vet att ett element som sätts in i ett BST ska följa regeln om mindre till vänster och större till höger. Vi utgår från roten och jämför med elementet för att se om det ska in i det vänstra ( < ) eller det högra delträdet. När vi insett vilket delträd elementet ska placeras i flyttar vi till roten i detta delträd (som ju är barn till den nod vi precis utgick ifrån). Därefter fortsätter vi på samma sätt tills vi kommer till en nod där delträdet som elementet ska placeras i är tomt. Det nya elementet infogas här (som ett löv) och blir därmed delträd till noden som inte hade något barn.
+Vi vet att ett element som sätts in i ett BST ska följa regeln om mindre till vänster och större till höger. Vi utgår från roten och jämför med elementet för att se om det ska in i det vänstra ( < ) eller det högra delträdet. När vi har insett vilket delträd elementet ska placeras i flyttar vi till roten i detta delträd (som ju är barn till den nod vi precis utgick ifrån). Därefter fortsätter vi på samma sätt tills vi kommer till den nod där delträdet som elementet ska placeras i är tomt. Det nya elementet infogas här (som ett löv) och blir därmed delträd till noden som inte hade något barn.
 
-En iterativ algoritm för insättning ges av
+En iterativ algoritm för insättning ges av:
 
 ```text
 insert(element)
@@ -56,23 +56,23 @@ insert(element)
     else
         currentNode = root
         inserted = false
-        while nod inserted
-        if element < currentNode.Element
-            if currentNode.LeftChild is none
-                add element in a node as leftChild
-                inserted = true
+        while not inserted
+            if element < currentNode.Element
+                if currentNode.LeftChild is none
+                    add element in a node as leftChild
+                    inserted = true
+                else
+                    currentNode = currentNode.LeftChild
             else
-                currentNode = currentNode.LeftChild
-        else
-            if currentNode.RightChild is none
-                add element in a node as rightChild
-                inserted = true
-            else
-                currentNode = currentNode.RightChild
+                if currentNode.RightChild is none
+                    add element in a node as rightChild
+                    inserted = true
+                else
+                    currentNode = currentNode.RightChild
 
 ```
 
-Vi följer algoritmen för att sätta in följande element i ett från början tomt BST  
+Vi följer algoritmen för att sätta in följande element i ett från början tomt BST.  
 55, 60, 12, 7, 89, 10
 
 **insert(55)**: resulterar i att roten innehåller 55  
@@ -96,12 +96,12 @@ Det resulterande trädet blir
     width="300px"
 />
 
-Du kan visualisera hur trädet blir med [visualisering av BST](https://www.cs.usfca.edu/~galles/visualization/BST.html)
+Du kan visualisera hur trädet blir med [visualisering av BST](https://www.cs.usfca.edu/~galles/visualization/BST.html).
 
 
 **Testa dig själv**
  
-1. Sätt in elementen i tur och ordning i ett från början tomt BST:  600, 200, 30, 400, 800, 55, 700  
+1. Sätt in elementen i tur och ordning i ett från början tomt BST:  600, 200, 30, 400, 800, 55, 700.  
 
     <details>
     <summary>Klicka här för att visa svaret</summary>  
@@ -113,14 +113,14 @@ Du kan visualisera hur trädet blir med [visualisering av BST](https://www.cs.us
     />
     </details>
 
-1. Kan du sätta in elementen från uppgift 1. i en annan ordning som resulterar i att trädet blir komplett?
+1. Kan du sätta in elementen från uppgift 1 i en annan ordning som resulterar i att trädet blir komplett?
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
     T.ex 400, 55, 30, 200, 700, 600, 800 med det finns fler möjliga ordningar
     </details>
 
-1. Kan du sätta in elementen från uppgift 1. i en annan ordning som resulterar i att trädet blir så högt som möjligt?
+1. Kan du sätta in elementen från uppgift 1 i en annan ordning som resulterar i att trädet blir så högt som möjligt?
 
     <details>
     <summary>Klicka här för att visa svaret</summary>
@@ -243,12 +243,12 @@ Förfarandet är "snarlikt" hur insättningen genomförs.
 
 Vid borttagning i ett BST identifieras 3 olika fall:
 
-Det element som ska tas bort finns i
+Det element som ska tas bort finns i:
 1. ett löv
 1. en nod som har 1 barn
 1. en nod som har 2 barn
 
-Vi utgår från ett exempel
+Vi utgår från ett exempel:
 
 <br></br>
 <Figure
@@ -262,8 +262,8 @@ Borttagning av t.ex 4 eller 72 motsvarar fall 1, dvs att ta bort ett löv. Det �
 Borttagning av t.ex 40 eller 80 motsvarar fall 2, dvs att ta bort en nod med ett barn. Här kan den nod som tas bort ersättas med dess enda barn. Noden med 40 är höger barn till noden med 33 och om noden med 40 tas bort får noden med 58 (som är det enda barnet) bli höger barn till noden med 33.
 På motsvarande sätt kommer noden med 74 att bli höger barn till noden med 65.
 
-Borttagning av t.ex 33 eller 74 motsvara fall 3, dvs att ta bort en nod som har två barn. Om vi utgår från 33 så vet vi att alla element i vänster delträd är mindre än 33 (och alla i höger är större). Om vi kan hitta det element i vänster delträd som är störst så skulle det kunna ersätta 33 (vi det ju att detta är större än alla andra i det vänstra delträdet och dessutom självklart mindre än alla i det högra delträdet eftersom alla element där är större än 33). Vi har sedan tidigare en algoritm för att hitta största (eller minsta) i ett BST. Eftersom vänster delträd självklart är ett BST kan lösa detta. 
-Detta ger oss 25. Nu kopierar vi elementet, dvs 25, till noden som innehåller 33 och därefter tar vi bort noden med 25 i det vänstra delträdet. Det resulterar i borttagning av en nod som har ett (1) barn (Bild 1) vilket vi har en lösning på sedan tidigare (Fall 2).
+Borttagning av t.ex 33 eller 74 motsvarar fall 3, dvs att ta bort en nod som har två barn. Om vi utgår från 33 så vet vi att alla element i vänster delträd är mindre än 33 (och alla i höger är större). Om vi kan hitta det element i vänster delträd som är störst så skulle det kunna ersätta 33 (vi det ju att detta är större än alla andra i det vänstra delträdet och dessutom självklart mindre än alla i det högra delträdet eftersom alla element där är större än 33). Vi har sedan tidigare en algoritm för att hitta största (eller minsta) i ett BST. Eftersom vänster delträd självklart är ett BST kan algoritmen för att hitta det största lösa detta.  
+Algoritmen ger oss 25. Nu kopierar vi elementet, dvs 25, till noden som innehåller 33 och därefter tar vi bort noden med 25 i det vänstra delträdet. Det resulterar i borttagning av en nod som har ett (1) barn (Bild 1) vilket vi har en lösning på sedan tidigare (Fall 2).
 
 Om vi istället tar bort 74, kommer 72 (största elementet i vänster delträd) att kopieras och noden med 72 i den vänstra delträdet därefter att tas bort (Bild 2). Detta är ett löv, vilket vi också har en lösning på sedan tidigare (Fall 1).
 
@@ -277,7 +277,7 @@ Om vi istället tar bort 74, kommer 72 (största elementet i vänster delträd) 
 
 **Testa dig själv**
 
-1. Hur hade trädet sett ut om vi istället valt det minsta värdet i det högra delträdet om en nod som ska tas bort har två barn. Vi utgår från samma träd som tidigare och tar bort 65. Trädet innan borttagning
+1. Hur hade trädet sett ut om vi istället valt det minsta värdet i det högra delträdet om en nod som ska tas bort har två barn. Vi utgår från samma träd som tidigare och tar bort 65. Trädet innan borttagning:
     <br></br>
     <Figure
         src={bstborttagning}
@@ -313,7 +313,7 @@ Om vi istället tar bort 74, kommer 72 (största elementet i vänster delträd) 
     </details>
 
 
-Det första som ska ske vid borttagning är att hitta noden som innehåller det element som ska tas bort, vilket motsvarar `find(elem)` med justeringen att vi behöver noden som elem finns i och dessutom nodens förälder, eftersom dess barn kommer att tas bort (Fall 1 och Fall 2). Denna del kommer att vara inledande i borttagningsalgoritmen
+Det första som ska ske vid borttagning är att hitta noden som innehåller det element som ska tas bort, vilket motsvarar `find(elem)` med justeringen att vi behöver noden som `elem` finns i och dessutom nodens förälder, eftersom dess barn kommer att tas bort (Fall 1 och Fall 2). Denna del kommer att vara inledande i borttagningsalgoritmen.
 
 Vi kan dela upp detta i två delproblem
 
@@ -321,7 +321,7 @@ Vi kan dela upp detta i två delproblem
 1. hitta föräldern till noden med elementet `findParentOf(theNode)`
 
 Idé för `findNodeOf(elem)`:   
-Utgå från roten genom att sätta en *pekare* till roten och uppdatera denna *pekare* med vänster eller höger barn (beroende på nodens värde jämfört med elem) så länge *pekaren* inte är "tom" och den nod den "pekar på" inte har ett innehåll som är detsamma som `elem`.  
+Utgå från roten genom att sätta en *pekare* till roten och uppdatera denna *pekare* med vänster eller höger barn (beroende på nodens värde jämfört med `elem`) så länge *pekaren* inte är "tom" och den nod den "pekar på" inte har ett innehåll som är detsamma som `elem`.  
 
 **Testa dig själv**
 
@@ -346,7 +346,7 @@ Utgå från roten genom att sätta en *pekare* till roten och uppdatera denna *p
 Idé för `findParentOf(theNode)`:   
 Vi förutsätter att denna inte anropas om `theNode` är roten och vi förutsätter även att `theNode` finns i trädet.  
 
-Utgå från roten genom att sätta en *pekare* till roten och uppdatera pekaren med vänster eller höger barn (beroende på nodens värde jämfört med elem) så länge inget av barnen till noden som *pekaren* pekar på är samma som `theNode`  
+Utgå från roten genom att sätta en *pekare* till roten och uppdatera pekaren med vänster eller höger barn (beroende på nodens värde jämfört med `elem`) så länge inget av barnen till noden som *pekaren* pekar på är samma som `theNode`  
 
 
 **Testa dig själv**
@@ -373,10 +373,12 @@ Utgå från roten genom att sätta en *pekare* till roten och uppdatera pekaren 
 
 ## Bestämma antalet
 
-Antalet noder i ett BST kan bestämmas genom att ta antalet noder i det vänstra delträdet och addera det till antalet noder i det högra delträdet för att slutligen addera 1. Detta motsvara en rekursiv definition och vi behöver därmed även basfall. Det får vi genom att inse att ett tomt träd innehåller 0 noder. Vi får
+Antalet noder i ett BST kan bestämmas genom att ta antalet noder i det vänstra delträdet och addera det till antalet noder i det högra delträdet för att slutligen addera 1. Detta motsvarar en rekursiv definition och vi behöver därmed även basfall. Det får vi genom att inse att ett tomt träd innehåller 0 noder. Vi får:
 
+```
 nrOfNodes(currentRoot) = nrNodes(currentNode.LeftChild) + nrOfNodes(currentNode.RightChild) + 1  
 nrOfNodes(none) = 0
+```
 
 **Testa dig själv**
 
@@ -431,11 +433,11 @@ nrOfNodes(none) = 0
 ## Representera BST
 
 Vid implementation av BST används länkning med en klass för att representera Node. Klassen Node behöver pekare (referensvariabler) för att peka på vänster barn och för att peka på höger barn.   
-Eftersom elementen som ska placeras i trädet ska ordnas krävs att deras datatyp är jämförbar. I C# betyder detta att interfacet `IComparable<T>` används. Klassen placeras lämpligen som inre klass inom klassen som representerar BST.   
+Eftersom elementen som ska placeras i trädet ska ordnas krävs det att deras datatyp är jämförbar. I C# betyder detta att interfacet `IComparable<T>` används. Klassen Node placeras lämpligen som inre klass inom klassen som representerar BST.   
 
 Det finns en möjlighet att visualisera trädet genom att skapa en sträng med en viss uppbyggnad. Denna del är klar genom metoden `toGraphviz()` som med hjälp av `BuildGraphviz()` konstruerar och returnerar en sträng som har en uppbyggnad som visualiseringsverktyget använder. Visualiseringsverktyget hittar du här [GraphvizOnline](https://dreampuf.github.io/GraphvizOnline/). 
 
-Här är ett exempel på hur GraphvizOnline används
+Här är ett exempel på hur GraphvizOnline används:
 
 ```csharp
 BST<int> bst = new BST<int>();
@@ -446,7 +448,7 @@ bst.Insert(11);
 Console.Write(bst.toGraphviz());
 ```
 
-Detta resulterar i utskriften
+Detta resulterar i utskriften:
 
 ```text
 digraph BST {
@@ -555,16 +557,16 @@ public class BST<T> where T: IComparable<T>
 ```
 ## Sammanfattningsvis
 
-Ett BST (Binärt Sökträd) är ett binärt träd med regeln att för varje nod gäller att alla värden i vänster delträd är mindre än nodens värde och all värden i höger delträd är större än nodens värde.  
+Ett BST (Binärt Sökträd) är ett binärt träd med regeln att för varje nod gäller att alla värden i vänster delträd är mindre än nodens värde och alla värden i höger delträd är större än nodens värde.  
 
-Vi insättning hamnar det nya värdet i ett löv eftersom man bestämmer platsen genom att vandra från roten och jämför om det nya värdet ska till vänster eller höger tills dessa att en ledig plats hittas (vilket alltid blir ett löv).  
+Vid insättning hamnar det nya värdet i ett löv eftersom man bestämmer platsen genom att vandra från roten och jämför om det nya värdet ska till vänster eller höger tills dess att en ledig plats hittas (vilket alltid blir ett löv).  
 
 Sökning utförs på motsvarande sätt avseende vänster och höger delträd.
 
-Vid borttagning finns tre olika fall som behöver hanteras  
-- att ta bort ett löv
-- ta bort en nod som har ett barn
-- ta bort en nod som har två barn
+Vid borttagning finns tre olika fall som behöver hanteras:  
+1. att ta bort ett löv
+1. ta bort en nod som har ett barn
+1. ta bort en nod som har två barn
 
 
 
