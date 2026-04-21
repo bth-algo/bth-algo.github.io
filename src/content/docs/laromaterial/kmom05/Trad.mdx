@@ -56,7 +56,7 @@ Roten finns på **nivå (eng. level)** 0, rotens barn på nivå 1, osv. Det nede
 />
 
 
-Noderna är förbundna med varandra på ett bestämt sätt. Det är nämligen så att det finns en relation mellan noderna beroende på hur de är placerade och förbundna med varandra. Man pratar om **föräldrar (eng. parent)** och **barn (eng. child)**. 
+Noderna är förbundna med varandra på ett bestämt sätt. Det är nämligen så att det finns en relation mellan noderna beroende på hur de är placerade och förbundna med varandra. I en trädstruktur pratar vi om **föräldrar (eng. parent)** och **barn (eng. child)**. 
 <br></br>
 <Figure
     src={tradforalderbarn}
@@ -65,27 +65,28 @@ Noderna är förbundna med varandra på ett bestämt sätt. Det är nämligen s�
 />
 
 I bilden ovan har roten (den röda noden) 4 barn vilka är noderna med färgerna grön, svart, gul och blå. Även den svarta noden är förälder och dess barn är den orange noden och den grå noden. 
-Man kan även uttrycka att den gula nodens förälder är den röda noden och att den grå nodens förälder är den svarta noden.
-Dessutom säger man att den grå och den orange noden är **syskon (eng. siblings)**. På samma sätt är den gröna, svarta, gula och blå noden syskon.   
+Vi kan även uttrycka att den gula nodens förälder är den röda noden och att den grå nodens förälder är den svarta noden.
+Dessutom säger vi att den grå och den orange noden är **syskon (eng. siblings)**. På samma sätt är den gröna, svarta, gula och blå noden syskon.   
 
-Andra begrepp som är relevanta är **höjd (eng. height)**, **djup (eng. depth)** och **väg (eng path)**. En väg innebär att man använder kanterna för att ta sig från en nod till en annan nod. En kant får bara användas en gång. Det innebär att det finns en unik väg mellan varje par av noder.
+Andra begrepp som är relevanta är **höjd (eng. height)**, **djup (eng. depth)** och **väg (eng path)**. En väg innebär att vi använder kanterna för att ta sig från en nod till en annan nod. En kant får bara användas en gång. Det innebär att det finns en unik väg mellan varje par av noder.
 
-Det finns t.ex en väg från den grå noden till den blå noden där man passerar den svarta noden följt av den röda noden. Vägen blir (med färgangivelse på noderna) grå - svart - röd - blå. Det finns ingen annan alternativ väg från grå till blå nod. 
+Det finns t.ex en väg från den grå noden till den blå noden där vi passerar den svarta noden följt av den röda noden. Vägen blir (med färgangivelse på noderna) grå - svart - röd - blå. Det finns ingen annan alternativ väg från grå till blå nod. 
 
 **Längden (eng. length)** på en väg motsvarar antalet använda kanter. I vårt exempel på väg från den grå till den blå noden blir längden 3.
 
 Höjden på ett träd är den längsta vägen som finns i trädet från ett löv till roten. I vårt exempel är höjden 2 (från det orange lövet eller det grå lövet till roten).
 
-Alla noder finns på ett djup vilket bestäms av längden på vägen från noden till roten. I vårt exempel så är till exempel den röda noden (roten) på djupet 0, den blå på djupet1 och den orange på djupet 2.
+Alla noder finns på ett djup vilket bestäms av längden på vägen från noden till roten. I vårt exempel så är till exempel den röda noden (roten) på djupet 0, den blå på djupet 1 och den orange på djupet 2.
 
 Ett **tomt träd (eng. empty tree)** är ett träd som inte innehåller några noder.
 
 ## Binära träd
-Binära träd (eng binary tree)
+
+Binära träd (eng binary tree):
 - har en rot 
 - varje nod har 0, 1 eller 2 barn
 
-Vidare namnger man barnen som **vänster barn (eng. left child)** och **höger barn (eng. right child)**. Det träd som har vänster barn som rot kallas **vänster delträd (eng. left subtree)** och det träd som har höger barn som rot kallas **höger delträd (eng. right subtree)**. 
+Vidare namnger vi barnen som **vänster barn (eng. left child)** och **höger barn (eng. right child)**. Det träd som har vänster barn som rot kallas **vänster delträd (eng. left subtree)** och det träd som har höger barn som rot kallas **höger delträd (eng. right subtree)**. 
 
 
 Några exempel:
@@ -102,12 +103,13 @@ När det gäller *Träd 2* så har alla noder, förutom det enda lövet, 1 barn.
 
 *Träd 3* består av endast 1 nod som därmed är både rot och löv. Höjden på trädet är 0. Både vänster och höger delträd är tomma träd.
 
-Avseende *Träd 4* ser vi att alla noder, förutom löven, har 2 barn. Ett sådant träd kallas ett **fullt binärt träd (eng. full binary tree)**. Benämning **fullt träd (eng. full tree)** gäller även träd som inte är binära men kravet är att alla noder förutom löven har maximalt antal möjliga barn. 
+Avseende *Träd 4* ser vi att alla noder, förutom löven, har 2 barn. Ett sådant träd kallas ett **fullt binärt träd (eng. full binary tree)**. Benämningen **fullt träd (eng. full tree)** gäller även träd som inte är binära men kravet är att alla noder förutom löven har maximalt antal möjliga barn. 
 
 *Träd 5* är ett **komplett binärt träd (eng. complete binary tree)** vilket definieras av att alla nivåer är fyllda förutom möjligen den sista som är fylld till viss del från vänster. På motsvarande sätt som för fullt träd finns **kompletta träd (eng. complete tree)** med samma regel men för det antal barn noderna max kan ha.
 
-# Traversering av binära träd
-Man kan behöva gå igenom noderna i ett binärt träd för att t.ex uppdatera eller söka efter värden. Det finns olika algoritmer som utför detta och vi ska gå igenom 3 av dessa:
+## Traversering av binära träd
+
+Vi kan behöva gå igenom noderna i ett binärt träd för att t.ex uppdatera eller söka efter värden. Det finns olika algoritmer som utför detta och vi ska gå igenom 3 av dessa:
 - preorder
 - inorder 
 - postorder
@@ -123,9 +125,9 @@ Vi konstaterar att för alla noder i ett binärt träd gäller att de har ett v�
 
 Detta innebär att vi kan definiera rekursiva traverseringsalgoritmer. 
 
-Alla traverseringsalgoritmer börjar i roten.
+Alla algoritmer för traversering börjar i roten.
 
-## Preorder
+### Preorder
 
 *Pre* betyder innan/före och syftar på att själva besöket av noden utförs innan både vänster delträd och höger delträd traverseras. 
 
@@ -263,7 +265,7 @@ Noden med W besöks. Denna har inga barn och preorder återgår till föregåend
     heigth="250px"
 />
 
-Eftersom noden med S inte har något häger barn är algoritmen klar för delträdet med S som rot. Föregående anrop motsvarar att X är `currentNode`.
+Eftersom noden med S inte har något höger barn är algoritmen klar för delträdet med S som rot. Föregående anrop motsvarar att X är `currentNode`.
 
 <br></br>
 <Figure
@@ -301,7 +303,7 @@ Förhoppningsvis har vi nu klart för oss hur besöksordningen blir.
     ROPFHAXSW
     </details>
 
-## Inorder
+### Inorder
 
 Vi fortsätter med **inorder**, *in* betyder i detta fall mellan och syftar på att själva besöket av noden utförs mellan traverseringen av vänster delträd och traverseringen av höger delträd. 
 
@@ -346,9 +348,9 @@ Och så vidare.
     POHRXWS
     </details>
 
-## Postorder
+### Postorder
 
-Sista traverserings-algoritmen är **postorder**, *post* betyder efter(sist) och syftar på att själva besöket av noden utförs efter traverseringen av vänster delträd och höger delträd. 
+Sista traverseringsalgoritmen är **postorder**, *post* betyder efter(sist) och syftar på att själva besöket av noden utförs efter traverseringen av vänster delträd och höger delträd. 
 
 ```
 postorder(currentNode)
@@ -373,7 +375,7 @@ Vi följer den rekursiva algoritmen på motsvarande sätt som för inorder:
 Algoritmen startar i R som inte är null.  
 Nästa steg i algoritmen är ett anrop med vänster barn, dvs O.  
 Noden är inte null och anrop görs med vänster barn som är P.
-Nästa anrop är vänster barn til P som är null följt av höger barn till P som också är null. Det är nu dags för besöket och P presenteras.  
+Nästa anrop är vänster barn till P som är null följt av höger barn till P som också är null. Det är nu dags för besöket och P presenteras.  
 Trädet med P som rot är klart.  
 Vi är tillbaka i algoritmen för O där nästa steg är anrop med höger barn, dvs H.
 Anropet för H resulterar i att anrop med H's vänster barn som är null följt av ett anrop med H's höger barn som också är null. Det innebär att nästa steg genomförs vilket är besöket och H presenteras. Nu är algoritmen för trädet med H som rot klar.   
