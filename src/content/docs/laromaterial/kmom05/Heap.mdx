@@ -1,20 +1,21 @@
 ---
 title: Heap
 description:  Introduktion och definition av Heap
-order: 0040
-hidden: true
+sidebar:
+    order: 0040
+    hidden: true
 ---
 
 import Figure from '@components/CustomFigure.astro';
 
 import heaparray from '@assets/img/kmom05/HeapArray.png';
-import heapexempel from '@assets/img/kmom05/HeapExempel.png';
+import heapexempel from '@assets/img/kmom05/HeapExempel2.png';
 import heapborttagning from '@assets/img/kmom05/HeapBorttagning02.png';
 import heapinsattning01 from '@assets/img/kmom05/HeapInsattning01.png';
 import heapsvaruppgift from '@assets/img/kmom05/HeapSvarUppgift.png';
 import heapsvaruppgiftinsattning from '@assets/img/kmom05/HeapSvarUppgiftInsattning.png';
 
-En max-heap är ett **komplett binärt träd** som har regeln att **varje nods värde är ≤ alla barns värden**. Detta gäller för en **max-heap** (vilket är det vi normalt avser när vi skriver heap). För en **min-heap** gäller det omvända avseende regeln, dvs att föräldern har lägre värde ≥ än alla barns värden.
+En max-heap är ett **komplett binärt träd** som har regeln att **varje nods värde är ≥ alla barns värden**. Detta gäller för en **max-heap** (vilket är det vi normalt avser när vi skriver heap). För en **min-heap** gäller det omvända avseende regeln, dvs att föräldern har lägre värde ≤ än alla barns värden.
 
 Nedan ser du tre exempel på heapar.
 
@@ -29,7 +30,7 @@ Kontrollera att träden uppfyller både kravet på att vara kompletta och regeln
 
 Genom att använda heap:ar kan vi alltid vara säkra på att vi har det högsta (mest prioriterade) elementet i roten, vilket vi snabbt kan komma åt. Detta är relevant när akuta/prioriterade fall/ärenden måste identifieras. Det är även relevant vid vissa algoritmer i samband med grafer som vi kommer behandla senare.
 
-ADT:n Heap har operationerna 
+ADT:n Heap har operationerna: 
 - sätta in ett element
 - ta bort elementet med högst värde/prioritet
 - "kika" på elementet med högst värde/prioritet
