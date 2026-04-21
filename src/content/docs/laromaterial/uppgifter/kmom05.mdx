@@ -28,7 +28,7 @@ Kopiera den generiska klassen `BusStop` som du har i `kmom02` till katalogen `He
 ### min-Heap
 
 Du ska i denna uppgift implementera en min-Heap i klassen `Heap`. Klassen `Heap` ska implementeras baserat på det generiska interfacet `IHeap`.  
-Både klassen `Heap` och interfacet `IHeap` ska finnas i namespace `Heap` och de ska vara generiska och de ska ha en typparameter T som har en begränsning så att den måste implementera interfacet `IComparable<T>`. Interfacet `IHeap` hittar du nedan.
+Både klassen `Heap` och interfacet `IHeap` ska finnas i namespace `Heap` och de ska vara generiska och de ska ha en typparameter T som har en begränsning så att den måste implementera interfacet `IComparable<T>` (samma som använts i samband med klassen BusStop). Interfacet `IHeap` hittar du nedan och detta skapar du själv i filen `IHeap.cs`.
 
 ```csharp
 public interface IHeap<T> where T:IComparable<T>
@@ -62,8 +62,8 @@ Sorteringsordningen ska vara från lägst till högst.
 
 I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att din sortering fungerar korrekt.
 
-- Prova att sortera med de olika datatyperna `int`, `string` och `BusStop`.  
-- Överst i `Program.cs`skriver du en kommentar där du resonerar om tidskomplexiteten i ordo-notation för din sortering.
+- Prova att sortera med de olika datatyperna `int`, `string` och `BusStop`. Tips: Använd t.ex filen `names.txt` som du laddade ner i kmom04 och skapa en array av strängar och filen `stops.txt` från kmom02 och skapa en array av `BusStop`-objekt som du sedan sorterar. 
+- Överst i `Program.cs`skriver du en kommentar där du resonerar om tidskomplexiteten i ordo-notation för värsta fallet för din sortering.
 - Kontrollera att arrayen verkligen är sorterad när algoritmen är klar. Du kan använda samma kod som användes i kmom02.
 
     <details>
@@ -72,7 +72,7 @@ I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att din so
     ```csharp
     bool CheckSorted<T>(T[] arr, int n) where T: IComparable<T>
     {
-        for (int i=1; i<n-1; i++)
+        for (int i=0; i<n-1; i++)
         {
             if (arr[i].CompareTo(arr[i+1])>0)
                 return false;
@@ -89,4 +89,4 @@ I ditt dotnet-projekt ska följande filer ingå
 - `IHeap.cs` - som innehåller interfacet IHeap
 - `Heap.cs` - som innehåller klassen Heap som implementerar IHeap
 - `UsingHeap.cs` - som innehåller klassen UsingHeap med metoden `SortUsingAHeap`
-- `Program.cs`- där du har kod som kontrollerar att sorteringen fungerar korrekt och en kommentar med ditt resonemang över tidskomplexiteten för din implementation sorteringsalgoritmen.
+- `Program.cs`- där du har kod som kontrollerar att sorteringen fungerar korrekt och dessutom överst i filen, en kommentar med ditt resonemang över tidskomplexiteten i värsta fallet för din implementation av sorteringsalgoritmen.
