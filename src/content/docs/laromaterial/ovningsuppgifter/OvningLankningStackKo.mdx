@@ -118,7 +118,7 @@ listan. Vidare är är listan sorterad från minsta till största element.
     counter = 1
     while walker != current
         counter = counter + 1
-        walker = waler.next
+        walker = walker.next
     return counter
     ```
     </details>
@@ -149,7 +149,7 @@ listan. Vidare är är listan sorterad från minsta till största element.
         first = toInsert
     else
         walker = first
-        while walker.next is not node and toInsert.data > walker.next.data
+        while walker.next is not none and toInsert.data > walker.next.data
             walker = walker.next
         toInsert.next = walker.next
         toInsert.prev = walker
