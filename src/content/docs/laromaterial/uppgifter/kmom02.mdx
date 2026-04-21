@@ -160,7 +160,7 @@ private static int Partition<T>(T[] A, int start, int end) where T : IComparable
     ```csharp
     bool CheckSorted<T>(T[] arr, int n) where T: IComparable<T>
     {
-        for (int i=1; i<n-1; i++)
+        for (int i=0; i<n-1; i++)
         {
             if (arr[i].CompareTo(arr[i+1])>0)
                 return false;
