@@ -9,13 +9,13 @@ sidebar:
 
 1. Beskriv principen för ADT:n Stack och vad operationerna push, pop och peek resulterar i.  
 
-1. Beskriv principen för ADT:n Kö och vad operationerna enqueue, dequeue och peek resulterar i.  
+2. Beskriv principen för ADT:n Kö och vad operationerna enqueue, dequeue och peek resulterar i.  
 
-1. Visa innehållet i stacken om följande operationer utförs i tur och ordning på en från början tom Stack  
+4. Visa innehållet i stacken om följande operationer utförs i tur och ordning på en från början tom Stack  
 
     push(W), push(R), push(Q), pop(), pop(), push(H), push(Y), pop()
 
-1. En Kö implementeras med en array med kapaciteten 6 som intern datastruktur. Vilket innehåll har arrayen efter det att följande operationer har utförts på en från början tom kö?
+4. En Kö implementeras med en array med kapaciteten 6 som intern datastruktur. Vilket innehåll har arrayen efter det att följande operationer har utförts på en från början tom kö?
 
     enqueue(X)  
     enqueue(M)  
@@ -30,33 +30,33 @@ sidebar:
     dequeue()  
     enqueue(P)  
 
-1. Redogör för hur operationerna på en Kö hanteras om en enkellänkad lista används. Tidskomplexiteten för respektive operation förutsätts vara O(1).
+5. Redogör för hur operationerna på en Kö hanteras om en enkellänkad lista används. Tidskomplexiteten för respektive operation förutsätts vara O(1).
 
-1. Anta att en dubbellänkad cirkulär lista använder klassen `Node` för att representera noder där
-- `data` används för att lagra ett element
-- `next` används för att peka ut efterföljande nod
-- `prev` används för att peka ut föregående nod  
+6. Anta att en dubbellänkad cirkulär lista använder klassen `Node` för att representera noder där
+    - `data` används för att lagra ett element
+    - `next` används för att peka ut efterföljande nod
+    - `prev` används för att peka ut föregående nod  
 
-Pekaren current pekar på en nod (Node-objektet) i den cirkulära länkade
+    Pekaren current pekar på en nod (Node-objektet) i den cirkulära länkade
 listan. 
 
-Skriv pseudokod för att bestämma antalet noder i listan.
+    Skriv pseudokod för att bestämma antalet noder i listan.
 
-1. Med samma förutsättningar som i föregående uppgift, skriv pseudokod för att ta bort den nod som `current` pekar på. `current` ska efter borttagningen peka på efterföljaren.
+7. Med samma förutsättningar som i föregående uppgift, skriv pseudokod för att ta bort den nod som `current` pekar på. `current` ska efter borttagningen peka på efterföljaren.
 
-1. Anta att en dubbellänkad lista använder klassen `Node` för att representera noder där
-- `data` används för att lagra ett element
-- `next` används för att peka ut efterföljande nod
-- `prev` används för att peka ut föregående nod  
+8. Anta att en dubbellänkad lista använder klassen `Node` för att representera noder där
+    - `data` används för att lagra ett element
+    - `next` används för att peka ut efterföljande nod
+    - `prev` används för att peka ut föregående nod  
 
-Pekaren `first` pekar på den första noden (Node-objektet) i den dubbellänkade
+    Pekaren `first` pekar på den första noden (Node-objektet) i den dubbellänkade
 listan. Vidare är är listan sorterad från minsta till största element.
 
-Skriv pseudokod för att sätt in ett element på rätt plats enligt sorteringen. Den nya elementet finns i noden (node-objektet) som pekaren `toInsert` pekar på. Denna nods båda pekare är satta till none.
+    Skriv pseudokod för att sätt in ett element på rätt plats enligt sorteringen. Den nya elementet finns i noden (node-objektet) som pekaren `toInsert` pekar på. Denna nods båda pekare är satta till none.
 
-1. Om man vet att en Stack ska användas och man har två alternativa implementeringar att välja mellan, en där Stacken är implementerad med en array och en där Stacken är implementerad med en länkad lista, vilken av dessa implementeringar är lämpligast om antalet element som kommer att finnas på stacken kommer att variera mycket? Motivera.
+9. Om man vet att en Stack ska användas och man har två alternativa implementeringar att välja mellan, en där Stacken är implementerad med en array och en där Stacken är implementerad med en länkad lista, vilken av dessa implementeringar är lämpligast om antalet element som kommer att finnas på stacken kommer att variera mycket? Motivera.
 
-1. Om man vet att en Kö ska användas och man har två olika alternativ implementeringar att välja mellan, en där Kön är implementerad med en array och en där Kön är implementerad med en länkad lista, vilken av dessa implementeringar är lämpligast om antalet element som kommer att finnas på kön inte kommer att variera speciellt mycket? Motivera.
+10. Om man vet att en Kö ska användas och man har två olika alternativ implementeringar att välja mellan, en där Kön är implementerad med en array och en där Kön är implementerad med en länkad lista, vilken av dessa implementeringar är lämpligast om antalet element som kommer att finnas på kön inte kommer att variera speciellt mycket? Motivera.
 
 ## Lösningsförslag
 
@@ -166,7 +166,6 @@ Skriv pseudokod för att sätt in ett element på rätt plats enligt sorteringen
     </details>
 
 1. 
-
     <details>
     <summary>Klicka här för att visa svaret</summary>
     En Kö som är implementerad med en array är lämpligare eftersom den har en fast kapacitet och när denna kapacitet inte överskrids så är det mer minnes- och tidsmässigt effektivt än att använda en länkad lista där varje element kräver extra minne för att lagra pekare. 
