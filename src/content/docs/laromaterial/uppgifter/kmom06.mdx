@@ -27,7 +27,7 @@ Kopiera den klassen `BusStop` som du har i `kmom02` till katalogen `HashTable` o
 
 Metoderna `Equals` och `GetHashCode` i klassen `BusStop` ska tillföras (dessa överskuggar de från klassen `object` precis som tidigare metoden `ToString`). `Equals` ger svar på om de båda objekten har samma tillstånd, dvs samma värde på alla instansvariabler. `GetHashCode` returnerar ett heltal som är lika för alla objekt som är lika enligt Equals. Det är viktigt att dessa två metoder är konsekventa, dvs att de uppfyller kravet att om `a.Equals(b)` så ska `a.GetHashCode() == b.GetHashCode()`. För att implementera `GetHashCode` kan du använda dig av `HashCode.Combine` som tar ett godtyckligt antal argument och returnerar en hashkod som är lika för alla kombinationer av argument som är lika.
 
-#### KOntrollera de nya metoderna i BusStop
+#### Kontrollera de nya metoderna i BusStop
 
 I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att metoderna `Equals` och `GetHashCode` fungerar korrekt. Det ska tydligt framgå vilka tester som görs och vad som förväntas hända i varje test. 
 
