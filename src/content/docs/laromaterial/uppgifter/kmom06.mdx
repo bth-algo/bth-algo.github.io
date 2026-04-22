@@ -1,0 +1,72 @@
+---
+title: Kmom06 - Hashtabeller
+description: Kmom06 inlämningsuppgift om hashtabeller
+sidebar: 
+    order: 0060
+    hidden: true
+---
+
+import Figure from '@components/CustomFigure.astro';
+
+import klassdiagram from '@assets/img/kmom06/BusStopUMLkmom06.png';
+
+I denna uppgift ska du dels implementera en Hashtabell och dels utöka klassen BusStop från tidigare kursmoment. Hashtabellen kommer att användas i det avslutande projektet i kursen.
+
+
+### Förberedelser
+
+I `kmom06` skapar du ett dotnet console-projekt namngivet `HashTable`.
+
+Kopiera den klassen `BusStop` som du har i `kmom02` till katalogen `HashTable` och ändra dessutom namespace till `HashTable`. I klassdiagrammet nedan ser du vilka ändringar som ska göras i klassen `BusStop` i kmom06 jämfört med den version av `BusStop` som du hade i kmom02. 
+
+<Figure
+    src={klassdiagram}
+    caption="BusStop klassdiagram"
+    width="400px"
+/>
+
+Metoderna `Equals` och `GetHashCode` i klassen `BusStop` ska tillföras (dessa överskuggar de från klassen `object` precis som tidigare metoden `ToString`). `Equals` ger svar på om de båda objekten har samma tillstånd, dvs samma värde på alla instansvariabler. `GetHashCode` returnerar ett heltal som är lika för alla objekt som är lika enligt Equals. Det är viktigt att dessa två metoder är konsekventa, dvs att de uppfyller kravet att om `a.Equals(b)` så ska `a.GetHashCode() == b.GetHashCode()`. För att implementera `GetHashCode` kan du använda dig av `HashCode.Combine` som tar ett godtyckligt antal argument och returnerar en hashkod som är lika för alla kombinationer av argument som är lika.
+
+#### KOntrollera de nya metoderna i BusStop
+
+I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att metoderna `Equals` och `GetHashCode` fungerar korrekt. Det ska tydligt framgå vilka tester som görs och vad som förväntas hända i varje test. 
+
+### Hashtabell
+
+Du ska i denna uppgift implementera en Hashtabell i klassen `HashTable`. Klassen `HashTable` ska implementeras baserat på det generiska interfacet `IHashTable` enligt nedan. Både klassen `HashTable` och interfacet `IHashTable` ska tillhöra namespace `HashTable` och de ska vara generiska med två typparametrar, `Key` och `Value`. Interfacet `IHashTable` hittar du nedan och detta skapar du själv i filen `IHashTable.cs`.
+
+```csharp
+public interface IHashTable<Key, Value>
+{
+    public bool Add(Key key, Value element);
+    public bool Remove(Key key);
+    public bool Contains(Key key);
+    public Value Get(Key key);
+    public double LoadFactor();
+}
+```
+
+Metoden `GetAllElements` är egentligen inte en metod som ska ingå i en Heap men denna behövs för att vi ska kunna göra vissa kontroller när vi rättar din lösning.
+Det är tillåtet och dessutom lämpligt att tillföra hjälpmetoder för att lösa vissa delproblem.
+
+Val av instansvariabler och design av klassen `HashTable` är helt upp till dig. Det är dock viktigt att du har en plan för hur du ska hantera kollisioner: linjär sondering eller kedjning. Du får även välja annan metod om du vill men behöver du motivera och förklara extra tydligt (se längre fram i texten). 
+
+#### Kontrollera att din hashtabell fungerar korrekt
+
+I `Program.cs` i ditt dotnet-projekt ska du, förutom testerna för BusStop, skriva kod som kontrollerar att hashtabellen fungerar. Du behöver tänka igenom vilka tester som behöver göras och det ska tydligt framgå vilka tester som görs och vad som förväntas hända i varje test. Objekt av klasstypen BusStop ska användas för testerna. 
+Avslutningsvis i `Program.cs` ska du skriva en kommentar där du motiverar ditt val av kollisionshantering.
+
+
+#### Filer som ingår i inlämningen
+
+I ditt dotnet-projekt ska följande filer ingå
+- `BusStop.cs` - som innehåller klassen BusStop
+- `IHashTable.cs` - som innehåller interfacet IHashTable
+- `HashTable.cs` - som innehåller klassen HashTable som implementerar IHashTable
+- `Program.cs`- där du har tester för BusStop och HashTable samt din motivering av val av kollisionshantering.
+
+### Detta förväntas du kunna efter att du genomfört uppgiften
+
+- Förstå och kunna skapa klasser i vilka du definierar hur hashkoden ska bestämmas
+- Implementera metoder som representerar operationer för en hashtabell
+- Hantera kollisioner i en hashtabell
