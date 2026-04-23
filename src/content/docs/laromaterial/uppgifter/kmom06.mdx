@@ -46,15 +46,20 @@ public interface IHashTable<Key, Value>
 }
 ```
 
-Metoden `GetAllElements` är egentligen inte en metod som ska ingå i en Heap men denna behövs för att vi ska kunna göra vissa kontroller när vi rättar din lösning.
 Det är tillåtet och dessutom lämpligt att tillföra hjälpmetoder för att lösa vissa delproblem.
 
-Val av instansvariabler och design av klassen `HashTable` är helt upp till dig. Det är dock viktigt att du har en plan för hur du ska hantera kollisioner: linjär sondering eller kedjning. Du får även välja annan metod om du vill men behöver du motivera och förklara extra tydligt (se längre fram i texten). 
+Val av instansvariabler och design av klassen `HashTable` är helt upp till dig. Det är dock viktigt att du har en plan för hur du ska hantera kollisioner: linjär sondering eller kedjning. Du får även välja annan metod om du vill men då behöver du motivera och förklara detta val tydligt (se längre fram i texten). 
+
+Du behöver förutom kollisioner även hantera utökning av hashtabellen om fyllnadsgraden (belastningsgraden) passerar en relevant gräns, vilken beror på hur du valt att hantera kollisioner. Även detta ska motiveras.
 
 #### Kontrollera att din hashtabell fungerar korrekt
 
-I `Program.cs` i ditt dotnet-projekt ska du, förutom testerna för BusStop, skriva kod som kontrollerar att hashtabellen fungerar. Du behöver tänka igenom vilka tester som behöver göras och det ska tydligt framgå vilka tester som görs och vad som förväntas hända i varje test. Objekt av klasstypen BusStop ska användas för testerna. 
-Avslutningsvis i `Program.cs` ska du skriva en kommentar där du motiverar ditt val av kollisionshantering.
+I `Program.cs` i ditt dotnet-projekt ska du, förutom testerna för BusStop, skriva kod som kontrollerar att hashtabellen fungerar. Du behöver tänka igenom vilka tester som behöver göras och det ska tydligt framgå vilka tester som görs och vad som förväntas hända i varje test. Utskrifter som redogör för vad som testas och vilket resultat som förväntas tillsammans med det resultat som erhålls. 
+
+Bland annat ska objekt av klasstypen BusStop ska användas för testerna, men du bör dessutom lämpligen skapa en enkel klass som du kan använda för att testa kollisionshanteringen.  
+*Tips för denna: En instansvariabel som är ett heltal vilket dessutom motsvarar resultatet av `GetHashCode()` tillsammans med att du känner till HashTabellens kapacitet.*
+
+Avslutningsvis i `Program.cs` ska du skriva en kommentar där du motiverar ditt val av kollisionshantering och gränsen för re.
 
 
 #### Filer som ingår i inlämningen
