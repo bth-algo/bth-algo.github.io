@@ -23,11 +23,10 @@ Du har uppfyllt kraven i uppgiften och har gjort en vanlig inlämning enligt [Re
 ## Ordlista
 
 - `PR`: Pull request
-- `Submitted`: Får din PR när de automatiska testerna gått igenom. Nu ska du bara vänta på att en lärare kollar på din inlämning.
-- `Tests passed(TP)`: Får din PR när de automatiska testerna gått igenom.
+- `Tests passed(TP)`: Får din PR när de automatiska testerna gått igenom. Nu ska du bara vänta på att en lärare kollar på din inlämning.
 - `Tests failed`: Får din PR när något gått fel i de automatiska testerna. Ladda ner testerna igen, fixa felet lokalt och pusha till GitHub.
 - `Grade: G`: Helt klar med en uppgift.
-- `Grade: Ux`: En lärare har bedömt din inlämning men tycker att något behöver förbättras i din inlämning. Följ instruktionerna, fixa problemet lokalt och pusha din lösning till GitHug. När du taggar pushen så körs testerna om.
+- `Grade: Ux`: En lärare har bedömt din inlämning men tycker att något behöver förbättras i din inlämning. Följ instruktionerna, fixa problemet lokalt och pusha din lösning till GitHub. När du taggar så körs testerna på GitHub.
 - `Grade: U`: En lärare har bedömt din inlämning men tycker inte att det är tillräckligt bra. Du behöver göra en ny inlämning till nästa rättningstillfälle.
 - `Integration failed`: Något i koden som kör de automatiserade testerna gick fel. Kontakta en lärare.
 
@@ -44,17 +43,9 @@ I samband med att du gör din PR så intygar du att arbetet är ditt eget och up
 
 Du skall nu göra din inlämning som en PR mot följande branch.
 
-### kmom03
-
-- mot `bth/submit/kmom03`
-
-### kmom06
-
-- mot `bth/submit/kmom06`
-
-### kmom10 (Projektet)
-
-- mot `bth/submit/kmom10`
+- **PR kmom03** mot `bth/submit/kmom03`
+- **PR kmom06** mot `bth/submit/kmom06`
+- **PR kmom10** mot `bth/submit/kmom10`
 
 Följ stegen nedan för att skapa en PR.
 
@@ -62,7 +53,7 @@ Följ stegen nedan för att skapa en PR.
 
 ### Gå till din kod på GitHub
 
-Du gör detta med hjälp av GitHub. Se till att du har pushat din aktuella kodbas till GitHub och öppna webbläsaren mot din kod på GitHub.
+Du gör detta med hjälp av GitHub. Se till att du har pushat och taggat din aktuella kodbas till GitHub och öppna webbläsaren mot din kod på GitHub.
 
 import pr1 from '@assets/pr/pr1.png';
 
@@ -140,7 +131,7 @@ import prOk1 from '@assets/pr/pr_tests_ok1.png';
     caption="Lyckat resultat från testerna ger labeln `Tests passed(TP)`."
 />
 
-Skrolla längre ner och du ska ha fått en kommentar om att testerna gick bra samt meddelandet "All checks have passed".
+Skrolla längre ner i PR:n och du ska ha fått en kommentar om att taggarna är ok och att testerna gick bra samt meddelandet "All checks have passed".
 
 import prOk2 from '@assets/pr/pr_tests_ok2.png';
 
@@ -156,7 +147,7 @@ NU är din PR klar och väntar på rättning! Alla labels sätts automatiskt!
 
 ### Testerna gick fel
 
-Om något gick fel med testerna får du en kommentar om vad som gick fel samt din PR får labeln `Tests failed`. Eftersom du kör testerna när du taggar så bör detta inte inträffa.
+Om något gick fel med testerna får du en kommentar om vad som gick fel samt din PR får labeln `Tests failed` och PR:n stängs. Eftersom du kör testerna när du taggar så bör detta inte inträffa.
 
 Vanliga fel:
 
@@ -166,7 +157,8 @@ Nu behöver du kolla vad som gick fel, fixa felet och ladda upp koden igen. Enkl
 
 1. Ladda ner testerna på nytt och kör dem lokalt
 1. Rätta felet och testkör lokalt.
-1. Pusha din rättning till GitHub och gör en ny PR.
+1. Pusha din rättning till GitHub och tagga den
+1. Gör en ny PR.
 
 
 :::tip
@@ -174,22 +166,61 @@ Vi rättar inte inlämningar (PRs) med labeln `Tests failed`.
 :::
 
 
-## ⚠️ PR kmom07/10 (ej uppdaterad)
+## PR kmom06
+
+### Skapa branchen `bth/submit/kmom06`
+
+Branchen `bth/submit/kmom06` saknas i ditt repo och den skapar du enklast i terminalen. Det första kommandot kollar vilka brancher det finns och markerar den aktuella branchen med en `*`. Det andra kommandot gör din branch aktuell och håller historiken ren med flaggan `rebase`.
+
+```bash title="Verifiera att du står i main-branchen (* framför main) och att den är aktuell"
+git branch
+git pull --rebase
+```
+
+Det första kommandot skapar branchen och det andra kommandot pushar upp det till GitHub. Om du kör `git branch` nu så ser du att `*` är framför `bth/submit/kmom06`. Med det tredje kommandot hoppar du tillbaka till main där du ska jobba.
+
+```bash title="Skapa en ny branch, pusha den och hoppa tillbaka till main"
+git switch -c bth/submit/kmom06
+git push origin bth/submit/kmom06
+git switch main
+```
+
+Om du kör `git branch` nu så ser du att `*` är framför main-branchen.
+
+### Skapa en PR för kmom06
+
+Gör på samma sätt som i [Pull Request (PR)](./#pull-request-pr).
+
+
+## Skapa en PR för kmom10
 
 Du gör PR för projektet på samma sätt som för kmom03 och kmom06. Här finns inga tester utan du förväntas att själv se till att du följer kraven.
+
+### Skapa branchen `bth/submit/kmom10`
+
+```bash title="Skapa en ny branch, pusha den och hoppa tillbaka till main"
+git switch -c bth/submit/kmom10
+git push origin bth/submit/kmom10
+git switch main
+```
+
+### Skapa en PR för kmom10
+
+Gör på samma sätt som i [Pull Request (PR)](./#pull-request-pr).
+
 
 ## Feedback och bedömning
 
 När läraren rättar din PR så får du återkoppling i kommentarer till din PR.
 
-### Approved / G
+### Godkänd - Grade: G
 
-Om läraren tycker att allt ser bra ut får du en kommentar, label `Approved` och `G` i Canvas. Läraren mergar din PR och stänger den när den är godkänd. Du kommer också se vilken lärare som har varit "reviewer". Du kan jobba vidare med nästa kmom.
+Om läraren tycker att allt ser bra ut får du en kommentar, label `Grade: G` på din PR och `G` i Canvas. Läraren mergar din PR och stänger den när den är godkänd. Du kommer också se vilken lärare som har varit "reviewer". Du kan jobba vidare med nästa kmom.
 
 
-### Needs improvement / Ux
+### Komplettering - Grade: Ux
 
-Om läraren tycker att något är fel som du behöver fixa får du label `Needs improvement` och `Ux` på Canvas. Det kommer finnas kommentarer på specifika rader. Om kommentaren innehåller en `Warning` som på bilden nedanför, då måste du åtgärda det i din kod. Om kommentaren inte innehåller `Warning` behöver du inte åtgärda det som står där.
+Om läraren tycker att något är fel som du behöver fixa får du label `Grade: Ux` på din PR och `Ux` på Canvas. Det kommer finnas kommentarer på specifika rader. Om kommentaren innehåller en `Warning` som på bilden nedanför, då måste du åtgärda det i din kod. Om kommentaren inte innehåller `Warning` behöver du inte åtgärda det som står där.
 
 import pr_warning from '@assets/pr/pr_comment_warning.png';
 
@@ -201,15 +232,20 @@ import pr_warning from '@assets/pr/pr_comment_warning.png';
 
 När du har åtgärdat felen gör följande:
  
-- Pusha din kod til GitHub. 
-- Gör en ny tag, då körs testerna igen.
-- Om din fix funkade ska du nu få labeln `Tests passed(TP)` eller `Tests failed`.
+1. Rätta felet och testkör lokalt.
+1. Pusha din rättning till GitHub och tagga den
+1. Gör en ny PR. Om din fix funkade ska du nu få labeln `Tests passed(TP)`.
 
-### Submission not approved / U
+:::note
+Din komplettering ska lämnas in inom 5 arbetsdagar!
+:::
 
-Om din inlämning inte är tillräckligt bra så får den labeln `Grade: U` och `U` i Canvas. Det kommer finnas kommentarer som förklara felet och läraren kommer stänga din PR.
 
-I kmom10, vid större fel, ges inte komplettering. Då kan du få U direkt.
+### Inte godkänd - Grade: U
+
+Om din inlämning inte är tillräckligt bra så får den labeln `Grade: U` på din PR och `U` i Canvas. Det kommer finnas kommentarer med motivering och läraren kommer att stänga din PR.
+
+Vid större fel, ges inte komplettering. Då kan du få `U` direkt.
 
 Din inlämning kommer inte rättas mer. Din PR stängs. Du behöver göra en ny PR till nästa rättningstillfälle. I [studieplanen](/intro/studieplan/) hittar du när nästa rättningstillfälle är.
 
