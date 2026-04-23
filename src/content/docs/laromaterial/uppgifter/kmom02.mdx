@@ -195,8 +195,8 @@ BusStop[] ReadFromFile(string filename, int nrOf = -1)
     try 
     {
         string[] stops = File.ReadAllLines(filename);
-            if (nrOf == -1 || nrOf > stops.Length)
-        nrOf = stops.Length - 1;
+        if (nrOf == -1 || nrOf > stops.Length)
+            nrOf = stops.Length - 1;
         BusStop[] busStops = new BusStop[nrOf];
         for (int i=0; i<nrOf; i++)
         {
