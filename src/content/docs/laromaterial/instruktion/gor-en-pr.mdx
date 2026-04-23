@@ -26,10 +26,9 @@ Du har uppfyllt kraven i uppgiften och har gjort en vanlig inlämning enligt [Re
 - `Submitted`: Får din PR när de automatiska testerna gått igenom. Nu ska du bara vänta på att en lärare kollar på din inlämning.
 - `Tests passed(TP)`: Får din PR när de automatiska testerna gått igenom.
 - `Tests failed`: Får din PR när något gått fel i de automatiska testerna. Ladda ner testerna igen, fixa felet lokalt och pusha till GitHub.
-- `Approved`/`G`/`1`: Helt klar med en uppgift.
-- `Needs improvement`/`Ux`/`0.49`: En lärare har bedömt din inlämning men tycker att något behöver förbättras i din inlämning. Använd dig av label `Re-submitted` när du har gjort din uppdatering.
-- `Re-submitted`: Du sätter den som label på din PR efter att du har fixat den komplettering en lärare gav på din inlämning.
-- `Submission not approved`/`U`/`0`: En lärare har bedömt din `Re-submitted` men tycker inte att det är tillräckligt bra. Du behöver göra en ny inlämning till nästa rättningstillfälle.
+- `Grade: G`: Helt klar med en uppgift.
+- `Grade: Ux`: En lärare har bedömt din inlämning men tycker att något behöver förbättras i din inlämning. Följ instruktionerna, fixa problemet lokalt och pusha din lösning till GitHug. När du taggar pushen så körs testerna om.
+- `Grade: U`: En lärare har bedömt din inlämning men tycker inte att det är tillräckligt bra. Du behöver göra en ny inlämning till nästa rättningstillfälle.
 - `Integration failed`: Något i koden som kör de automatiserade testerna gick fel. Kontakta en lärare.
 
 
@@ -185,7 +184,7 @@ När läraren rättar din PR så får du återkoppling i kommentarer till din PR
 
 ### Approved / G
 
-Om läraren tycker att allt ser bra ut får du en kommentar, label `Approved` och G i Canvas. Läraren mergar din PR och stänger den när den är godkänd. Du kommer också se vilken lärare som har varit "reviewer". Du kan jobba vidare med nästa kmom.
+Om läraren tycker att allt ser bra ut får du en kommentar, label `Approved` och `G` i Canvas. Läraren mergar din PR och stänger den när den är godkänd. Du kommer också se vilken lärare som har varit "reviewer". Du kan jobba vidare med nästa kmom.
 
 
 ### Needs improvement / Ux
@@ -201,14 +200,14 @@ import pr_warning from '@assets/pr/pr_comment_warning.png';
 />
 
 När du har åtgärdat felen gör följande:
-
-- I din PR sätt label `Re-submitted`. 
-- Pusha din kod til GitHub. Då körs testerna igen.
-- Om din fix funkade ska du nu få lablarna `submitted` och `tests-passed`.
+ 
+- Pusha din kod til GitHub. 
+- Gör en ny tag, då körs testerna igen.
+- Om din fix funkade ska du nu få labeln `Tests passed(TP)` eller `Tests failed`.
 
 ### Submission not approved / U
 
-Om åtgärderna du gjorde i `Re-submitted` bedöms att inte vara tillräckliga får du label `Submission not approved` och `U` i Canvas. Det kommer finnas kommentarer som förklara felet och läraren kommer stänga din PR.
+Om din inlämning inte är tillräckligt bra så får den labeln `Grade: U` och `U` i Canvas. Det kommer finnas kommentarer som förklara felet och läraren kommer stänga din PR.
 
 I kmom10, vid större fel, ges inte komplettering. Då kan du få U direkt.
 
