@@ -10,7 +10,7 @@ import Figure from '@components/CustomFigure.astro';
 
 import klassdiagram from '@assets/img/kmom02/KlassdiagramKmom02Uppgift.png';
 
-I denna uppgift ska du implementera en min-Heap. Denna kommer att användas i det avslutande projektet i kursen men du kommer i denna uppgift dessutom använda din  min-Heap för att utföra sortering.
+I denna uppgift ska du implementera en min-Heap som ska utföra sortering. Denna min-Heap kommer dessutom att användas i det avslutande projektet i kursen.
 
 
 ### Förberedelser
@@ -28,7 +28,7 @@ Kopiera den generiska klassen `BusStop` som du har i `kmom02` till katalogen `He
 ### min-Heap
 
 Du ska i denna uppgift implementera en min-Heap i klassen `Heap`. Klassen `Heap` ska implementeras baserat på det generiska interfacet `IHeap`.  
-Både klassen `Heap` och interfacet `IHeap` ska finnas i namespace `Heap` och de ska vara generiska och de ska ha en typparameter T som har en begränsning så att den måste implementera interfacet `IComparable<T>` (samma som använts i samband med klassen BusStop). Interfacet `IHeap` hittar du nedan och detta skapar du själv i filen `IHeap.cs`.
+Både klassen `Heap` och interfacet `IHeap` ska finnas i namespace `Heap` och de ska vara generiska. De ska ha en typparameter T som har en begränsning så att den måste implementera interfacet `IComparable<T>` (samma som använts i samband med klassen BusStop). Interfacet `IHeap` hittar du nedan och detta skapar du själv i filen `IHeap.cs`.
 
 ```csharp
 public interface IHeap<T> where T:IComparable<T>
@@ -41,17 +41,20 @@ public interface IHeap<T> where T:IComparable<T>
 }
 ```
 
-Metoden `GetAllElements` är egentligen inte en metod som ska ingå i en Heap men denna behövs för att vi ska kunna göra vissa kontroller när vi rättar din lösning.
+Metoden `GetAllElements` är egentligen inte en metod som ska ingå i en Heap men den behövs för att vi ska kunna göra vissa kontroller när vi rättar din lösning.
 Det är tillåtet och dessutom lämpligt att tillföra hjälpmetoder för att lösa vissa delproblem.
 
 #### Sortera genom att använda en heap
 
 Nu ska du använda din implementation av min-Heap för att utföra sortering. 
 
-Stommen till metoden är
+Stommen till metoden är:
 
 ```csharp
-public static void SortUsingAHeap<T>(T[] A, int n) where T : IComparable<T> {/*ska implementeras*/}
+public static void SortUsingAHeap<T>(T[] A, int n) where T : IComparable<T> 
+{
+    /*ska implementeras*/
+}
 ```
 
 och denna ska placeras i en klass namngiven `UsingHeap` och även denna klass ska finnas i namespace `Heap`.
@@ -85,7 +88,8 @@ I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att din so
 
 #### Filer som ingår i inlämningen
 
-I ditt dotnet-projekt ska följande filer ingå
+I ditt dotnet-projekt ska följande filer ingå:
+
 - `IHeap.cs` - som innehåller interfacet IHeap
 - `Heap.cs` - som innehåller klassen Heap som implementerar IHeap
 - `UsingHeap.cs` - som innehåller klassen UsingHeap med metoden `SortUsingAHeap`
