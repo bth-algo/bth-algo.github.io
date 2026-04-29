@@ -35,7 +35,7 @@ En graf består, precis som när det gäller träd, av **noder** och **kanter** 
 <br></br>
 <Figure
     src={grafex}
-    caption="Illustration av en graf"
+    caption="Illustration av två grafer"
     width="400px"
 />
 
@@ -58,7 +58,7 @@ Man använder begreppet **granne** för de noder som en nod har kant till. I gra
 
 Grafen visar att det går att ta sig från S till P och vidare till E, vilket motsvarar att det finns en **väg** (eng. path) från S till P. Vägen har en **längd** som i detta fall motsvarar antalet kanter. Vi får att längden på vägen från S via P till E är 2. En annan väg från S till E är S -> P -> X -> E. Denna väg är längre då den använder 3 kanter.
 
-I en graf, till skillnad mot träd, kan det finnas **cykler**. En cykel är en väg, med längden > 0, som börjar och slutar i samma nod och där varje kant endast används en gång. I grafen ovan (Graf 1) finns en cykel genom vägen E -> P -> X -> E. Denna cykel har längden 3. En cykel tar inte hänsyn till start-nod, det är alltså samma cykel som beskrivs genom P -> X -> E -> P.
+I en graf, till skillnad mot träd, kan det finnas **cykler**. En cykel är en väg, med längden större än (>) 0, som börjar och slutar i samma nod och där varje kant endast används en gång. I grafen ovan (Graf 1) finns en cykel genom vägen E -> P -> X -> E. Denna cykel har längden 3. En cykel tar inte hänsyn till startnod, det är alltså samma cykel som beskrivs genom P -> X -> E -> P.
 
 Antalet kanter som ansluter till en nod kallas nodens **grad**. Vi ser att graden för S är 1 vilket skrivs grad(S) = 1 (eller degree(S) = 1). För övriga noder gäller grad(P) = 3, grad(E) = 2 och grad(X) = 2. 
 
@@ -70,7 +70,8 @@ En **komplett graf** är en graf där varje nod har en kant till varje annan nod
 
     <details>
     <summary>Klicka här för att visa svaret</summary>  
-    6 respektive 10.
+    6 respektive 10.  
+    Löses genom att rita upp grafen eller genom att beräkna med n*(n-1)/2 där n är antalet noder i (gäller komplett oriktad graf).
     </details>
 
 
@@ -135,7 +136,7 @@ Det finns två vedertagna sätt som används att representera grafer:
 - **grannmatris (adjacency matrix)**
 - **grannlistor (adjacensy lists)**
 
-Grannmatris är en 2-dim-matris där alla noder finns i varje rad och i varje kolumn. Den cell i matrisen där rad-nod och kolumn-nod möts motsvarar kanten mellan rad-nod och kolumn-nod. Om grannmatrisen är namngiven `adjacencyMatrix` når vi en kant genom `adjacencyMatrix[<row-node>][<column-node>]`. Matrisen är kvadratisk eftersom alla noder finns i varje rad och i varje kolumn.
+Grannmatris är en 2-dimensionell-matris där alla noder finns i varje rad och i varje kolumn. Den cell i matrisen där rad-nod och kolumn-nod möts motsvarar kanten mellan rad-nod och kolumn-nod. Om grannmatrisen är namngiven `adjacencyMatrix` når vi en kant genom `adjacencyMatrix[<row-node>][<column-node>]`. Matrisen är kvadratisk eftersom alla noder finns i varje rad och i varje kolumn.
 
 Grannlistor innebär att varje nod har en lista med alla sina grann-noder. 
 
@@ -159,7 +160,7 @@ I bilden nedan ser vi grannmatriser för respektive graf.
     />
 
 
-När man tolkar en grannmatris kan man läsa rad som *från* och kolumn som *till*. Om vi tittar i grannmatrisen för Graf 1 (som är en representation av en oriktade graf) ser vi att det från S (rad) till P (kolumn) finns en 1:a. Det innebär att det finns en kant från S till P. Vi ser också att det från E (rad) till S (kolumn) finns en 0:a vilket innebär att det inte finns någon kant från E till S.  
+När man tolkar en grannmatris kan man läsa rad som *från* och kolumn som *till*. Om vi tittar i grannmatrisen för Graf 1 (som är en representation av en oriktad graf) ser vi att det från S (rad) till P (kolumn) finns en 1:a. Det innebär att det finns en kant från S till P. Vi ser också att det från E (rad) till S (kolumn) finns en 0:a vilket innebär att det inte finns någon kant från E till S.  
 Vi observerar att grannmatrisen för den oriktade grafen Graf 1 är speglad över diagonalen - finns det en kant från S till P så finns det även en kant från från P till S.  
 
 I grannmatrisen för Graf 2 (som är oriktad och viktad) ser vi att vikten för kanten finns i matrisen. Bland annat ser vi att från P (rad) till X (kolumn) finns en kant med kostnaden 6. 
@@ -203,7 +204,7 @@ I bilden nedan ser vi grannlistor för respektive graf.
     <br></br>
     <Figure
         src={graf03_04narhetslistor}
-        caption="Exempel med grannmatriser"
+        caption="Exempel med grannlistor"
         height="400px"
         width="520px"
     />
