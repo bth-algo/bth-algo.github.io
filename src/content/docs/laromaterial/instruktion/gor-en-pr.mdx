@@ -28,6 +28,7 @@ Du har uppfyllt kraven i uppgiften och har gjort en vanlig inlämning enligt [Re
 - `Grade: G`: Helt klar med en uppgift.
 - `Grade: Ux`: En lärare har bedömt din inlämning men tycker att något behöver förbättras i din inlämning. Följ instruktionerna, fixa problemet lokalt och pusha din lösning till GitHub. När du taggar så körs testerna på GitHub.
 - `Grade: U`: En lärare har bedömt din inlämning men tycker inte att det är tillräckligt bra. Du behöver göra en ny inlämning till nästa rättningstillfälle.
+- `Run tests`: Du ska sätta labeln "Run tests"  för att köra igång flödet som kör testerna och sätter `Tests Passed (TP)` eller `Tests failed`.
 - `Integration failed`: Något i koden som kör de automatiserade testerna gick fel. Kontakta en lärare.
 
 
@@ -152,12 +153,14 @@ Om något gick fel med testerna får du en kommentar om vad som gick fel samt di
 Vanliga fel:
 
 - du har inte de nyaste testerna
+- du inte inloggad med SSO (logga ut och sen in igen och klicka på SSO-knappen på rätt organisation)
 
 Nu behöver du kolla vad som gick fel, fixa felet och ladda upp koden igen. Enklast gör du det genom att:  
 
 1. Ladda ner testerna på nytt och kör dem lokalt
 1. Rätta felet och testkör lokalt.
 1. Pusha din rättning till GitHub och tagga den
+1. Sätt labeln `Run tests` på din öppna PR för att köra igång flödet som kör testerna och sätter `Tests Passed (TP)` eller `Tests failed`.
 
 
 :::tip
@@ -233,6 +236,7 @@ När du har åtgärdat felen gör följande:
  
 1. Rätta felet och testkör lokalt.
 1. Pusha din rättning till GitHub och tagga den. Om din fix funkade ska du nu få labeln `Tests passed(TP)`.
+1. Sätt labeln `Run tests` på din öppna PR för att köra igång flödet som kör testerna och sätter `Tests Passed (TP)` eller `Tests failed`.
 
 :::note
 Din komplettering ska lämnas in inom 5 arbetsdagar!
