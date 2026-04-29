@@ -48,7 +48,9 @@ public interface IHashTable<Key, Value>
 
 Det är tillåtet och dessutom lämpligt att tillföra hjälpmetoder för att lösa vissa delproblem.
 
-Val av instansvariabler och design av klassen `HashTable` är helt upp till dig. Det är dock viktigt att du har en plan för hur du ska hantera kollisioner: linjär sondering eller kedjning. Du får även välja annan metod om du vill men då behöver du motivera och förklara detta val tydligt (se längre fram i texten). 
+Hashtabellen ska använda en array och storleken/kapaciteten på denna ska vara alltid vara ett primtal.
+
+Det är viktigt att du har en plan för hur du ska hantera kollisioner: linjär sondering eller kedjning. Du får även välja annan metod om du vill men då behöver du motivera och förklara detta val tydligt (se längre fram i texten). 
 
 Du behöver förutom kollisioner även hantera utökning av hashtabellen om fyllnadsgraden (belastningsgraden) passerar en relevant gräns, vilken beror på hur du valt att hantera kollisioner. Även detta ska motiveras.
 
