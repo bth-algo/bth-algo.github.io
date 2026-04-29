@@ -10,14 +10,14 @@ import Figure from '@components/CustomFigure.astro';
 
 import klassdiagram from '@assets/img/kmom06/BusStopUMLkmom06.png';
 
-I denna uppgift ska du dels implementera en Hashtabell och dels utöka klassen BusStop från tidigare kursmoment. Hashtabellen kommer att användas i det avslutande projektet i kursen.
+I denna uppgift ska du dels implementera en hashtabell och dels utöka klassen BusStop från tidigare kursmoment. Hashtabellen kommer att användas i det avslutande projektet i kursen.
 
 
 ### Förberedelser
 
 I `kmom06` skapar du ett dotnet console-projekt namngivet `HashTable`.
 
-Kopiera den klassen `BusStop` som du har i `kmom02` till katalogen `HashTable` och ändra dessutom namespace till `HashTable`. I klassdiagrammet nedan ser du vilka ändringar som ska göras i klassen `BusStop` i kmom06 jämfört med den version av `BusStop` som du hade i kmom02. 
+Kopiera klassen `BusStop` som du har i `kmom02` till katalogen `HashTable` och ändra dessutom namespace till `HashTable`. I klassdiagrammet nedan ser du vilka ändringar som ska göras i klassen `BusStop` i kmom06 jämfört med den version av `BusStop` som du hade i kmom02. 
 
 <Figure
     src={klassdiagram}
@@ -33,7 +33,7 @@ I Program.cs i ditt dotnet-projekt ska du skriva kod som kontrollerar att metode
 
 ### Hashtabell
 
-Du ska i denna uppgift implementera en Hashtabell i klassen `HashTable`. Klassen `HashTable` ska implementeras baserat på det generiska interfacet `IHashTable` enligt nedan. Både klassen `HashTable` och interfacet `IHashTable` ska tillhöra namespace `HashTable` och de ska vara generiska med två typparametrar, `Key` och `Value`. Interfacet `IHashTable` hittar du nedan och detta skapar du själv i filen `IHashTable.cs`.
+Du ska i denna uppgift implementera en hashtabell i klassen `HashTable`. Klassen `HashTable` ska implementeras baserat på det generiska interfacet `IHashTable` enligt nedan. Både klassen `HashTable` och interfacet `IHashTable` ska tillhöra namespace `HashTable` och de ska vara generiska med två typparametrar, `Key` och `Value`. Interfacet `IHashTable` hittar du nedan och detta skapar du själv i filen `IHashTable.cs`.
 
 ```csharp
 public interface IHashTable<Key, Value>
@@ -59,7 +59,7 @@ I `Program.cs` i ditt dotnet-projekt ska du, förutom testerna för BusStop, skr
 Bland annat ska objekt av klasstypen BusStop ska användas för testerna, men du bör dessutom lämpligen skapa en enkel klass som du kan använda för att testa kollisionshanteringen.  
 *Tips för denna: En instansvariabel som är ett heltal vilket dessutom motsvarar resultatet av `GetHashCode()` tillsammans med att du känner till HashTabellens kapacitet.*
 
-Avslutningsvis i `Program.cs` ska du skriva en kommentar där du motiverar ditt val av kollisionshantering och gränsen för re.
+Avslutningsvis i `Program.cs` ska du skriva en kommentar där du motiverar ditt val av kollisionshantering och gränsen för rehashning.
 
 
 #### Filer som ingår i inlämningen
