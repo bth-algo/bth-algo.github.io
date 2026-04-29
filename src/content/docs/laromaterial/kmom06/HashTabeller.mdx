@@ -20,11 +20,11 @@ import hashtabelluppgiftsvar from '@assets/img/kmom06/HashTabellUppgiftSvar.png'
 import hashtabellkedjning from '@assets/img/kmom06/HashtabellKedjning.png';
 import hashtabellkedjning01 from '@assets/img/kmom06/HashtabellKedjning01.png';
 
-Hashtabeller används när man inte behöver ordna element men däremot har behov av att hitta element riktigt snabbt. Man kan tänka att det är som att direkt veta var något finns. 
+Hashtabeller används när vi inte behöver ordna element men däremot har behov av att hitta element riktigt snabbt. Man kan tänka att det är som att direkt veta var något finns. 
 
 Klassen `Dictionary` som du använt i programmeringskurserna är ett exempel på när detta används. 
 
-Operationer är
+Operationer är:
 - Add(key, element): lägger in element med nyckeln key
 - Remove(key): tar bort elementet med nyckeln key
 - Get(key): får tillgång till elementet med nyckeln key
@@ -36,7 +36,7 @@ Själva tabellen, där elementen lagras, är en array. Den plats, dvs det index,
 
 För att kunna hitta ett element direkt (eller i alla fall med väldigt få jämförelser) används en funktion, som givet en **unik nyckel** beräknar ett index i en array där elementet ska placeras. Denna funktion kallas **hash-funktion**. Samma funktion används när vi vill hämta ett element, veta om ett element finns samt när vi ska ta bort ett element.   
 
-Det är viktigt att hash-funktionen (som i C# implementeras som en metod) gör en effektiv omarbetning av en nyckel till ett **index i en array**. Elementen som ska placeras i hash-tabellen innehåller dels den unika nyckeln men även ytterligare information/data som ofta benämns **satellitdata**. 
+Det är viktigt att hash-funktionen (som i C# implementeras som en metod) gör en effektiv omarbetning av en nyckel till ett **index i en array**. Elementen som ska placeras i hashtabellen innehåller dels den unika nyckeln men även ytterligare information/data som ofta benämns **satellitdata**. 
 
 <br></br>
 <Figure
@@ -56,26 +56,26 @@ Vi tänker oss till exempel en liten förening med medlemmar där varje medlem h
 
 Vi inser att det när det gäller hash-funktionen så är det viktigt att denna är definierad så att det index som funktionen beräknar hamnar inom arrayens index-gränser. I exemplet med medlemmarna kommer detta att uppfyllas eftersom kapaciteten är 10 och modulus 10 ger heltal inom [0..9]. Men vad händer om det finns en medlem med medlemsnummer 1027? Då ger hash-funktionen värdet 7 vilket innebär att medlemmen ska placeras på index 7 men där är upptaget. Det som inträffat är en **kollision**, vilket vi ska gå in på hur vi kan hantera lite senare. 
 
-*Notering: Här kan man kanske fundera över att använda index motsvarande medlemsnummer men det skulle uppta betydlig mer minne än vad som är rimligt i förhållande till antalet medlemmar. Om vi tänker oss ett medlemsregister med 200 medlemmar (några lämnar och några tillkommer under tidens gång) och att medlemsnumreringen en gång började på 1 och nu har (efter flera år) som sista nummer 1800 (och det kommer att fortsätta). Vi vill inte allokera en array med 1800 (eller fler platser) för de ca 200 medlemmarna. Vi får istället riskera att olika nycklar ger samma index och istället hantera det (se längre fram)*
+*Notering: Här kan vi kanske fundera över att använda index motsvarande medlemsnummer men det skulle uppta betydlig mer minne än vad som är rimligt i förhållande till antalet medlemmar. Om vi tänker oss ett medlemsregister med 200 medlemmar (några lämnar och några tillkommer under tidens gång) och att medlemsnumreringen en gång började på 1 och nu har (efter flera år) som sista nummer 1800 (och det kommer att fortsätta). Vi vill inte allokera en array med 1800 (eller fler platser) för de ca 200 medlemmarna. Vi får istället riskera att olika nycklar ger samma index och istället hantera det (se längre fram)*.
 
-När det gäller hash-funktioner vill man försöka minska risken för att olika nycklar ger samma index. Ett exempel som kan användas om nycklarna är strängar är att se till så att "ab" inte ger samma resultat som "ba". Vi kan använda ascii-värdet för tecken (det ska ju resultera i ett heltal) tillsammans med position. Då blir "ab" 97 * 1 + 98 * 2 medan "ba" blir 98 * 1 + 97 * 2.
+När det gäller hash-funktioner vill vi försöka minska risken för att olika nycklar ger samma index. Ett exempel som kan användas om nycklarna är strängar är att se till så att "ab" inte ger samma resultat som "ba". Vi kan använda ASCII-värdet för tecken (det ska ju resultera i ett heltal) tillsammans med position. Då blir "ab" 97 * 1 + 98 * 2 medan "ba" blir 98 * 1 + 97 * 2.
 
 ### Implementation
 
-I de flesta objektorienterade programspråk har man möjlighet att definiera hash-funktionen i den klass som representerar de element som ska placera i en hash-tabell.   
-I C# ärvs denna metod från alla klassers bas-klass `Object`. Metoden har namnet `GetHashCode()` med returtypen int. Om man inte överskuggar metoden får man ett heltal (hashcode) som baseras på den minnesplats (referens) som objektet är placerat på (detta är ju unikt). Det innebär att även om två objekt är  identiska avseende sina värden på medlemsvariablerna så får de inte samma hash-kod.  
-Om målsättningen är att objektets tillstånd (värdet på medlemsvariablerna) ska ge samma hash-kod måste man överskugga metoden `GetHashCode()`.  
-Om man överskuggar GetHashCode() behöver man dessutom överskugga metoden `Equals(object? obj)`. Vi inser behovet av denna när vi fördjupar oss i kollisionshanteringen. 
+I de flesta objektorienterade programspråk har vi möjlighet att definiera hash-funktionen i den klass som representerar de element som ska placeras i en hashtabell.   
+I C# ärvs denna metod från alla klassers basklass `Object`. Metoden har namnet `GetHashCode()` med returtypen int. Om vi inte överskuggar metoden får vi ett heltal som hashkod (hashcode) som baseras på den minnesplats (referens) som objektet är placerat på (detta är ju unikt). Det innebär att även om två objekt är  identiska avseende sina värden på medlemsvariablerna så får de inte samma hashkod.  
+Om målsättningen är att objektets tillstånd (värdet på medlemsvariablerna) ska ge samma hashkod måste vi överskugga metoden `GetHashCode()`.  
+Om vi överskuggar GetHashCode() behöver vi dessutom överskugga metoden `Equals(object? obj)`. Vi inser behovet av denna när vi fördjupar oss i kollisionshanteringen. 
 
 *Notering: parameterns datatyp skrivs object med litet o. Det är ett alias för System.Object.*
 
 ### Kollisionshantering
 
-Vi har konstaterat att det finns en möjlighet att det blir kollisioner (när olika nycklar ger samma index) vid insättning i hash-tabellen. Vi ska kika på två olika sätt att hantera detta (linjär sondering och kedjning) men det finns fler (t.ex dubbel hashning och kvadratisk sondering).
+Vi har konstaterat att det finns en möjlighet att det blir kollisioner (när olika nycklar ger samma index) vid insättning i hashtabellen. Vi ska kika på två olika sätt att hantera detta (linjär sondering och kedjning) men det finns fler (t.ex dubbel hashning och kvadratisk sondering).
 
 #### Linjär sondering (eng. Linear Probing)
 
-Sondering innebär att man letar sig fram systematiskt i arrayen.
+Sondering innebär att vi letar oss fram systematiskt i arrayen.
 
 ##### Insättning - Add(key, element)
 
@@ -89,7 +89,7 @@ Vi fortsätter på medlemsregistret. Medlemmen *Leif Ohlin* med medlemsnummer *1
 />
 
 
-Nu ska även medlemmen *Sten Holm* med medlemsnummer *1005* placeras i hash-tabellen.  
+Nu ska även medlemmen *Sten Holm* med medlemsnummer *1005* placeras i hashtabellen.  
 Hash-funktionen ger 5, men denna plats är upptagen. Vi har alltså råkat ut för en kollision. Nu sonderar vi stegvis och undersöker om det är ledigt på index 6, men även där är upptaget. Vi letar vidare index för index och finner att index 8 är den första plats vi hittar som inte är upptagen. Vi placerar medlemmen Sten Holm här.
 
 <br></br>
@@ -125,7 +125,7 @@ Om vi ska ta bort medlemmen med medlemsnummer *1015* (*Per Svahn*) använder vi 
 
 
 Om vi stället hade velat ta bort medlemmen med medlemsnummer *1005* kommer vi också att få 5 från hash-funktionen. Vi kontrollerar den medlem som finns på detta index och finner att det inte är den medlem vi söker.  
-Eftersom linjär sondering används vet vi att medlemmen kan ha placerats på något index efter det som hash-funktionen ger. Vi letar index för index och upptäcker att den medlem vi vill ta bort finns på index 8 och vi kan ta bort den.
+Eftersom linjär sondering används vet vi att medlemmen kan ha placerats på något index efter det som hash-funktionen ger. Vi letar index för index och upptäcker att den medlem vi vill ta bort finns på index 8 och nu kan vi ta bort den.
 <br></br>
 <Figure
     src={hashtabell07}
@@ -133,20 +133,20 @@ Eftersom linjär sondering används vet vi att medlemmen kan ha placerats på n�
 />
 
 
-Förhoppningsvis inses att det finns en del problem som måste hanteras. Vad händer om vi först tar bort medlemmen med medlemsnummer 1015 och därefter den med medlemsnummer 1005? Och vad händer om vi försöker ta bort en medlem som inte finns?
+Förhoppningsvis inser vi att det finns en del problem som måste hanteras. Vad händer om vi först tar bort medlemmen med medlemsnummer 1015 och därefter den med medlemsnummer 1005? Och vad händer om vi försöker ta bort en medlem som inte finns?
 <br></br>
 <Figure
     src={hashtabell08}
     width="650px"
 />
 
-Vi kan konstatera att en ledig plats i arrayen kan vara ledig pga att
+Vi kan konstatera att en ledig plats i arrayen kan vara ledig pga att:
 - det aldrig placerats något på detta index
 - ett element kan ha funnits där tidigare men tagits bort
 
 Har detta någon betydelse? Ja, vid sonderingen vet vi att om vi kommer till en plats som en borttagning har gjorts på, kan det element vi letar efter finnas på efterföljande index eftersom det kan ha sonderats. Är det däremot så att en plats vi kommer till aldrig använts, kan vi dra slutsatsen att elementet inte kan finnas i arrayen eftersom sondering inte hoppar över några index. 
 
-Vi behöver kunna markera alla platser i arrayen som 
+Vi behöver kunna markera alla platser i arrayen som: 
 - aldrig använd
 - tidigare använd
 - upptagen
@@ -157,7 +157,7 @@ Ett tips är att använda en egendefinierad enum för dessa tre möjliga fall.
 
 **Testa dig själv**
 
-1. Bilden nedan illustrerar hash-tabellen för medlemmar med samma hash-funktion som tidigare, dvs `hash(medlemsnummer) = medlemsnummer mod 10` och med markeringarna i arrayen som motsvarar 
+1. Bilden nedan illustrerar hashtabellen för medlemmar med samma hash-funktion som tidigare, dvs `hash(medlemsnummer) = medlemsnummer mod 10` och med markeringarna i arrayen som motsvarar 
     - O: Occupied (finns element)  
     - U: Unused (har aldrig använts)  
     - E: Empty (har haft element)  
@@ -180,7 +180,7 @@ Ett tips är att använda en egendefinierad enum för dessa tre möjliga fall.
 
     A. 2 sonderingssteg. På index 9 ersätts O med E.  
     B. Ingen sondering. På index 8 ersätts E med O.  
-    C. 2 sonderingssteg. På index 9 ersätts O med E.   
+    C. 2 sonderingssteg. På index 1 ersätts O med E.   
     D. 1 sonderingssteg.  
     <br></br>
     <Figure
@@ -195,16 +195,16 @@ På samma sätt som för borttagning används hash-funktionen följt av sonderin
 
 Sökningen fortgår tills elementet med den sökta nyckeln påträffas eller tills en plats som aldrig använts påträffas (då finns inte elementet).
 
-Contains - ger svar på om elementet med en given nyckel finns eller ej  
-Get - returnerar elementet med den givna nyckeln
+Contains(key): - ger svar på om elementet med en given nyckel finns eller ej  
+Get(key): - returnerar elementet med den givna nyckeln
 
 #### Kedjning (eng. Chaining)
 
-Kedjning innebär att man placerar alla element som får samma index från hash-funktionen i en "samling". 
+Kedjning innebär att vi placerar alla element som får samma index från hash-funktionen i en "samling". 
 
 ##### Insättning - Add(key, element)
 
-Anta hash-tabellen med medlemmar enligt bilden nedan och att vi har samma hash-funktion, dvs `hash(medlemsnummer) = medlemsnummer mod 10`.  
+Anta hashtabellen med medlemmar enligt bilden nedan och att vi har samma hash-funktion, dvs `hash(medlemsnummer) = medlemsnummer mod 10`.  
 
 <br></br>
 <Figure
@@ -248,15 +248,15 @@ Sökning utförs på motsvarande sätt som borttagning, dvs efter det att hash-f
 
     A. De hamnar på index 6. Ordningen kan vi inte vara säkra på men om nya element alltid placeras först blir det 1116 -> 1086 -> 1026.    
     B. Alla elementen i listan behöver kontrolleras i så fall, dvs 3 jämförelser.  
-    C. Det finns bara ett element så det lir 1 jämförelse.  
+    C. Det finns bara ett element så det blir 1 jämförelse.  
     </details>
 
 
 ## Belastningsfaktor  (eng Load factor)
 
-För att hash-tabellen ska vara effektiv får den inte vara för fylld. Då inträffar för många kollisioner och effektiviteten blir sämre. Ett mått på detta är den sk belastnings-faktorn. Andra benämningar är belastningsgrad och fyllnadsgrad.
+För att hashtabellen ska vara effektiv får den inte vara för fylld. Då inträffar för många kollisioner och effektiviteten blir sämre. Ett mått på detta är den sk belastningsfaktorn. Andra benämningar är belastningsgrad och fyllnadsgrad.
 
-Om **n** är antalet element som placerats i hash-tabellen och **cap** är kapaciteten på arrayen beräknas beslastningsfaktorn **n/cap**. 
+Om **n** är antalet element som placerats i hashtabellen och **cap** är kapaciteten på arrayen beräknas beslastningsfaktorn **n/cap**. 
 
 Vid linjär sondering (och även en del andra sonderingsmetoder) är gränsen för att effektiviteten ska bibehållas runt 0.7 - 0.8. 
 
@@ -268,21 +268,21 @@ När belastningsfaktorn överstigen gränsen behövs sk. **rehashning**. Det inn
 
 Med en bra hash-funktion (bra spridning på index) får vi konstant tidkomplexitet i medelfallet och även bästa fallet. Det ska helt enkelt inte krävas många extra steg för att identifiera var ett element finns givet nyckeln. 
 
-Att beräkna ursprungsindex, vilket är uppgiften för hash-funktionen, tar samma tid oavsett antalet element. Om inga kollisioner inträffar behövs inget mer utföras avseende index. Om det finns kollisioner krävs ett fåtal extra kontroller vilket betraktas som marginellt. Vi får alltså vilket konstant tid, dvs **O(1)** för alla operationerna på Hash-tabellen. 
+Att beräkna ursprungsindex, vilket är uppgiften för hash-funktionen, tar samma tid oavsett antalet element. Om inga kollisioner inträffar behövs inget mer utföras avseende index. Om det finns kollisioner krävs ett fåtal extra kontroller vilket betraktas som marginellt. Vi får alltså vilket konstant tid, dvs **O(1)** för alla operationerna på hashtabellen. 
 
 ## Sammanfattningsvis
 
-Hashtabeller är effektiva när man behöver hitta element snabbt men samtidigt inte ordna elementen.  
-Operationer som hör till ADT Hash-tabell är 
--lägg till ett element givet nyckeln och elementet 
+Hashtabeller är effektiva när vi behöver hitta element snabbt men samtidigt inte ordna elementen.  
+Operationer som hör till ADT:n hashtabell är:   
+- lägg till ett element givet nyckeln och elementet 
 - ta bort ett element givet nyckel 
 - avgör om ett element finns eller ej givet nyckel
 - få ett element som har en given nyckel
 
 En hashtabell byggs upp av en array tillsammans med en hash-funktion.  
 Hash-funktionen beräknar, givet en unik nyckel, ett index i arrayen.  
-Kollisioner inträffar när olika nycklar får samma index. Vi har tittat på två olika sätt att hantera detta  
+Kollisioner inträffar när olika nycklar får samma index. Vi har tittat på två olika sätt att hantera detta:  
 - linjär sondering
 - kedjning  
 
-Belasningsfaktorn är ett mått på hur fylld hash-tabellen är och vid en viss gräns krävs rehashning för att effektiviteten ska bibehållas.
+Belasningsfaktorn är ett mått på hur fylld hashtabellen är och vid en viss gräns krävs rehashning för att effektiviteten ska bibehållas.
