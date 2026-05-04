@@ -18,7 +18,7 @@ Ett vanligt förekommande graf-problem är att bestämma kortaste vägen (egentl
 ## Dijkstras algoritm - introduktion
 
 Strategin är att alltid välja den nod som för närvarande har det kortaste kända avståndet till startnoden.  
-Det innebär att det första som kontrolleras är vilka noder som kan nås från startnoden och vad det kostar (vikten). Det billigaste alternativet väljs. Nu kan vi komma vidare från den nyss valda till dess grannar. Vi undersöker vilka grannarna är och som inte ingår bland redan valda noder och registrera den totala kostnaden till dessa. Nu väljer vi den billigaste totala kostnaden av de som vi har registrerat, dvs av de som går direkt från startnoden och de som går via den nyss valda. Detta upprepas tills det inte finns fler möjliga noder att komma till.
+Det innebär att det första som kontrolleras är vilka noder som kan nås direkt (dvs en granne) från startnoden och vad det kostar (vikten). Det billigaste alternativet väljs. Nu kan vi komma vidare från den nyss valda till dess grannar. Vi undersöker vilka grannarna är och som inte ingår bland redan valda noder och registrera den totala kostnaden till dessa. Nu väljer vi den billigaste totala kostnaden av de som vi har registrerat, dvs av de som går direkt från startnoden och de som går via den nyss valda. Detta upprepas tills det inte finns fler möjliga noder att komma till.
 
 Vi gör ett exempel där Dijkstras algoritm tillämpas för att finna kortaste vägen från nod X till varje annan nod. 
 <br></br>
