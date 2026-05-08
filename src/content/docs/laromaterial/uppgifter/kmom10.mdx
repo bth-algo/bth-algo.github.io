@@ -10,7 +10,7 @@ import Figure from '@components/CustomFigure.astro';
 {/*import klassdiagram from '@assets/img/kmom02/KlassdiagramKmom02Uppgift.png';*/}
 import karta from '@assets/img/kmom10/Karta.png';
 
-Denna uppgift omfattar i första hand grafer och det specifika grafproblemet att hitta **kortaste vägen** från en nod till en annan nod.
+Denna uppgift omfattar i första hand grafer och det specifika grafproblemet att hitta **kortaste vägen** från en nod till en annan nod, exempelvis från Oslo till Stockholm.
 
 <Figure
     src={karta}
@@ -39,24 +39,24 @@ Ditt val:
 
 ### Förberedelser
 
-Skapa ett dotnetprojekt i katalogen `kmom10` som namnges `ProjectSolution`.   
-I `kmom05` har du implementerat en **min-Heap** och i `kmom06` ska du ha implementerat en **hash-tabell**. Dessa (inklusive interface) ska du kopiera till katalogen `ProjectSolution`. Ändra dessutom namespace till `GraphProject` vilket ska gälla för alla klasser och interface som ingår i lösningen.  
+Skapa ett console-projekt (med dotnet) i katalogen `kmom10` som namnges `GraphProject`.   
+I `kmom05` har du implementerat en **min-Heap** och i `kmom06` ska du ha implementerat en **hashtabell**. Dessa (inklusive interface) ska du kopiera till katalogen `GraphProject`. Ändra dessutom namespace till `GraphProject` vilket ska gälla för alla klasser och interface som ingår i lösningen.  
 
-Avseende hash-tabellen ska du tillse att det finns en konstant som innehåller värdet för gränsen för när omhashning (rehash) ska utföras. Konstanten ska vara namngiven `LOAD_FACTOR_LIMIT` och datatypen ska vara `double`.
+Utöka hashtabellen med en konstant som innehåller värdet för gränsen för när omhashning (rehash) ska utföras. Konstanten ska vara publik, namngiven `LOAD_FACTOR_LIMIT` och datatypen ska vara `double`.
 
 
 ### Graf
 
-Skapa en klass `Graph` i en fil namngiven `Graph.cs`vilken ska används för att representera en oriktad graf. Klassen `Graph` ska implementera interfacet `IGraph` enligt nedan. Detta interface ska finnas i en fil namngiven `IGraph.cs`
+Skapa en klass `Graph` i en fil namngiven `Graph.cs` som används för att representera en oriktad graf. Klassen `Graph` ska implementera interfacet `IGraph` enligt nedan. Detta interface ska finnas i en fil namngiven `IGraph.cs`.
 
 ```csharp
 public interface IGraph<T>
 {
     public void AddEdge(T fromVertex, T toVertex, int weight);
 
-    public bool RemoveEdge(T fromvertex, T tovertex);
+    public bool RemoveEdge(T fromVertex, T toVertex);
 
-    public int GetWeight(T fromvertex, T tovertex);
+    public int GetWeight(T fromVertex, T toVertex);
 
     public int GetNrOfVerticies();
 
@@ -64,18 +64,19 @@ public interface IGraph<T>
 
     public int GetTotalWeight();
 
-    public (int, List<(T, int)>) GetShortestPath(T fromvertex, T tovertex);
+    public (int, List<(T, int)>) GetShortestPath(T fromVertex, T toVertex);
 }
 ```
 
-- `AddEdge`: lägger till kant med kostnaden `weight` mellan `fromvertex` och `tovertex`. Eftersom det är en oriktad graf ska kanten gå i båda riktningarna. Om det redan finns en kant mellan noderna ersätts den efter anropet så att den har den nya vikten (antingen ersätts endast vikten eller ersätts hela kanten).
-- `RemoveEdge`: tar bort kanten mellan `fromvertex` och `tovertex` om det finns, `true` returneras i så fall. Finns det ingen kant returneras istället `false`.
-- `GetWeight`: returnerar vikten på kanten mellan `fromvertex` och `tovertex`. Om det inte finns någon kant returneras -1.
+- `AddEdge`: lägger till en kant med kostnaden `weight` mellan `fromVertex` och `toVertex`. Eftersom det är en oriktad graf ska kanten gå i båda riktningarna. Om det redan finns en kant mellan noderna ersätts den efter anropet så att den har den nya vikten (antingen ersätts endast vikten eller ersätts hela kanten).
+- `RemoveEdge`: tar bort kanten mellan `fromVertex` och `toVertex` om det finns, `true` returneras i så fall. Finns det ingen kant returneras istället `false`.
+- `GetWeight`: returnerar vikten på kanten mellan `fromVertex` och `toVertex`. Om det inte finns någon kant returneras -1.
 - `GetNrOfVerticies`: returnerar antalet noder i grafen.
-- `GetAllVerticies`: returnerar en lista med alla noder i grafen. 
-- `GetTotalWeight`: returnerar den totala kant-vikten (summan av alla kant-vikter) för grafen.
-- `GetShortestPath`: bestämmer kortaste (billigaste) vägen mellan `fromvertex` och `tovertex`. Returnerar en tupel med första elementet motsvarande den totala kostnaden (vikten) för vägen och som andra element en lista som representerar vägen.   
-Om vägen mellan noden A och noden X har den totala vikten 65 och den motsvarar kanten (A,C) med vikten 20 följt av kanten (C,B) med vikten 15 och slutligen kanten (B,X) med vikten 30 ska listan vara av längden 4 och innehåll i listan är tuplerna (från och med index 0) (A,0), (C,20), (B,35), (X,65).
+- `GetAllVerticies`: returnerar en lista med alla noder i grafen.
+- `GetTotalWeight`: returnerar den totala kant-vikten (sumdu av alla kant-vikter) för grafen.
+- `GetShortestPath`: bestämmer kortaste (billigaste) vägen mellan `fromVertex` och `toVertex`. Returnerar en tupel med första elementet motsvarande den totala kostnaden (vikten) för vägen och som andra element en lista som representerar vägen.  
+*Exempel:* Om vägen mellan noden A och noden X har den totala vikten 65 och den motsvarar kanten (A,C) med vikten 20 följt av kanten (C,B) med vikten 15 och slutligen kanten (B,X) med vikten 30.  
+Då ska listan vara av längden 4 och innehåll i listan är tuplerna (från och med index 0) (A,0), (C,20), (B,35), (X,65).
 
 #### Instruktioner, förutsättningar och krav för klassen Graph
 
@@ -84,30 +85,30 @@ Om vägen mellan noden A och noden X har den totala vikten 65 och den motsvarar 
 - Du får (och bör) skapa inre klass(er).  
 - Du ska i metoden GetShortestPath använda Dijkstras algoritm.  
 - Du ska använda dina implementationer av min-Heap (från kmom05) och hash-tabell (från kmom06) på ett rimligt och lämpligt sätt i Dijkstras algoritm.  
-- Du får förutom dina implementationer av min-heap och hash-tabell endast använda array och listor för att hantera samlingar av objekt. Tupler är tillåtet.  
+- Du får förutom dina implementationer av min-heap och hashtabell endast använda array och listor för att hantera samlingar av objekt. Tupler är tillåtet.  
 - Det ska inte finnas några orimligt ineffektiva lösningar.  
 - Var noga med att endast ha relevanta instans/medlemsvariabler i klassen Graph, dvs skilj på det som ska vara egenskaper och det som behövs lokalt i metoder.  
 - Interface ska användas som datatyp för variabler som ska referera till objekt av klasstyper som i sin tur implementerar interface.  
-- Alla medlemsvariabler ska vara privata, förutom i inre klasser. 
+- Alla medlemsvariabler ska vara privata, förutom i inre klasser.
 - Ingen in- och utmatning får utföras i Graph-klassen.
 
 ### Meny och start
 
 I en fil namngiven `GraphHandler.cs` ska du implementera klassen `GraphHandler`. Denna klass ska bl.a presentera menyn och hantera interaktionen med användaren (in och utmatning). En metod namngiven `Run()` som startar upp och visar menyn som användaren därefter kan välja alternativ ifrån. Implementera gärna hjälpmetoder för respektive menyalternativ.
 
-I filen `Program.cs` ska det bara finnas `using` direktiv och ett anrop av `Run()`-metoden i Graph-klassen.
+I filen `Program.cs` ska det bara finnas `using` direktiv och ett anrop av `Run()`-metoden i GraphHandler-klassen.
 
 
 ### Innehåll på textfiler
 
-Textfiler som representerar avstånd mellan orter ska vara uppbyggda enligt
+Textfiler som representerar avstånd mellan orter ska vara uppbyggda enligt:
 
 ```text
 från:till:vikt
 ```
-där `från` och `till` är namn på orter och `vikt` är sträckan i hela kilometer
+där `från` och `till` är namn på orter och `vikt` är sträckan i hela kilometer.
 
-till exempel  
+Till exempel:
 
 ```text
 Stockholm:Helsinki:400
@@ -117,34 +118,38 @@ Bergen:Trondheim:700
 Trondheim:Stockholm:830
 ```
 
-Filen `europeiskaStader.txt` innehåller avstånd mellan drygt 100 europeiska städer och är uppbyggd enligt exemplet ovan.
+Filen `europeiskaStader.txt` innehåller avstånd mellan drygt 100 europeiska städer och är uppbyggd enligt exemplet ovan. Du hämtar den med task till din katalog `example`:
+
+```bash title="Ladda ner filen europeiskaStader.txt till uppgiften"
+task download-example
+```
 
 ## Tester
 
-Du ska skriva NUnit-tester för hashtabellen och för grafen (namnge projektet ProjectSolution.Tests). Detta ska vara på samma nivå som ProjectSolution (se kmom02 och kmom05 i C# för info).  
-Det ska finnas tester för Hash-tabellen i en separat fil och tester för Grafen i en annan fil. Testerna ska vara genomtänkta och tydliga (alla metoder behöver tester och du behöver tänka igenom hur dessa ska testas).
+Du ska skriva NUnit-tester för hashtabellen och för grafen (namnge projektet `GraphProject.Tests`). Detta ska vara på samma nivå i katalogstrukturen som `GraphProject` (se kmom02 och kmom05 i C# för info).  
+Det ska finnas tester för Hashtabellen i en separat fil och tester för Grafen i en annan fil. Testerna ska vara genomtänkta och tydliga (alla metoder behöver tester och du behöver tänka igenom hur dessa ska testas).
 
 <details>
-<summary>Kort sammanställning om du skapar nunit projekt</summary>    
+<summary>Kort samduställning om du skapar NUnit projekt</summary>   
 
 ```
-// skapa dotnet nunit projekt
-dotnet new nunit -n ProjectSolution.Tests
+// skapa NUnit projekt med dotnet
+dotnet new nunit -n GraphProject.Tests
 
-// ändra till katalogen för ProjectSolution.Tests projektet
-cd ProjectSolution.Tests
+// ändra till katalogen för GraphProject.Tests
+cd GraphProject.Tests
 
-// lägg till referens till Sorting projektet
-dotnet add reference ../ProjectSolution/ProjectSolution.csproj
+// lägg till referens till GraphProject projektet
+dotnet add reference ../GraphProject/GraphProject.csproj
 
-// exekvera nunit projektet
+// exekvera NUnit projektet
 dotnet test
 ```
 </details>
 
 ### Exempelgrafer
 
-Exempel 1:  
+Exempel:  
 
 ```text
 A:B:55
@@ -154,24 +159,26 @@ B:D:10
 C:D:40
 ```
 
-Kortaste vägen från A till A ska resultera i 0 och listans innehåll blir [(A,0)]  
-Kortaste vägen från A till C ska resultera i 20 och listans innehåll blir [(A,0),(C,20)]  
-Kortaste vägen från A till B ska resultera i 35 och listans innehåll blir [(A,0),(C,20),(B,35)]  
-Kortaste vägen från A till D ska resultera i 45 och listans innehåll blir [(A,0),(C,20),(B,35),(D,45)]  
+Kortaste vägen från A till A ska resultera i 0 och listans innehåll blir [(A,0)].  
+Kortaste vägen från A till C ska resultera i 20 och listans innehåll blir [(A,0),(C,20)].  
+Kortaste vägen från A till B ska resultera i 35 och listans innehåll blir [(A,0),(C,20),(B,35)].  
+Kortaste vägen från A till D ska resultera i 45 och listans innehåll blir [(A,0),(C,20),(B,35),(D,45)].  
 
-Om man använder filen **europeiskaStader.txt** och väljer att få kortaste vägen från Oslo till Berlin ska det resultera i sträckan 1040 km och listans innehåll ska vara [(Oslo,0),(Copenhagen,600), (Berlin,1040)].    
-Väljer man kortaste vägen från Madrid till Stockholm blir sträckan 3190 km och listans innehåll [(Madrid,0),(Paris,1270),(Brussel,1570),(Cologne,1780),(Hamburg,2200),(Copenhagen,2540),(Stockholm,3190)].
+Om du använder filen **europeiskaStader.txt** och väljer att få kortaste vägen från Oslo till Berlin ska det resultera i sträckan 1040 km och listans innehåll ska vara [(Oslo,0),(Copenhagen,600), (Berlin,1040)].  
+Väljer du kortaste vägen från Madrid till Stockholm blir sträckan 3190 km och listans innehåll [(Madrid,0),(Paris,1270),(Brussel,1570),(Cologne,1780),(Hamburg,2200),(Copenhagen,2540),(Stockholm,3190)].
 
 ### Filer som ingår i inlämningen
-I ditt dotnet-projekt ska minst följande filer ingå
+
+I ditt dotnet-projekt ska minst följande filer ingå:
+
 - `IHeap.cs`
 - `IHashTable.cs`
 - `IGraph.cs`
 - `Heap.cs`
 - `HashTable.cs`
 - `Graph.cs`
-- `GraphHandler.cs` 
-- `Program.cs`   
+- `GraphHandler.cs`
+- `Program.cs`
 
 Koden ska vara välstrukturerad och tydlig. Ingen bortkommenterad kod ska finnas och kommentarsatser ska användas sparsamt och endast för sådant som inte är tydligt trots bra namngivning och bra struktur.
 
