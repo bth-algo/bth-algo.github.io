@@ -39,6 +39,11 @@ jobs:
       - name: Build Astro site
         run: pnpm run build
 
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist   # ← Astro bygger hit som standard
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
