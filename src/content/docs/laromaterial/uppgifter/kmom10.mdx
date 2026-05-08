@@ -68,19 +68,20 @@ public interface IGraph<T>
 }
 ```
 
-- `AddEdge`: lägger till kant med kostnaden `weight` mellan `fromvertex` och `tovertex`. Om det redan finns en kant mellan noderna ersätts den efter anropet så att den har den nya vikten (antingen ersätts endast vikten eller ersätts hela kanten).
-- `RemoveEdge`: tar bort kanten mellan `fromvertex` och `tovertex` och `true` returneras. Finns det ingen kant returneras istället `false`.
+- `AddEdge`: lägger till kant med kostnaden `weight` mellan `fromvertex` och `tovertex`. Eftersom det är en oriktad graf ska kanten gå i båda riktningarna. Om det redan finns en kant mellan noderna ersätts den efter anropet så att den har den nya vikten (antingen ersätts endast vikten eller ersätts hela kanten).
+- `RemoveEdge`: tar bort kanten mellan `fromvertex` och `tovertex` om det finns, `true` returneras i så fall. Finns det ingen kant returneras istället `false`.
 - `GetWeight`: returnerar vikten på kanten mellan `fromvertex` och `tovertex`. Om det inte finns någon kant returneras -1.
 - `GetNrOfVerticies`: returnerar antalet noder i grafen.
 - `GetAllVerticies`: returnerar en lista med alla noder i grafen. 
 - `GetTotalWeight`: returnerar den totala kant-vikten (summan av alla kant-vikter) för grafen.
-- `GetShortestPath`: bestämmer kortaste (billigaste) vägen mellan `fromvertex` och `tovertex`. Returnerar en tupel med första elementet motsvarande den totala kostnaden (vikten) för vägen och som andra element en lista som representerar vägen. Om vägen mellan noden A och noden X har den totala vikten 65 och den motsvarar kanten (A,C) med vikten 20 följt av kanten (C,B) med vikten 15 och slutligen kanten (B,X) med vikten 30 ska listan vara av längden 4 och innehåll i listan är tuplerna (från och med index 0) (A,0), (C,20), (B,35), (X,65).
+- `GetShortestPath`: bestämmer kortaste (billigaste) vägen mellan `fromvertex` och `tovertex`. Returnerar en tupel med första elementet motsvarande den totala kostnaden (vikten) för vägen och som andra element en lista som representerar vägen.   
+Om vägen mellan noden A och noden X har den totala vikten 65 och den motsvarar kanten (A,C) med vikten 20 följt av kanten (C,B) med vikten 15 och slutligen kanten (B,X) med vikten 30 ska listan vara av längden 4 och innehåll i listan är tuplerna (från och med index 0) (A,0), (C,20), (B,35), (X,65).
 
-#### Instruktioner och krav för klassen Graph
+#### Instruktioner, förutsättningar och krav för klassen Graph
 
 - Klassen Graph ska använda grannlistor (adjacency lists) som intern representation.  
 - Alla kanter har en positiv vikt, ett heltal större än 0.  
-- Du får (och bör) skapa inre klasser.  
+- Du får (och bör) skapa inre klass(er).  
 - Du ska i metoden GetShortestPath använda Dijkstras algoritm.  
 - Du ska använda dina implementationer av min-Heap (från kmom05) och hash-tabell (från kmom06) på ett rimligt och lämpligt sätt i Dijkstras algoritm.  
 - Du får förutom dina implementationer av min-heap och hash-tabell endast använda array och listor för att hantera samlingar av objekt. Tupler är tillåtet.  
@@ -162,7 +163,7 @@ Om man använder filen **europeiskaStader.txt** och väljer att få kortaste vä
 Väljer man kortaste vägen från Madrid till Stockholm blir sträckan 3190 km och listans innehåll [(Madrid,0),(Paris,1270),(Brussel,1570),(Cologne,1780),(Hamburg,2200),(Copenhagen,2540),(Stockholm,3190)].
 
 ### Filer som ingår i inlämningen
-I ditt dotnet-projekt ska följande filer ingå
+I ditt dotnet-projekt ska minst följande filer ingå
 - `IHeap.cs`
 - `IHashTable.cs`
 - `IGraph.cs`
