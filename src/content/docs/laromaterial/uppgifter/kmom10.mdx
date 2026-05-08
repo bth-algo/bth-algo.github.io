@@ -94,7 +94,10 @@ Då ska listan vara av längden 4 och innehåll i listan är tuplerna (från och
 
 ### Meny och start
 
-I en fil namngiven `GraphHandler.cs` ska du implementera klassen `GraphHandler`. Denna klass ska bl.a presentera menyn och hantera interaktionen med användaren (in och utmatning). En metod namngiven `Run()` som startar upp och visar menyn som användaren därefter kan välja alternativ ifrån. Implementera gärna hjälpmetoder för respektive menyalternativ.
+I en fil namngiven `GraphHandler.cs` ska du implementera klassen `GraphHandler`. Denna klass ska bl.a presentera menyn och hantera interaktionen med användaren (in och utmatning). 
+En metod namngiven `Run()` som startar upp och visar menyn som användaren därefter kan välja alternativ ifrån. Implementera gärna hjälpmetoder för respektive menyalternativ.  
+
+Om användaren trycker retur direkt vi inmatning av filnamnet så motsvara det inte ska utföras någon läsning från fil, men körningen fortsätter med att menyn visas.
 
 I filen `Program.cs` ska det bara finnas `using` direktiv och ett anrop av `Run()`-metoden i GraphHandler-klassen.
 
