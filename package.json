@@ -21,5 +21,8 @@
     "sharp": "^0.34.2",
     "starlight-auto-sidebar": "^0.1.2",
     "starlight-image-zoom": "^0.11.1"
+  },
+  "engines": {
+    "node": ">=22.13"
   }
 }
