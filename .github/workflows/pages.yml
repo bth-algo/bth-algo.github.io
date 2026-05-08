@@ -21,18 +21,23 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-     
+
+      - name: Use Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.13
+
+      - name: Enable pnpm
+        run: corepack enable
+
       - name: Allow pnpm build scripts
         run: echo "PNPM_ENABLE_PRE_POST_SCRIPTS=true" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        run: pnpm install
 
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
-        with:
-          path: . # The root location of your Astro project inside the repository. (optional)
-          node-version: 22.13 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
-          package-manager: pnpm@9 # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-          # var tvungen att sätta package-manger. Annars klagar den på att jag inte valt någon package manager
-
+      - name: Build Astro site
+        run: pnpm run build
 
   deploy:
     needs: build
