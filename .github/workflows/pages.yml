@@ -27,9 +27,6 @@ jobs:
         with:
           node-version: 22.13
 
-      - name: Enable pnpm
-        run: corepack enable
-
       - name: Allow pnpm build scripts
         run: echo "PNPM_ENABLE_PRE_POST_SCRIPTS=true" >> $GITHUB_ENV
       
