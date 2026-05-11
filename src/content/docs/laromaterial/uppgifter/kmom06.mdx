@@ -61,7 +61,7 @@ Du behöver förutom kollisioner även hantera utökning av hashtabellen om fyll
 
 I `Program.cs` i ditt dotnet-projekt ska du, förutom testerna för BusStopKey, skriva kod som kontrollerar att hashtabellen fungerar och att det fungerar att placera BusStop-objekt i hashtabeller. Du behöver tänka igenom vilka tester som behöver göras och det ska tydligt framgå vilka tester som görs och vilket resultatet av respektive test förväntas bli. Detta gör du genom utskrifter som redogör för vad som testas och vilket resultat som förväntas tillsammans med det resultat som erhålls. 
 
-Objekt av klasstypen BusStop ska användas för testerna, men du behöver dessutom skapa en enkel klass som du kan använda för att trigga kollisioner, namnge denna `TestElement` och låt den ingår i samma namespace och finnas i filen `TestElement.cs`.  
+Objekt av klasstypen BusStop ska användas för testerna, men du behöver dessutom skapa en enkel klass som du kan använda för att trigga kollisioner, namnge denna `TestElement` och låt den ingå i samma namespace och finnas i filen `TestElement.cs`.  
 *Tips för denna: En instansvariabel som är ett heltal vilket dessutom motsvarar nyckeln och som erhålla via `GetKey()` tillsammans med att du känner till HashTabellens kapacitet. Key är då typen int och Value är den skapade klasstypen*
 
 Avslutningsvis i `Program.cs` ska du skriva en kommentar där du motiverar ditt val av kollisionshantering och gränsen för rehashning.
