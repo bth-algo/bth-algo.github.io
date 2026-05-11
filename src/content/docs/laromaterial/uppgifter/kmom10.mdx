@@ -7,10 +7,9 @@ hidden: true
 
 import Figure from '@components/CustomFigure.astro';
 
-{/*import klassdiagram from '@assets/img/kmom02/KlassdiagramKmom02Uppgift.png';*/}
 import karta from '@assets/img/kmom10/Karta.png';
 
-Denna uppgift omfattar i första hand grafer och det specifika grafproblemet att hitta **kortaste vägen** från en nod till en annan nod, exempelvis från Oslo till Stockholm.
+Denna uppgift omfattar i första hand grafer och det specifika grafproblemet att hitta **kortaste vägen** från en nod till en annan nod, exempelvis från Oslo till Rom.
 
 <Figure
     src={karta}
@@ -73,7 +72,7 @@ public interface IGraph<T>
 - `GetWeight`: returnerar vikten på kanten mellan `fromVertex` och `toVertex`. Om det inte finns någon kant returneras -1.
 - `GetNrOfVerticies`: returnerar antalet noder i grafen.
 - `GetAllVerticies`: returnerar en lista med alla noder i grafen.
-- `GetTotalWeight`: returnerar den totala kant-vikten (sumdu av alla kant-vikter) för grafen.
+- `GetTotalWeight`: returnerar den totala kant-vikten (summan av alla kant-vikter) för grafen.
 - `GetShortestPath`: bestämmer kortaste (billigaste) vägen mellan `fromVertex` och `toVertex`. Returnerar en tupel med första elementet motsvarande den totala kostnaden (vikten) för vägen och som andra element en lista som representerar vägen.  
 *Exempel:* Om vägen mellan noden A och noden X har den totala vikten 65 och den motsvarar kanten (A,C) med vikten 20 följt av kanten (C,B) med vikten 15 och slutligen kanten (B,X) med vikten 30.  
 Då ska listan vara av längden 4 och innehåll i listan är tuplerna (från och med index 0) (A,0), (C,20), (B,35), (X,65).
@@ -84,7 +83,7 @@ Då ska listan vara av längden 4 och innehåll i listan är tuplerna (från och
 - Alla kanter har en positiv vikt, ett heltal större än 0.  
 - Du får (och bör) skapa inre klass(er).  
 - Du ska i metoden GetShortestPath använda Dijkstras algoritm.  
-- Du ska använda dina implementationer av min-Heap (från kmom05) och hash-tabell (från kmom06) på ett rimligt och lämpligt sätt i Dijkstras algoritm.  
+- Du ska använda dina implementationer av min-Heap (från kmom05) och hashtabell (från kmom06) på ett rimligt och lämpligt sätt i Dijkstras algoritm.  
 - Du får förutom dina implementationer av min-heap och hashtabell endast använda array och listor för att hantera samlingar av objekt. Tupler är tillåtet.  
 - Det ska inte finnas några orimligt ineffektiva lösningar.  
 - Var noga med att endast ha relevanta instans/medlemsvariabler i klassen Graph, dvs skilj på det som ska vara egenskaper och det som behövs lokalt i metoder.  
@@ -95,9 +94,9 @@ Då ska listan vara av längden 4 och innehåll i listan är tuplerna (från och
 ### Meny och start
 
 I en fil namngiven `GraphHandler.cs` ska du implementera klassen `GraphHandler`. Denna klass ska bl.a presentera menyn och hantera interaktionen med användaren (in och utmatning). 
-En metod namngiven `Run()` som startar upp och visar menyn som användaren därefter kan välja alternativ ifrån. Implementera gärna hjälpmetoder för respektive menyalternativ.  
+En metod namngiven `Run()` som startar upp och visar menyn som användaren därefter kan välja alternativ från ska finnas. Implementera gärna hjälpmetoder för respektive menyalternativ.  
 
-Om användaren trycker retur direkt vi inmatning av filnamnet så motsvara det inte ska utföras någon läsning från fil, men körningen fortsätter med att menyn visas.
+Om användaren trycker retur direkt vi inmatning av filnamnet så motsvara det att det inte ska utföras någon läsning från fil, men körningen fortsätter med att menyn visas.
 
 I filen `Program.cs` ska det bara finnas `using` direktiv och ett anrop av `Run()`-metoden i GraphHandler-klassen.
 
@@ -129,11 +128,12 @@ task download-example
 
 ## Tester
 
-Du ska skriva NUnit-tester för hashtabellen och för grafen (namnge projektet `GraphProject.Tests`). Detta ska vara på samma nivå i katalogstrukturen som `GraphProject` (se kmom02 och kmom05 i C# för info).  
-Det ska finnas tester för Hashtabellen i en separat fil och tester för Grafen i en annan fil. Testerna ska vara genomtänkta och tydliga (alla metoder behöver tester och du behöver tänka igenom hur dessa ska testas).
+Du ska skriva NUnit-tester för hashtabellen och för grafen (namnge projektet `GraphProject.Tests`). NUnit-projektet ska vara på samma nivå i katalogstrukturen som `GraphProject`. Se kmom02 och kmom05 i C# för instruktioner och info.  
+
+Det ska finnas tester för hashtabellen i en separat fil och tester för Grafen i en annan fil. Testerna ska vara genomtänkta och tydliga (alla metoder behöver tester och du behöver tänka igenom dessa).
 
 <details>
-<summary>Kort samduställning om du skapar NUnit projekt</summary>   
+<summary>Kort sammanställning om hur du skapar NUnit projekt</summary>   
 
 ```
 // skapa NUnit projekt med dotnet
